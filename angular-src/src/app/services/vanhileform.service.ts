@@ -27,33 +27,33 @@ export class VanhileformService {
   getUser(ID:Number){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    //return this.http.get('http://localhost:3050/VHS/'+ID,{headers:headers}).map(res=>res.json());
-    return this.http.get('VHS/'+ID,{headers:headers}).map(res=>res.json());
+    return this.http.get('http://localhost:3050/VHS/'+ID,{headers:headers}).map(res=>res.json());
+    //return this.http.get('VHS/'+ID,{headers:headers}).map(res=>res.json());
   }
 
   createUser(user){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    // return this.http.post('http://localhost:3050/VHS/register',user,{headers:headers})
-    //   .map(res=>res.json());
-    return this.http.post('VHS/register',user,{headers:headers})
-    .map(res=>res.json());
+    return this.http.post('http://localhost:3050/VHS/register',user,{headers:headers})
+      .map(res=>res.json());
+    // return this.http.post('VHS/register',user,{headers:headers})
+    // .map(res=>res.json());
   }
 
   nullifyAnswers(id:Number,tryNum:Number){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    // return this.http.post('http://localhost:3050/VHS/nullifyAnswers/' + id + '/' + tryNum,{headers:headers})
-    // .map(res=>res.json());
-    return this.http.post('/VHS/nullifyAnswers/' + id + '/' + tryNum,{headers:headers})
+    return this.http.post('http://localhost:3050/VHS/nullifyAnswers/' + id + '/' + tryNum,{headers:headers})
     .map(res=>res.json());
+    // return this.http.post('/VHS/nullifyAnswers/' + id + '/' + tryNum,{headers:headers})
+    // .map(res=>res.json());
   }
   updateGroupNumOfStudent(id:Number,groupNum:Number){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    // return this.http.post('http://localhost:3050/VHS/updateGroupNum/' + id + '/' + groupNum,{headers:headers})
-    // .map(res=>res.json());
-    return this.http.post('/VHS/updateGroupNum/' + id + '/' + groupNum,{headers:headers})
+    return this.http.post('http://localhost:3050/VHS/updateGroupNum/' + id + '/' + groupNum,{headers:headers})
     .map(res=>res.json());
+    // return this.http.post('/VHS/updateGroupNum/' + id + '/' + groupNum,{headers:headers})
+    // .map(res=>res.json());
   }
 }

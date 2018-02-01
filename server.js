@@ -26,23 +26,23 @@ const vanHille = require('./routes/VHQuiz');
 const user = require('./routes/user');
 
 //For Heroku Upload
- const forceSSL = function() {
-     return function (req, res, next) {
-       if (req.headers['x-forwarded-proto'] !== 'https') {
-         return res.redirect(
-          ['https://', req.get('Host'), req.url].join('')
-         );
-       }
-       next();
-     }
-   }
+//  const forceSSL = function() {
+//      return function (req, res, next) {
+//        if (req.headers['x-forwarded-proto'] !== 'https') {
+//          return res.redirect(
+//           ['https://', req.get('Host'), req.url].join('')
+//          );
+//        }
+//        next();
+//      }
+//    }
   
-   //port number
-   const port = process.env.PORT || 3050;
-   app.use(forceSSL());
+//    //port number
+//    const port = process.env.PORT || 3050;
+//    app.use(forceSSL());
 
 //port number
-//const port = 3050;
+const port = 3050;
 //CORS MW
 app.use(cors());
 //Set Static Folder

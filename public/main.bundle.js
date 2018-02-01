@@ -905,30 +905,30 @@ var AuthService = (function () {
     AuthService.prototype.registerSiteUser = function (SiteUser) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        //return this.http.post('http://localhost:3050/User/register', SiteUser, { headers: headers })
-        //  .map(res => res.json());
-        return this.http.post('User/register', SiteUser, { headers: headers })
+        return this.http.post('http://localhost:3050/User/register', SiteUser, { headers: headers })
             .map(function (res) { return res.json(); });
+        //  return this.http.post('User/register', SiteUser, { headers: headers })
+        //  .map(res => res.json());
     };
     AuthService.prototype.authUser = function (SiteUser) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        // return this.http.post('http://localhost:3050/User/auth', SiteUser, { headers: headers })
-        //   .map(res => res.json());
-        return this.http.post('User/auth', SiteUser, { headers: headers })
+        return this.http.post('http://localhost:3050/User/auth', SiteUser, { headers: headers })
             .map(function (res) { return res.json(); });
+        // return this.http.post('User/auth', SiteUser, { headers: headers })
+        // .map(res => res.json());
     };
     AuthService.prototype.getProfile = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        // return this.http.get('http://localhost:3050/User/profile', { headers: headers })
-        //   .map(res => res.json());
-        return this.http.get('User/profile', { headers: headers })
+        return this.http.get('http://localhost:3050/User/profile', { headers: headers })
             .map(function (res) { return res.json(); });
+        // return this.http.get('User/profile', { headers: headers })
+        // .map(res => res.json());
     };
     // getReports() {
     //   let headers = new Headers();
@@ -1000,44 +1000,44 @@ var QuestionsserviceService = (function () {
     QuestionsserviceService.prototype.getUser = function (ID) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        // return this.http.get('http://localhost:3050/VHS/'+ID,{headers:headers}).map(res=>res.json());
-        return this.http.get('VHS/' + ID, { headers: headers }).map(function (res) { return res.json(); });
+        return this.http.get('http://localhost:3050/VHS/' + ID, { headers: headers }).map(function (res) { return res.json(); });
+        //return this.http.get('VHS/'+ID,{headers:headers}).map(res=>res.json());
     };
     QuestionsserviceService.prototype.getAllQuestions = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        //return this.http.get('http://localhost:3050/VanHilleQuiz/questions',{headers:headers}).map(res=>res.json());
-        return this.http.get('VanHilleQuiz/questions', { headers: headers }).map(function (res) { return res.json(); });
+        return this.http.get('http://localhost:3050/VanHilleQuiz/questions', { headers: headers }).map(function (res) { return res.json(); });
+        //return this.http.get('VanHilleQuiz/questions',{headers:headers}).map(res=>res.json());
     };
     QuestionsserviceService.prototype.saveCorrectAnsPerDiff = function (id, arr, tryNum) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        //return this.http.post('http://localhost:3050/VHS/calc/' + tryNum  +  '/' + id  +  '/' + arr ,{headers:headers}).map(res=>res.json());
-        return this.http.post('/VHS/calc/' + tryNum + '/' + id + '/' + arr, { headers: headers }).map(function (res) { return res.json(); });
+        return this.http.post('http://localhost:3050/VHS/calc/' + tryNum + '/' + id + '/' + arr, { headers: headers }).map(function (res) { return res.json(); });
+        //return this.http.post('/VHS/calc/' + tryNum  +  '/' + id  +  '/' + arr,{headers:headers}).map(res=>res.json());
     };
     QuestionsserviceService.prototype.getNextQuestion = function (id) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        //return this.http.get('http://localhost:3050/VanHilleQuiz/'+id,{headers:headers})
-        //  .map(res=>res.json());
-        return this.http.get('VanHilleQuiz/' + id, { headers: headers })
+        return this.http.get('http://localhost:3050/VanHilleQuiz/' + id, { headers: headers })
             .map(function (res) { return res.json(); });
+        //  return this.http.get('VanHilleQuiz/'+id,{headers:headers})
+        //  .map(res=>res.json());
     };
     QuestionsserviceService.prototype.saveUserAnswer = function (id, ansNum, qnumber, tryNum) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        // return this.http.put('http://localhost:3050/VHS/'+id+'/'+ansNum + '/' + qnumber + '/' + tryNum,{headers:headers})
-        //   .map(res=>res.json());
-        return this.http.put('VHS/' + id + '/' + ansNum + '/' + qnumber + '/' + tryNum, { headers: headers })
+        return this.http.put('http://localhost:3050/VHS/' + id + '/' + ansNum + '/' + qnumber + '/' + tryNum, { headers: headers })
             .map(function (res) { return res.json(); });
+        // return this.http.put('VHS/'+id+'/'+ansNum + '/' + qnumber + '/' + tryNum,{headers:headers})
+        //  .map(res=>res.json());
     };
     QuestionsserviceService.prototype.calcUser = function (id) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        // return this.http.post('http://localhost:3050/VHS/calc/'+id,{headers:headers})
-        //   .map(res=>res.json());
-        return this.http.post('VHS/calc/' + id, { headers: headers })
+        return this.http.post('http://localhost:3050/VHS/calc/' + id, { headers: headers })
             .map(function (res) { return res.json(); });
+        // return this.http.post('VHS/calc/'+id,{headers:headers})
+        // .map(res=>res.json());
     };
     return QuestionsserviceService;
 }());
@@ -1135,32 +1135,32 @@ var VanhileformService = (function () {
     VanhileformService.prototype.getUser = function (ID) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        //return this.http.get('http://localhost:3050/VHS/'+ID,{headers:headers}).map(res=>res.json());
-        return this.http.get('VHS/' + ID, { headers: headers }).map(function (res) { return res.json(); });
+        return this.http.get('http://localhost:3050/VHS/' + ID, { headers: headers }).map(function (res) { return res.json(); });
+        //return this.http.get('VHS/'+ID,{headers:headers}).map(res=>res.json());
     };
     VanhileformService.prototype.createUser = function (user) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        // return this.http.post('http://localhost:3050/VHS/register',user,{headers:headers})
-        //   .map(res=>res.json());
-        return this.http.post('VHS/register', user, { headers: headers })
+        return this.http.post('http://localhost:3050/VHS/register', user, { headers: headers })
             .map(function (res) { return res.json(); });
+        // return this.http.post('VHS/register',user,{headers:headers})
+        // .map(res=>res.json());
     };
     VanhileformService.prototype.nullifyAnswers = function (id, tryNum) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        // return this.http.post('http://localhost:3050/VHS/nullifyAnswers/' + id + '/' + tryNum,{headers:headers})
-        // .map(res=>res.json());
-        return this.http.post('/VHS/nullifyAnswers/' + id + '/' + tryNum, { headers: headers })
+        return this.http.post('http://localhost:3050/VHS/nullifyAnswers/' + id + '/' + tryNum, { headers: headers })
             .map(function (res) { return res.json(); });
+        // return this.http.post('/VHS/nullifyAnswers/' + id + '/' + tryNum,{headers:headers})
+        // .map(res=>res.json());
     };
     VanhileformService.prototype.updateGroupNumOfStudent = function (id, groupNum) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        // return this.http.post('http://localhost:3050/VHS/updateGroupNum/' + id + '/' + groupNum,{headers:headers})
-        // .map(res=>res.json());
-        return this.http.post('/VHS/updateGroupNum/' + id + '/' + groupNum, { headers: headers })
+        return this.http.post('http://localhost:3050/VHS/updateGroupNum/' + id + '/' + groupNum, { headers: headers })
             .map(function (res) { return res.json(); });
+        // return this.http.post('/VHS/updateGroupNum/' + id + '/' + groupNum,{headers:headers})
+        // .map(res=>res.json());
     };
     return VanhileformService;
 }());
@@ -1210,54 +1210,54 @@ var VanhilereportService = (function () {
     VanhilereportService.prototype.getUser = function (ID) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        //return this.http.get('http://localhost:3050/VHS/'+ID,{headers:headers}).map(res=>res.json());
-        return this.http.get('VHS/' + ID, { headers: headers }).map(function (res) { return res.json(); });
+        return this.http.get('http://localhost:3050/VHS/' + ID, { headers: headers }).map(function (res) { return res.json(); });
+        //return this.http.get('VHS/'+ID,{headers:headers}).map(res=>res.json());
     };
     VanhilereportService.prototype.getAllQuestions = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        //return this.http.get('http://localhost:3050/VanHilleQuiz/questions',{headers:headers}).map(res=>res.json());
-        return this.http.get('VanHilleQuiz/questions', { headers: headers }).map(function (res) { return res.json(); });
+        return this.http.get('http://localhost:3050/VanHilleQuiz/questions', { headers: headers }).map(function (res) { return res.json(); });
+        //return this.http.get('VanHilleQuiz/questions',{headers:headers}).map(res=>res.json());
     };
     VanhilereportService.prototype.createAllResults = function (tryNum) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        // return this.http.post('http://localhost:3050/VanHilleQuiz/calcAll/' +tryNum ,{headers:headers})
-        // .map(res=>res.json());
-        return this.http.post('VanHilleQuiz/calcAll/' + tryNum, { headers: headers })
+        return this.http.post('http://localhost:3050/VanHilleQuiz/calcAll/' + tryNum, { headers: headers })
             .map(function (res) { return res.json(); });
+        //  return this.http.post('VanHilleQuiz/calcAll/'+tryNum,{headers:headers})
+        //  .map(res=>res.json());
     };
     VanhilereportService.prototype.getAllQuizesDoneInTheLastSemeter = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        // return this.http.get('http://localhost:3050/VanHilleQuiz/studentSemester/get',{headers:headers})
-        // .map(res=>res.json());
-        return this.http.get('VanHilleQuiz/studentSemester/get', { headers: headers })
+        return this.http.get('http://localhost:3050/VanHilleQuiz/studentSemester/get', { headers: headers })
             .map(function (res) { return res.json(); });
+        // return this.http.get('VanHilleQuiz/studentSemester/get',{headers:headers})
+        // .map(res=>res.json());
     };
     VanhilereportService.prototype.getQuizesByGroupAndCourse = function (cNum, gNum) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        // return this.http.get('http://localhost:3050/VanHilleQuiz/studentSemester/' + cNum + '/' + gNum,{headers:headers})
-        // .map(res=>res.json());
-        return this.http.get('VanHilleQuiz/studentSemester/' + cNum + '/' + gNum, { headers: headers })
+        return this.http.get('http://localhost:3050/VanHilleQuiz/studentSemester/' + cNum + '/' + gNum, { headers: headers })
             .map(function (res) { return res.json(); });
+        // return this.http.get('VanHilleQuiz/studentSemester/' + cNum + '/' + gNum,{headers:headers})
+        // .map(res=>res.json());
     };
     VanhilereportService.prototype.getQuizByCourseNum = function (cNum) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        // return this.http.get('http://localhost:3050/VanHilleQuiz/quizByCnum/' + cNum,{headers:headers})
-        // .map(res=>res.json());
-        return this.http.get('VanHilleQuiz/quizByCnum/' + cNum, { headers: headers })
+        return this.http.get('http://localhost:3050/VanHilleQuiz/quizByCnum/' + cNum, { headers: headers })
             .map(function (res) { return res.json(); });
+        // return this.http.get('VanHilleQuiz/quizByCnum/' + cNum,{headers:headers})
+        // .map(res=>res.json());
     };
     VanhilereportService.prototype.getStudentsBetweenDates = function (sDate, fDate) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        // return this.http.get('http://localhost:3050/VHS/students/' + sDate + '/' + fDate,{headers:headers})
-        // .map(res=>res.json());
-        return this.http.get('/VHS/students/' + sDate + '/' + fDate, { headers: headers })
+        return this.http.get('http://localhost:3050/VHS/students/' + sDate + '/' + fDate, { headers: headers })
             .map(function (res) { return res.json(); });
+        // return this.http.get('/VHS/students/' + sDate + '/' + fDate,{headers:headers})
+        // .map(res=>res.json());
     };
     return VanhilereportService;
 }());
