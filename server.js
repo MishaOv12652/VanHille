@@ -60,9 +60,9 @@ app.use('/VanHilleQuiz',vanHille);
 app.use('/User',user);
 
 //Index Route
-app.get('/',(req,res)=>{
-    res.send('Invalid End Point');
-});
+// app.get('/',(req,res)=>{
+//     res.send('Invalid End Point');
+// });
 
 //For Heroku Upload
  app.get('/*', function(req, res) {
