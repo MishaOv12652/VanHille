@@ -1,0 +1,89 @@
+<div  class="container-fluid" dir="rtl">
+  <h1 class="header">תוצאות כל הכיתה</h1>
+  <div *ngIf="!showpast" class="row col-md-12 col-md-pull-1">
+    <div class="col-md-offset-2">
+        <h3 class="header">תוצאות נוכחיות</h3>
+    </div>
+    <div style="display: block;background-color: white" >
+      <canvas baseChart [colors]="radarcolors" [datasets]="radarChartData" [labels]="radarChartLabels" [options]="radarChartOptions"
+        [chartType]="radarChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+    </div>
+    <div class="button-group" style="margin-top: 5px">
+      <button type="button" class="btn btn-success btn-block" (click)="calcAll()">חשב נתונים כללים</button>
+      <button type="button" class="btn btn-danger  btn-block" (click)="clearRadar()">נקה גרף</button>
+      <button type="button" class="btn btn-primary btn-block" (click)="showPast()">הצג/הסתר השוואת נתונים קודמים</button>
+    </div>
+  </div>
+  <div *ngIf="showpast" >
+    <h2 class="header">השוואת תוצאות</h2>
+  </div>
+  
+  <div *ngIf="showpast" class="row" style="margin-right: 150px">
+      
+    <div class="col-md-6">
+      <div class="col-md-offset-3">
+        <h3 class="header">תוצאות אחרי</h3>
+      </div>
+      <div style="display: block;background-color: white">
+        <canvas baseChart [colors]="radarcolors" [datasets]="radarChartDataPost" [labels]="radarChartLabels" [options]="radarChartOptions"
+          [chartType]="radarChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+      </div>
+      <div class="button-group">
+        <div style="margin-top:5px">
+          <select name="courseNum" class="form-control" [(ngModel)]="courseNumPost" (change) = "findGroupNumByCourseNumSelected(2)">
+            <option disabled hidden [value]="selectUndefinedOptionValue">בחר מספר קורס</option>
+            <option *ngFor = "let coursePostOption of courseNumPostOptions" [value]="coursePostOption">{{coursePostOption}}</option>
+        </select>
+        </div>
+        <div style="margin-top:5px;margin-bottom: 5px">
+          <select name="groupNum" class="form-control" [(ngModel)]="groupNumPost">
+             <option disabled hidden [value]="selectUndefinedOptionValue">בחר מס' קבוצת לימוד</option>
+             <option *ngFor = "let gpro of groupNumPostOptions" [value]="gpro">{{gpro}}</option>
+        </select>
+        </div>
+        <button type="button" class="btn btn-danger  btn-block" (click)="clearSelection(2)">נקה בחירה</button>
+        <button type="button" class="btn btn-success  btn-block" (click)="findQuizByGroupAndCourseNum(2)">חפש</button>
+      </div>
+
+    </div>
+    <div class="col-md-6 ">
+      <div class="col-md-offset-3">
+        <h3 class="header">תוצאות לפני</h3>
+      </div>
+      <div style="display: block;background-color: white">
+          <canvas baseChart [colors]="radarcolors" [datasets]="radarChartDataPre" [labels]="radarChartLabels" [options]="radarChartOptions"
+            [chartType]="radarChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+        </div>
+        <div class="button-group">
+            <div style="margin-top:5px">
+              <select name="courseNum" class="form-control" [(ngModel)]="courseNumPre" (change) = "findGroupNumByCourseNumSelected(1)">
+                <option disabled hidden [value]="selectUndefinedOptionValue">בחר מספר קורס</option>
+                <option *ngFor = "let coursePreOption of courseNumPreOptions" [value]="coursePreOption">{{coursePreOption}}</option>
+            </select>
+            </div>
+            <div style="margin-top:5px;margin-bottom: 5px">
+              <select name="groupNum" class="form-control" [(ngModel)]="groupNumPre">
+                 <option disabled hidden [value]="selectUndefinedOptionValue">בחר מס' קבוצת לימוד</option>
+                 <option *ngFor = "let gpoo of groupNumPreOptions" [value]="gpoo">{{gpoo}}</option>
+            </select>
+            </div>
+            <button type="button" class="btn btn-danger  btn-block" (click)="clearSelection(1)">נקה בחירה</button>
+            <button type="button" class="btn btn-success  btn-block" (click)="findQuizByGroupAndCourseNum(1)">חפש</button> 
+      <!-- <div style="display: block;background-color: white">
+        <canvas baseChart [colors]="radarcolors" [datasets]="radarChartData" [labels]="radarChartLabels" [options]="radarChartOptions"
+          [chartType]="radarChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+      </div>
+      <div class="button-group" style="margin-top: 5px">
+        <button type="button" class="btn btn-success btn-block" (click)="calcAll()">חשב נתונים כללים</button>
+        <button type="button" class="btn btn-danger  btn-block" (click)="clearRadar()">נקה גרף</button>
+        <button type="button" class="btn btn-primary btn-block" (click)="showPast()">הצג/הסתר השוואת נתונים קודמים</button>      
+      </div> -->
+    </div>
+    
+  </div>
+
+</div>
+<br>
+<div class="col-md-11 col-md-pull-1" style="margin-left: 50px" >
+  <button *ngIf="showpast" type="button" class="btn btn-primary btn-block" (click)="showPast()">הצג/הסתר השוואת נתונים קודמים</button>
+</div>

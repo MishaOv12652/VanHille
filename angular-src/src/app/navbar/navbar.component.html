@@ -1,0 +1,68 @@
+<div id="wrapper">
+  <!-- Navigation -->
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header pull-right">
+      <a class="navbar-brand" [routerLink]="['/']">Math</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav navbar-left top-nav">
+        <!-- <li *ngIf="!auth.loggedIn()">
+          <a [routerLink]="['register']"><i class="fa fa-fw fa-dashboard"></i>רישום</a>
+        </li> -->
+        <li *ngIf="!auth.loggedIn()">
+          <a [routerLink]="['login']"><i class="fa fa-fw fa-dashboard"></i>כניסה</a>
+        </li>
+        <li *ngIf="auth.loggedIn()">
+          <a (click)="onLogout()" href="#"><i class="fa fa-fw fa-dashboard"></i>התנתק</a>
+        </li>
+        <li *ngIf="auth.loggedIn()">
+          <a [routerLink]="['profile']"><i class="fa fa-fw fa-dashboard"></i>פרופיל</a>
+        </li>
+        <li *ngIf="auth.loggedIn()">
+          <a [routerLink]="['dashboard']"><i class="fa fa-fw fa-dashboard"></i>לוח עבודה</a>
+        </li>
+      </ul>
+    </div>
+    <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse" dir="rtl">
+      <ul class="nav navbar-nav side-nav pull-right">
+        <li>
+          <a [routerLink]="['cloudlinks']"><i class="fa fa-fw fa-dashboard"></i>קישורים לענן</a>
+        </li>
+        <li>
+          <a [routerLink]="['reslit']"><i class="fa fa-fw fa-bar-chart-o"></i>ספרות מחקרית</a>
+        </li>
+        <li>
+          <a [routerLink]="['edulit']"><i class="fa fa-fw fa-table"></i>ספרות לימודית</a>
+        </li>
+        <li>
+          <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i>כלים פדגוגיים<i class="fa fa-fw fa-caret-down"></i></a>
+          <ul id="demo" class="collapse">
+            <li>
+              <a [routerLink]="['vanhilequiz']">שאלון ואן הילה</a>
+            </li>
+          </ul>
+        </li>
+        <li *ngIf="auth.loggedIn()">
+          <a href="javascript:;" data-toggle="collapse" data-target="#repo"><i class="fa fa-fw fa-arrows-v"></i>דו"חות<i class="fa fa-fw fa-caret-down"></i></a>
+          <ul id="repo" class="collapse">
+            <li>
+              <a href="javascript:;" data-toggle="collapse" data-target="#VanHilleRepo"><i class="fa fa-fw fa-arrows-v"></i>דו"חות ואן הילה<i class="fa fa-fw fa-caret-down"></i></a>
+              <ul id="VanHilleRepo" class="collapse">
+                <li>
+                  <a [routerLink]="['vanhille/studentreport']">דו"ח לסטודנט</a>
+                </li>
+                <li>
+                  <a [routerLink]="['vanhille/classreport']">דו"ח כללי</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+
+      </ul>
+    </div>
+    <!-- /.navbar-collapse -->
+  </nav>
+</div>

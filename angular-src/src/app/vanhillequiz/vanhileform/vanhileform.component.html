@@ -1,0 +1,28 @@
+<div class="margin">
+  <h2 class="page-header margin text-center" dir="rtl">פרטים אישיים</h2>
+  <form (submit)="startQuiz()">
+    <!-- <div class="form-group col-md-9 col-md-offset-1" dir="rtl">
+      <label for="">שם פרטי</label>
+      <input type="text" [(ngModel)]="Fname" name="Fname" class="form-control" placeholder="הכנס שם פרטי בלבד">
+    </div>
+    <div class="form-group col-md-9 col-md-offset-1" dir="rtl">
+      <label for="">שם משפחה</label>
+      <input type="text" [(ngModel)]="Lname" name="Lname" class="form-control" placeholder="הכנס שם מפחה בלבד">
+    </div> -->
+    <div class="form-group col-md-9 col-md-offset-1" dir="rtl">
+      <label for="">ת.ז</label>
+      <input type="number" [(ngModel)]="ID" name="ID" class="form-control" placeholder="הכנס ת.ז כולל ספרת ביקורת">
+    </div>
+    <div class="form-group col-md-9 col-md-offset-1" dir="rtl">
+      <label for="">מס' קורס</label>
+      <input type="number" [(ngModel)]="courseNum" name="courseNum" class="form-control" placeholder="הכנס את מס' הקורס">
+    </div>
+    <div class="form-group col-md-9 col-md-offset-1" dir="rtl">
+      <label for="">קבוצת לימוד</label>
+      <input type="number" [(ngModel)]="groupNum" name="groupNum" class="form-control" placeholder="הכנס את מס' קבוצת לימוד">
+    </div>
+    <div class="form-group col-md-9 col-md-offset-1" >
+      <button type="submit" class="btn btn-primary btn-lg">התחל שאלון</button>
+    </div>
+  </form>
+</div>

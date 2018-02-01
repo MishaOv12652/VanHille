@@ -1,0 +1,21 @@
+<div class="col-md-10" style="text-align: center;color: white">
+    <h2 class="page-header">טופס רישום</h2>
+  </div>
+  <form (submit)="register()" style="color:white">
+    <div class="form-group col-md-10 col-md-pull-0" dir="rtl">
+      <label for="">אימייל</label>
+      <input type="email" name="email" [(ngModel)]="email" class="form-control" placeholder="הכנס אימייל">
+    </div>
+    <div class="form-group col-md-10 col-md-pull-0" dir="rtl">
+      <label for="">שם משתמש</label>
+      <input type="text" name="username" [(ngModel)]="username" class="form-control" placeholder="הכנס שם משתמש">
+  
+    </div>
+    <div class="form-group col-md-10 col-md-pull-0" dir="rtl">
+      <label for="">סיסמא</label>
+      <input type="password" name="password" [(ngModel)]="password" class="form-control" placeholder="הכנס סיסמא">
+    </div>
+    <div class="form-group col-md-10 col-md-pull-0">
+      <button type="submit" class="btn btn-primary btn-lg">הרשם</button>
+    </div>
+  </form>

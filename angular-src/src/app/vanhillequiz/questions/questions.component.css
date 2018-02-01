@@ -1,0 +1,73 @@
+
+.margin{
+	margin-top: 50px;
+	margin-right:115px; 
+}
+.header{
+    text-decoration: underline;
+    text-align: center;
+	margin-right: 150px;
+	color: white;
+}
+h3{
+	color: white;
+}
+section { clear: both; margin: 0 80px; }
+
+label {   width: 100%;/* SET BTN WIDTH */ border-radius: 3px; border: 1px solid #D1D3D4; color: white }
+
+/* HIDE <input> */
+input.radio:empty { display: none }
+
+/* CUSTOM LABEL */
+input.radio:empty ~ label {
+ position: relative;
+ float: left;
+ font-size: 15px;
+ line-height: 2.5em;
+ text-indent: 1.25em;
+ margin-top: 1em;
+ cursor: pointer;
+ -webkit-user-select: none;
+ -moz-user-select: none;
+ -ms-user-select: none;
+ user-select: none;
+ background-color: #1A948E;
+ color: white;
+ /* width: 1000px; */
+}
+
+/* Label, not hovered or checked */
+input.radio:empty ~ label:before {
+	position: absolute;
+	display: block;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	content: '';
+	width: 2.5em;
+	background: #102EB3; /*#D4D1D4;*/
+	border-radius: 3px 0 0 3px;
+}
+
+/* On Hover */
+input.radio:hover:not(:checked) ~ label:before {
+	content:'\2714';
+	text-indent: .9em;
+	color: #C2C2C2;
+}
+
+input.radio:hover:not(:checked) ~ label { color: black; }
+
+/* Checked */
+input.radio:checked ~ label:before {
+	content:'\2714';
+	text-indent: .9em;
+	color: #9CE2AE;
+	background-color: #4DCB6D;
+}
+
+input.radio:checked ~ label { color: black; }
+
+/* On Focus */
+input.radio:focus ~ label:before { box-shadow: 0 0 0 3px #999; }

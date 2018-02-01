@@ -1,0 +1,24 @@
+{
+  "name": "vanhilleapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "*",
+    "body-parser": "*",
+    "cors": "*",
+    "express": "*",
+    "jsonwebtoken": "*",
+    "moment": "^2.18.1",
+    "momentjs": "^2.0.0",
+    "mongoose": "*",
+    "passport": "*",
+    "passport-jwt": "^2.2.1"
+  },
+  "author": "Michael Ovodenko",
+  "license": "ISC"
+}

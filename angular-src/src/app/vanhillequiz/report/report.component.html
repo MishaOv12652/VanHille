@@ -1,0 +1,40 @@
+<div class="row allclass" dir="rtl">
+  <h1 class="header">תוצאות כל הכיתה</h1>
+  <div class="row">
+    <div style="display: block;background-color: white" class="col-md-10 col-md-offset-0">
+      <canvas baseChart [colors]="radarcolors" [datasets]="radarChartData" [labels]="radarChartLabels" [options]="radarChartOptions"
+        [chartType]="radarChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-1">
+      <button type="button" class="btn btn-danger" (click)="clearRadar()">נקה גרף</button>
+    </div>
+    <div class="col-md-9 pull-left">
+      <button type="button" class="btn btn-success" (click)="calcAll()">חשב נתונים כללים</button>
+    </div>
+  </div>
+</div>
+
+<div class="row allclass" dir="rtl">
+  <h1 class="header">תוצאה לפי סטודנט</h1>
+  <br>
+  <div class="form-group col-md-10 col-md-offset-0">
+    <div class="row">
+      <label style="color:white;font-size: 18px" for="">ת.ז של הסטודנט</label>
+      <select name="selectID" class="form-control" [(ngModel)]="selectID" (change)="findCorrectAnswerData()">
+            <option *ngFor = "let op of Options" [value]="op.ID">{{op.ID}}</option>
+          </select>
+    </div>
+    <div class="row">
+      <button type="button" class="btn btn-danger" (click)="clearSelection()">נקה בחירה</button>
+    </div>
+    <br>
+    <div *ngIf="showHideChartOfUser()" style="display: block;background-color: white  ">
+      <canvas baseChart [colors]="colors" [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+        [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+    </div>
+  </div>
+
+
+</div>
