@@ -20,6 +20,7 @@ import { ReportComponent } from './vanhillequiz/report/report.component';
 //external modules
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { FlashMessagesModule } from "angular2-flash-messages";
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 //services
 import { QuestionsserviceService } from "./services/questionsservice.service";
 import { VanhileformService } from "./services/vanhileform.service";
@@ -80,7 +81,8 @@ const appRoutes: Routes = [
     DateTimePickerModule,
     FlashMessagesModule,
     ChartsModule,
-    Ng4LoadingSpinnerModule
+    Ng4LoadingSpinnerModule,
+    Ng2SmartTableModule
   ],
   providers: [
     QuestionsserviceService,
