@@ -24,6 +24,7 @@ const app = express();
 const VHStudent = require('./routes/VHStudent');
 const vanHille = require('./routes/VHQuiz');
 const user = require('./routes/user');
+const cloudLinks = require('./routes/cloudlinks');
 
 //For Heroku Upload
 //  const forceSSL = function() {
@@ -58,6 +59,7 @@ require('./config/passport')(passport);
 app.use('/VHS',VHStudent);
 app.use('/VanHilleQuiz',vanHille);
 app.use('/User',user);
+app.use('/CloudLinks',cloudLinks);
 
 //Index Route
 app.get('/',(req,res)=>{
