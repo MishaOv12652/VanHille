@@ -10,50 +10,49 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 })
 export class CloudlinksComponent implements OnInit {
   tableName:string;
-  tableNumOfRows:Number;
-  tableHeaders:Array<String>;
+  tables:any;
 
-  
-  
-  constructor() { 
+
+
+  constructor() {
   }
 
   ngOnInit() {
-    
+
    }
 
   addTable(){
-    var tbl_cont = document.getElementById('tbls');
-    var tbl_header = document.createElement('h3');
-    tbl_header.innerHTML=this.tableName;
-    tbl_header.className="text-center"
-    var tbl = document.createElement('table');
-    tbl.className="table table-bordered table-dark"
-    tbl.setAttribute("id",this.tableName.replace(/\s/g, ''));
-    var tbl_body = document.createElement('tbody');
-    var header_row = document.createElement('tr');
-    var id_header = document.createElement('th');
-    id_header.innerText="Number"
-    var name_header = document.createElement('th');
-    name_header.innerHTML="Name"
-    var desc_header = document.createElement('th');
-    desc_header.innerHTML="Description"
-    var link_header = document.createElement('th');
-    link_header.innerHTML="Link"
-    var add_row_button =document.createElement('button')
-    add_row_button.className="btn btn-primary"
-    add_row_button.innerHTML="add row"
-    add_row_button.setAttribute("id",this.tableName.replace(/\s/g, '') + "addRowButton")
-    add_row_button.onclick=this.addRow;
-    tbl_cont.appendChild(tbl_header);
-    header_row.appendChild(id_header);
-    header_row.appendChild(name_header);
-    header_row.appendChild(desc_header);
-    header_row.appendChild(link_header);
-    header_row.appendChild(add_row_button)
-    tbl_body.appendChild(header_row);
-    tbl.appendChild(tbl_body);
-    tbl_cont.appendChild(tbl);
+    // var tbl_cont = document.getElementById('tbls');
+    // var tbl_header = document.createElement('h3');
+    // tbl_header.innerHTML=this.tableName;
+    // tbl_header.className="text-center"
+    // var tbl = document.createElement('table');
+    // tbl.className="table table-bordered table-dark"
+    // tbl.setAttribute("id",this.tableName.replace(/\s/g, ''));
+    // var tbl_body = document.createElement('tbody');
+    // var header_row = document.createElement('tr');
+    // var id_header = document.createElement('th');
+    // id_header.innerText="Number"
+    // var name_header = document.createElement('th');
+    // name_header.innerHTML="Name"
+    // var desc_header = document.createElement('th');
+    // desc_header.innerHTML="Description"
+    // var link_header = document.createElement('th');
+    // link_header.innerHTML="Link"
+    // var add_row_button =document.createElement('button')
+    // add_row_button.className="btn btn-primary"
+    // add_row_button.innerHTML="add row"
+    // add_row_button.setAttribute("id",this.tableName.replace(/\s/g, '') + "addRowButton")
+    // add_row_button.onclick=this.addRow;
+    // tbl_cont.appendChild(tbl_header);
+    // header_row.appendChild(id_header);
+    // header_row.appendChild(name_header);
+    // header_row.appendChild(desc_header);
+    // header_row.appendChild(link_header);
+    // header_row.appendChild(add_row_button)
+    // tbl_body.appendChild(header_row);
+    // tbl.appendChild(tbl_body);
+    // tbl_cont.appendChild(tbl);
   }
   addRow(){
     // this.count=this.count+1;
@@ -78,7 +77,7 @@ export class CloudlinksComponent implements OnInit {
     // header_row.appendChild(name_header);
     // header_row.appendChild(desc_header);
     // header_row.appendChild(link_header);
-    // header_row.appendChild(edit_row_button); 
+    // header_row.appendChild(edit_row_button);
     // table.appendChild(header_row);
   }
 
