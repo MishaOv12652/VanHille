@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Node } from '@angular/compiler';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import {CloudlinksService} from '../services/cloudlinks.service';
 
 
 @Component({
@@ -10,18 +11,40 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 })
 export class CloudlinksComponent implements OnInit {
   tableName:string;
-  tables:any;
+  //row:any;
+  table_settings_object:any;
+  tables_array:Array<Object>;
 
 
 
-  constructor() {
+  constructor(private  cloud_links_service:CloudlinksService) {
   }
 
   ngOnInit() {
-
+      this.cloud_links_service.getAllCloudLinkTables().subscribe(tables=>{
+        this.tables_array = new Array(tables);
+      });
    }
 
   addTable(){
+    this.table_settings_object = {};
+    this.table_settings_object.settings = {columns:{
+      id:{
+        title:'ID'
+      },
+      name:{
+        title:'Name'
+      },
+      desc:{
+        title:'Description'
+      },
+      url:{
+        title:'URL'
+      }
+    }};
+
+    this.tables_array.push({id:this.tableName,settings_obj:this.table_settings_object,data:[]});
+    this.cloud_links_service.addCloudLinkTable(this.tables_array);
     // var tbl_cont = document.getElementById('tbls');
     // var tbl_header = document.createElement('h3');
     // tbl_header.innerHTML=this.tableName;

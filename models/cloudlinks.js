@@ -5,15 +5,17 @@ const CloudLinkSchema = mongoose.Schema({
     tableId:{
         type:String
     },
-    Table:{
+    settings_obj:{
         type:Object
+    },
+    data:{
+        type:Array
     }
 },{collection:'CloudLinks'});
 
-const CloudLink = module.exports = mongoose.model('CloudLinks',CloudLinkSchema);
+const CloudLink = module.exports = mongoose.model('CloudLinks',CloudLinkSchema.index({tableId:1},{unique:true}));
 
 module.exports.getCloudLinkByTableId = function(tableId,callback){
-    const id = parseInt(tableId);
     const query = {tableId:tableId};
     CloudLink.findOne(query,callback);
 };

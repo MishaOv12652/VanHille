@@ -29,6 +29,7 @@ import { VanhileformService } from "./services/vanhileform.service";
 import { VanhilereportService } from "./services/vanhilereport.service";
 import { AuthService } from "./services/auth.service";
 import { SiteRegisterServiceService } from "./services/site-register-service.service";
+import {CloudlinksService} from "./services/cloudlinks.service"
 import { StudentReportComponent } from './vanhillequiz/report/student-report/student-report.component';
 import { ClassReportComponent } from './vanhillequiz/report/class-report/class-report.component';
 import { TimerComponent } from './vanhillequiz/timer/timer.component';
@@ -86,13 +87,15 @@ const appRoutes: Routes = [
     Ng4LoadingSpinnerModule,
     Ng2SmartTableModule
 
+
   ],
   providers: [
     QuestionsserviceService,
     VanhileformService,
     VanhilereportService,
     AuthService,
-    SiteRegisterServiceService
+    SiteRegisterServiceService,
+    CloudlinksService
   ],
   bootstrap: [AppComponent]
 })

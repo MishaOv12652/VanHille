@@ -13,7 +13,7 @@ router.get('/getAllCloudLinks', (req, res, next) => {
 });
 
 router.get('/:CloudLinkTableId', (req, res, next) => {
-    Question.getQuestion(req.params.CloudLinkTableId, (err, cloudLinksTable) => {
+    CloudLink.getCloudLinkByTableId(req.params.CloudLinkTableId, (err, cloudLinksTable) => {
         if (err) {
             res.json({ success: false, msg: "לא נמצאה הטבלה" });
         } else {
@@ -37,7 +37,7 @@ router.post('/addCloudLinkTable', (req, res, next) => {
 });
 
 router.post('/:CloudLinkTableId', (req, res, next) => {
-    updateCloudLinkTable.updateCloudLinkTable(req.params.CloudLinkTableId, req.body.cloudLinksTable, (err, updatedCloudLinksTable) => {
+    CloudLink.updateCloudLinkTable(req.params.CloudLinkTableId, req.body.cloudLinksTable, (err, updatedCloudLinksTable) => {
         if (err) {
             res.json({ success: false, msg: "תקלה בעדכון טבלה של קישור לענן" });
         } else {
