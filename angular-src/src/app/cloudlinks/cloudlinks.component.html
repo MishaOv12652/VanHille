@@ -2,14 +2,19 @@
   <h2 dir="rtl" style="text-decoration: underline">קישורים לענן</h2>
   <div *ngIf="tables_array != undefined">
     <div *ngFor="let table of tables_array">
-      <h3>{{table.tableId}}</h3>
-      <ng2-smart-table [settings] = "table.settings_obj" [source] = "table.data" ></ng2-smart-table>
+      <h3 style="text-decoration: underline">{{table.tableId}}</h3>
+      <ng2-smart-table [settings]="table.settings_obj" [source]="table.data" (createConfirm)="onCreateConfirm($event)"
+                       (editConfirm)="onEditConfirm($event)" (deleteConfirm)="onDeleteConfirm($event)" ></ng2-smart-table>
     </div>
   </div>
 </div>
+<div class="btn-group col-md-offset-3">
+  <button class="btn btn-success" data-toggle="modal" data-target="#addTableFormModal">Add A Table
+  </button>
+  <button class="btn btn-danger" data-toggle="modal" data-target="#deleteTableFormModal">Delete A Table
+  </button>
+</div>
 
-<button class="btn btn-success col-md-offset-4" data-toggle="modal" data-target="#addTableFormModal">add a table
-</button>
 <div class="modal fade" id="addTableFormModal" role="dialog">
   <div class="modal-dialog">
 
@@ -29,7 +34,33 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addTable()">Submit</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addTable()">Add</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal fade" id="deleteTableFormModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal Add Table content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title text-center">Delete A Table Form</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="tableHeader">Table Header Name:</label>
+            <input type="text" id="tableHeaderToDelete" class="form-control" placeholder="Enter A Table Header"
+                   [(ngModel)]="tableName" name="tableName">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="deleteTable()">Delete</button>
       </div>
     </div>
 

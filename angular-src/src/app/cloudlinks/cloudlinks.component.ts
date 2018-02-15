@@ -31,6 +31,15 @@ export class CloudlinksComponent implements OnInit {
 
   addTable() {
     this.table_settings_object = {
+      delete: {
+        confirmDelete: true,
+      },
+      add: {
+        confirmCreate: true,
+      },
+      edit: {
+        confirmSave: true,
+      },
       columns: {
         id: {
           title: 'ID'
@@ -57,12 +66,46 @@ export class CloudlinksComponent implements OnInit {
     });
   }
 
-  addRow() {
-
+  onCreateConfirm(event){
+    if (window.confirm('Are you sure you want to create?')) {
+      event.newData['name'] += ' + added in code';
+      event.confirm.resolve(event.newData);
+    } else {
+      event.confirm.reject();
+    }
   }
 
-  editRow() {
-
+  onEditConfirm(event) {
+    if (window.confirm('Are you sure you want to save?')) {
+      event.newData['name'] += ' + added in code';
+      event.confirm.resolve(event.newData);
+    } else {
+      event.confirm.reject();
+    }
   }
 
+  onDeleteConfirm(event){
+    if (window.confirm('Are you sure you want to delete?')) {
+      event.confirm.resolve();
+    } else {
+      event.confirm.reject();
+    }
+  }
+
+  deleteTable(){
+    this.tables_array.forEach((table,index) => {
+      if(table['tableId'] === this.tableName){
+        this.tables_array.splice(index,1);
+        this.cloud_links_service.deleteCloudLinkTable(this.tableName).subscribe(table=>{
+          if(!table.success){
+            this.flashmessage.show(table.msg,{ cssClass: 'alert-danger', timeout: 3000 })
+          }else{
+            this.flashmessage.show('Table ' + this.tableName + ' was deleted',{ cssClass: 'alert-success', timeout: 3000 })
+          }
+        });
+      }
+    });
+
+
+  }
 }

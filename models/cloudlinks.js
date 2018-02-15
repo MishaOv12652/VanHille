@@ -32,3 +32,8 @@ module.exports.updateCloudLinkTable = function(updadtedTableId,updatedTable,call
         const query = {tableId:updadtedTableId};
         CloudLink.findOneAndUpdate(query,{Table:updatedTable},{ safe: true, new: true }, callback)
 }
+
+module.exports.deleteCloudLinkTable = function (tableID,callback) {
+    const query = {tableId:tableID};
+    CloudLink.find(query).remove(callback)
+}

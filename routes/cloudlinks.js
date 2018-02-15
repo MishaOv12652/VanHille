@@ -47,4 +47,14 @@ router.post('/:CloudLinkTableId', (req, res, next) => {
     })
 });
 
+router.delete('/:CloudLinkTableId',(req,res,next)=>{
+    CloudLink.deleteCloudLinkTable(req.params.CloudLinkTableId,(err,deletedCloudLinksTable)=>{
+        if (err) {
+            res.json({ success: false, msg: "תקלה במחיקת טבלה של קישור לענן" });
+        } else {
+            res.json({ success: true, updatedCloudLinksTable: deletedCloudLinksTable });
+        }
+    });
+});
+
 module.exports = router;

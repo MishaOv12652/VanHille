@@ -20,7 +20,13 @@ export class CloudlinksService {
   updateCloudLinkTable(id,table){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:3050/CloudLinks/addCloudLinkTable/' + id,table,{headers:headers}).map(res=>res.json());
+    return this.http.post('http://localhost:3050/CloudLinks/' + id,table,{headers:headers}).map(res=>res.json());
+  }
+
+  deleteCloudLinkTable(id){
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.delete('http://localhost:3050/CloudLinks/' + id,{headers:headers}).map(res=>res.json());
   }
 
 }
