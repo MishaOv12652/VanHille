@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Node } from '@angular/compiler';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
+import {Component, OnInit} from '@angular/core';
+// import {Node} from '@angular/compiler';
+// import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {CloudlinksService} from '../services/cloudlinks.service';
-
+import {FlashMessagesService} from 'angular2-flash-messages'
 
 @Component({
   selector: 'app-cloudlinks',
@@ -10,101 +10,58 @@ import {CloudlinksService} from '../services/cloudlinks.service';
   styleUrls: ['./cloudlinks.component.css']
 })
 export class CloudlinksComponent implements OnInit {
-  tableName:string;
-  //row:any;
-  table_settings_object:any;
-  tables_array:Array<Object>;
+  tableName: string;
+  table_settings_object: any;
+  tables_array: Array<Object>;
 
 
-
-  constructor(private  cloud_links_service:CloudlinksService) {
+  constructor(private  cloud_links_service: CloudlinksService,private flashmessage: FlashMessagesService) {
   }
 
   ngOnInit() {
-      this.cloud_links_service.getAllCloudLinkTables().subscribe(tables=>{
-        this.tables_array = new Array(tables);
-      });
-   }
-
-  addTable(){
-    this.table_settings_object = {};
-    this.table_settings_object.settings = {columns:{
-      id:{
-        title:'ID'
-      },
-      name:{
-        title:'Name'
-      },
-      desc:{
-        title:'Description'
-      },
-      url:{
-        title:'URL'
+    this.cloud_links_service.getAllCloudLinkTables().subscribe(tables => {
+      if(!tables.success){
+        this.flashmessage.show(tables.msg,{ cssClass: 'alert-danger', timeout: 3000 })
+      }else {
+        this.tables_array = tables.cloudLinksTables;
       }
-    }};
 
-    this.tables_array.push({id:this.tableName,settings_obj:this.table_settings_object,data:[]});
-    this.cloud_links_service.addCloudLinkTable(this.tables_array);
-    // var tbl_cont = document.getElementById('tbls');
-    // var tbl_header = document.createElement('h3');
-    // tbl_header.innerHTML=this.tableName;
-    // tbl_header.className="text-center"
-    // var tbl = document.createElement('table');
-    // tbl.className="table table-bordered table-dark"
-    // tbl.setAttribute("id",this.tableName.replace(/\s/g, ''));
-    // var tbl_body = document.createElement('tbody');
-    // var header_row = document.createElement('tr');
-    // var id_header = document.createElement('th');
-    // id_header.innerText="Number"
-    // var name_header = document.createElement('th');
-    // name_header.innerHTML="Name"
-    // var desc_header = document.createElement('th');
-    // desc_header.innerHTML="Description"
-    // var link_header = document.createElement('th');
-    // link_header.innerHTML="Link"
-    // var add_row_button =document.createElement('button')
-    // add_row_button.className="btn btn-primary"
-    // add_row_button.innerHTML="add row"
-    // add_row_button.setAttribute("id",this.tableName.replace(/\s/g, '') + "addRowButton")
-    // add_row_button.onclick=this.addRow;
-    // tbl_cont.appendChild(tbl_header);
-    // header_row.appendChild(id_header);
-    // header_row.appendChild(name_header);
-    // header_row.appendChild(desc_header);
-    // header_row.appendChild(link_header);
-    // header_row.appendChild(add_row_button)
-    // tbl_body.appendChild(header_row);
-    // tbl.appendChild(tbl_body);
-    // tbl_cont.appendChild(tbl);
-  }
-  addRow(){
-    // this.count=this.count+1;
-    // var table = document.getElementById("table1");
-    // var header_row = document.createElement('tr');
-    // var id_header = document.createElement('td');
-    // id_header.innerHTML=this.count.toString();
-    // var name_header = document.createElement('td');
-    // name_header.setAttribute("placeholder","Name")
-    // name_header.contentEditable="true"
-    // var desc_header = document.createElement('td');
-    // desc_header.setAttribute("placeholder","Description")
-    // desc_header.contentEditable="true"
-    // var link_header = document.createElement('td');
-    // link_header.setAttribute("placeholder","Link")
-    // link_header.contentEditable="true"
-    // var edit_row_button =document.createElement('button')
-    // edit_row_button.className="btn btn-danger"
-    // edit_row_button.innerHTML="edit"
-    // edit_row_button.onclick=this.editRow;
-    // header_row.appendChild(id_header);
-    // header_row.appendChild(name_header);
-    // header_row.appendChild(desc_header);
-    // header_row.appendChild(link_header);
-    // header_row.appendChild(edit_row_button);
-    // table.appendChild(header_row);
+    });
   }
 
-  editRow(){
+  addTable() {
+    this.table_settings_object = {
+      columns: {
+        id: {
+          title: 'ID'
+        },
+        name: {
+          title: 'Name'
+        },
+        desc: {
+          title: 'Description'
+        },
+        url: {
+          title: 'URL'
+        }
+      }
+    };
+
+    this.tables_array.push({tableId: this.tableName, settings_obj: this.table_settings_object, data: []});
+    this.cloud_links_service.addCloudLinkTable({tableId: this.tableName, settings_obj: this.table_settings_object, data: []}).subscribe(data=>{
+      if(!data.success){
+        this.flashmessage.show(JSON.stringify(data.msg), { cssClass: 'alert-danger', timeout: 3000 });
+      }else{
+        this.flashmessage.show('Table ' + JSON.stringify(data.cloudLinkTable.tableId) + ' Was Created ' , { cssClass: 'alert-success', timeout: 3000 });
+      }
+    });
+  }
+
+  addRow() {
+
+  }
+
+  editRow() {
 
   }
 

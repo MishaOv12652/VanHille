@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+let router = express.Router();
 const CloudLink = require('../models/cloudlinks');
 
 router.get('/getAllCloudLinks', (req, res, next) => {
@@ -25,11 +25,12 @@ router.get('/:CloudLinkTableId', (req, res, next) => {
 router.post('/addCloudLinkTable', (req, res, next) => {
     let newCloudLinkTable = new CloudLink({
         tableId: req.body.tableId,
-        Table: req.body.Table
+        settings_obj: req.body.settings_obj,
+        data: req.body.data
     });
     CloudLink.addCloudLinkTable(newCloudLinkTable, (err, cloudLinkTable) => {
         if (err) {
-            res.json({ success: false, msg: "קרתה שגיאה בהוספה טבלה של קישור לענן" });
+            res.json({ success: false, msg: err });
         } else {
             res.json({ success: true, cloudLinkTable: cloudLinkTable });
         }
