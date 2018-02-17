@@ -38,11 +38,21 @@ router.post('/addCloudLinkTable', (req, res, next) => {
 });
 
 router.post('/:CloudLinkTableId', (req, res, next) => {
-    CloudLink.updateCloudLinkTable(req.params.CloudLinkTableId, req.body, (err, updatedCloudLinksTable) => {
+    CloudLink.addEntryToCloudLinkTable(req.params.CloudLinkTableId, req.body, (err, updatedCloudLinksTable) => {
         if (err) {
-            res.json({ success: false, msg: "תקלה בעדכון טבלה של קישור לענן" });
+            res.json({ success: false, msg: "תקלה בהוספה שורה לטבלה של קישור לענן" });
         } else {
             res.json({ success: true, updatedCloudLinksTable: updatedCloudLinksTable });
+        }
+    })
+});
+
+router.post('/deleteEntry/:CloudLinkTableId', (req, res, next) => {
+    CloudLink.deleteEntryFromCloudLinkTable(req.params.CloudLinkTableId, req.body, (err, deletedCloudLinksTable) => {
+        if (err) {
+            res.json({ success: false, msg: "תקלה במחיקת שורה מטבלה של קישור לענן" });
+        } else {
+            res.json({ success: true, deletedCloudLinksTable: deletedCloudLinksTable });
         }
     })
 });

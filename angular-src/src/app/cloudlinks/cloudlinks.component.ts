@@ -85,11 +85,11 @@ export class CloudlinksComponent implements OnInit {
       }
       event.newData['url'] = '<a href="' + event.newData['url'] +'">' + event.newData['url'].replace("http://","") + '</a>';
       console.log(event.newData);
-      this.cloud_links_service.updateCloudLinkTable(tableId.tableId,event.newData).subscribe(data=>{
+      this.cloud_links_service.addEntryToCloudLinkTable(tableId.tableId,event.newData).subscribe(data=>{
         if(!data.err){
-          console.log(JSON.stringify(data.updatedCloudLinksTable));
+          this.flashmessage.show('new Entry was added to the table ' + tableId.tableId,{ cssClass: 'alert-success', timeout: 3000 });
         }else{
-          console.log("no success");
+          this.flashmessage.show('Something Went Wrong',{ cssClass: 'alert-danger', timeout: 3000 })
         }
       });
       event.confirm.resolve(event.newData);
@@ -110,6 +110,13 @@ export class CloudlinksComponent implements OnInit {
 
   onDeleteConfirm(event,tableId){
     if (window.confirm('Are you sure you want to delete?')) {
+      this.cloud_links_service.deleteEntryFromCloudTable(tableId.tableId,event.data).subscribe(data=>{
+        if(!data.err){
+          this.flashmessage.show('A row was successfully deleted from the table ' + tableId.tableId,{ cssClass: 'alert-success', timeout: 3000 })
+        }else{
+          this.flashmessage.show('Something Went Wrong',{ cssClass: 'alert-danger', timeout: 3000 })
+        }
+      });
       event.confirm.resolve();
     } else {
       event.confirm.reject();

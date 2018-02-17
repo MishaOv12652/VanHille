@@ -17,12 +17,16 @@ export class CloudlinksService {
     return this.http.post('http://localhost:3050/CloudLinks/addCloudLinkTable',table,{headers:headers}).map(res=>res.json());
   }
 
-  updateCloudLinkTable(id,newTableData){
+  addEntryToCloudLinkTable(id,newTableData){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:3050/CloudLinks/' + id, newTableData,{headers:headers}).map(res=>res.json());
   }
-
+  deleteEntryFromCloudTable(id,deletedTableData){
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3050/CloudLinks/deleteEntry/' + id,deletedTableData,{headers:headers}).map(res=>res.json());
+  }
   deleteCloudLinkTable(id){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
