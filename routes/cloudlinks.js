@@ -38,7 +38,7 @@ router.post('/addCloudLinkTable', (req, res, next) => {
 });
 
 router.post('/:CloudLinkTableId', (req, res, next) => {
-    CloudLink.updateCloudLinkTable(req.params.CloudLinkTableId, req.body.cloudLinksTable, (err, updatedCloudLinksTable) => {
+    CloudLink.updateCloudLinkTable(req.params.CloudLinkTableId, req.body, (err, updatedCloudLinksTable) => {
         if (err) {
             res.json({ success: false, msg: "תקלה בעדכון טבלה של קישור לענן" });
         } else {

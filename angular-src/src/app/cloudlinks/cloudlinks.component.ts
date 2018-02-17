@@ -3,6 +3,7 @@ import {Component, OnInit} from '@angular/core';
 // import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {CloudlinksService} from '../services/cloudlinks.service';
 import {FlashMessagesService} from 'angular2-flash-messages'
+import * as url from "url";
 
 @Component({
   selector: 'app-cloudlinks',
@@ -40,9 +41,20 @@ export class CloudlinksComponent implements OnInit {
       edit: {
         confirmSave: true,
       },
+      attr:{
+        id: this.tableName,
+        class:'table misha'
+      },
+      pager:{
+        display:true,
+        perPage:10
+      },
       columns: {
         id: {
-          title: 'ID'
+          title: 'ID',
+          filter:{
+            sortDirection:'asc'
+          }
         },
         name: {
           title: 'Name'
@@ -51,11 +63,11 @@ export class CloudlinksComponent implements OnInit {
           title: 'Description'
         },
         url: {
-          title: 'URL'
+          title: 'URL',
+          type:'html'
         }
       }
     };
-
     this.tables_array.push({tableId: this.tableName, settings_obj: this.table_settings_object, data: []});
     this.cloud_links_service.addCloudLinkTable({tableId: this.tableName, settings_obj: this.table_settings_object, data: []}).subscribe(data=>{
       if(!data.success){
@@ -66,16 +78,28 @@ export class CloudlinksComponent implements OnInit {
     });
   }
 
-  onCreateConfirm(event){
+  onCreateConfirm(event,tableId){
     if (window.confirm('Are you sure you want to create?')) {
-      event.newData['name'] += ' + added in code';
+      if(!(event.newData['url'].includes("http://")) && !(event.newData['url'].includes("https://"))){
+        event.newData['url'] = "https://" + event.newData['url'];
+      }
+      event.newData['url'] = '<a href="' + event.newData['url'] +'">' + event.newData['url'].replace("http://","") + '</a>';
+      console.log(event.newData);
+      this.cloud_links_service.updateCloudLinkTable(tableId.tableId,event.newData).subscribe(data=>{
+        if(!data.err){
+          console.log(JSON.stringify(data.updatedCloudLinksTable));
+        }else{
+          console.log("no success");
+        }
+      });
       event.confirm.resolve(event.newData);
+
     } else {
       event.confirm.reject();
     }
   }
 
-  onEditConfirm(event) {
+  onEditConfirm(event,tableId) {
     if (window.confirm('Are you sure you want to save?')) {
       event.newData['name'] += ' + added in code';
       event.confirm.resolve(event.newData);
@@ -84,7 +108,7 @@ export class CloudlinksComponent implements OnInit {
     }
   }
 
-  onDeleteConfirm(event){
+  onDeleteConfirm(event,tableId){
     if (window.confirm('Are you sure you want to delete?')) {
       event.confirm.resolve();
     } else {

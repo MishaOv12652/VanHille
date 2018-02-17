@@ -1,10 +1,10 @@
 <div id="tbls" class="jumbotron text-center margin">
   <h2 dir="rtl" style="text-decoration: underline">קישורים לענן</h2>
   <div *ngIf="tables_array != undefined">
-    <div *ngFor="let table of tables_array">
+    <div *ngFor="let table of tables_array;let i = index">
       <h3 style="text-decoration: underline">{{table.tableId}}</h3>
-      <ng2-smart-table [settings]="table.settings_obj" [source]="table.data" (createConfirm)="onCreateConfirm($event)"
-                       (editConfirm)="onEditConfirm($event)" (deleteConfirm)="onDeleteConfirm($event)" ></ng2-smart-table>
+      <ng2-smart-table [settings]="table.settings_obj" [source]="table.data" (createConfirm)="onCreateConfirm($event,this.tables_array[i])"
+                       (editConfirm)="onEditConfirm($event,this.tables_array[i])" (deleteConfirm)="onDeleteConfirm($event,this.tables_array[i])" ></ng2-smart-table>
     </div>
   </div>
 </div>
