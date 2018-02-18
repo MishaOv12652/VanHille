@@ -80,7 +80,10 @@ export class CloudlinksComponent implements OnInit {
           title: 'Name'
         },
         desc: {
-          title: 'Description'
+          title: 'Description',
+          editor:{
+            type:'textarea'
+          }
         },
         url: {
           title: 'URL',

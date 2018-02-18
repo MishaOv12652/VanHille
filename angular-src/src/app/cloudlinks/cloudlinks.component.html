@@ -4,7 +4,7 @@
     <div *ngFor="let table of tables_array;let i = index">
       <h3 style="text-decoration: underline">{{table.tableId}}</h3>
       <ng2-smart-table [settings]="table.settings_obj" [source]="table.data" (createConfirm)="onCreateConfirm($event,this.tables_array[i])"
-                       (editConfirm)="onEditConfirm($event,this.tables_array[i])" (deleteConfirm)="onDeleteConfirm($event,this.tables_array[i])" ></ng2-smart-table>
+                       (editConfirm)="onEditConfirm($event,this.tables_array[i])" (deleteConfirm)="onDeleteConfirm($event,this.tables_array[i])" style="font-size: 20px"></ng2-smart-table>
     </div>
   </div>
 </div>
