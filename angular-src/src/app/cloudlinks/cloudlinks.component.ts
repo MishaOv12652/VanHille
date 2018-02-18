@@ -113,8 +113,7 @@ export class CloudlinksComponent implements OnInit {
       if (!(event.newData['url'].includes("http://")) && !(event.newData['url'].includes("https://"))) {
         event.newData['url'] = "https://" + event.newData['url'];
       }
-      event.newData['url'] = '<a href="' + event.newData['url'] + '">' + event.newData['url'].replace("http://", "") + '</a>';
-      console.log(event.newData);
+      event.newData['url'] = '<a href="' + event.newData['url'] + '">' + "link" + '</a>';
       this.cloud_links_service.addEntryToCloudLinkTable(tableId.tableId, event.newData).subscribe(data => {
         if (!data.err) {
           this.flashmessage.show('new Entry was added to the table ' + tableId.tableId, {
