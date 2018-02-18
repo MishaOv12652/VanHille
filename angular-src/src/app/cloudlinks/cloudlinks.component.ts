@@ -4,6 +4,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../services/auth.service';
 import {CloudlinksService} from '../services/cloudlinks.service';
 import {FlashMessagesService} from 'angular2-flash-messages'
+import {CustomEditorComponent} from "./custom-editor/custom-editor.component";
 
 
 
@@ -87,7 +88,11 @@ export class CloudlinksComponent implements OnInit {
         },
         url: {
           title: 'URL',
-          type: 'html'
+          type: 'html',
+          editor: {
+            type: 'custom',
+            component: CustomEditorComponent,
+          },
         }
       }
     };
@@ -110,10 +115,10 @@ export class CloudlinksComponent implements OnInit {
 
   onCreateConfirm(event, tableId) {
     if (window.confirm('Are you sure you want to create?')) {
-      if (!(event.newData['url'].includes("http://")) && !(event.newData['url'].includes("https://"))) {
-        event.newData['url'] = "https://" + event.newData['url'];
-      }
-      event.newData['url'] = '<a href="' + event.newData['url'] + '">' + "link" + '</a>';
+      // if (!(event.newData['url'].includes("http://")) && !(event.newData['url'].includes("https://"))) {
+      //   event.newData['url'] = "https://" + event.newData['url'];
+      // }
+      // event.newData['url'] = '<a href="' + event.newData['url'] + '">' + "link" + '</a>';
       this.cloud_links_service.addEntryToCloudLinkTable(tableId.tableId, event.newData).subscribe(data => {
         if (!data.err) {
           this.flashmessage.show('new Entry was added to the table ' + tableId.tableId, {

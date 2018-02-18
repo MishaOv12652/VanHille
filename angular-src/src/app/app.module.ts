@@ -37,6 +37,7 @@ import {RegisterComponent} from './register/register.component';
 import {LoginComponent} from './login/login.component';
 import {ProfileComponent} from './profile/profile.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
+import { CustomEditorComponent } from './cloudlinks/custom-editor/custom-editor.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -52,7 +53,7 @@ const appRoutes: Routes = [
   {path: 'dashboard', component: DashboardComponent}
   // ,{path:'vanhileregister',component:VanhileformComponent}
 
-]
+];
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,7 +73,9 @@ const appRoutes: Routes = [
     LoginComponent,
     ProfileComponent,
     DashboardComponent,
+    CustomEditorComponent,
   ],
+  entryComponents: [CustomEditorComponent],
   imports: [
     BrowserModule,
     FlashMessagesModule,
