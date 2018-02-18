@@ -4,8 +4,8 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../services/auth.service';
 import {CloudlinksService} from '../services/cloudlinks.service';
 import {FlashMessagesService} from 'angular2-flash-messages'
-import * as url from "url";
-import {element} from "protractor";
+
+
 
 @Component({
   selector: 'app-cloudlinks',
@@ -67,7 +67,7 @@ export class CloudlinksComponent implements OnInit {
       },
       pager: {
         display: true,
-        perPage: 10
+        perPage: 5
       },
       columns: {
         id: {
