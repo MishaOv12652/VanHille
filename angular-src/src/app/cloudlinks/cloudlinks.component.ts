@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 // import {Node} from '@angular/compiler';
 // import {Ng2SmartTableModule} from 'ng2-smart-table';
+import {AuthService} from '../services/auth.service';
 import {CloudlinksService} from '../services/cloudlinks.service';
 import {FlashMessagesService} from 'angular2-flash-messages'
 import * as url from "url";
+import {element} from "protractor";
 
 @Component({
   selector: 'app-cloudlinks',
@@ -16,7 +18,7 @@ export class CloudlinksComponent implements OnInit {
   tables_array: Array<Object>;
 
 
-  constructor(private  cloud_links_service: CloudlinksService, private flashmessage: FlashMessagesService) {
+  constructor(private  cloud_links_service: CloudlinksService, private flashmessage: FlashMessagesService, private auth_service: AuthService) {
   }
 
   ngOnInit() {
@@ -24,7 +26,25 @@ export class CloudlinksComponent implements OnInit {
       if (!tables.success) {
         this.flashmessage.show(tables.msg, {cssClass: 'alert-danger', timeout: 3000})
       } else {
+        if (this.auth_service.loggedIn()) {
+          this.tables_array = tables.cloudLinksTables;
+        } else {
+          //this.tables_array = tables.cloudLinksTables;
+          let editMode={
+            actions:{
+              edit:false,
+              add:false,
+              delete:false,
+              columnTitle:""
+            }
+          };
+          tables.cloudLinksTables.forEach((cloudLinkTable) => {
+            let tempsettings = Object.assign(cloudLinkTable['settings_obj'],editMode);
+            cloudLinkTable['settings_obj'] = tempsettings;
+          });
+        }
         this.tables_array = tables.cloudLinksTables;
+
       }
 
     });
