@@ -63,7 +63,7 @@ export class CloudlinksComponent implements OnInit {
       },
       attr: {
         id: this.tableName,
-        class: 'table misha'
+        class: 'table'
       },
       pager: {
         display: true,
