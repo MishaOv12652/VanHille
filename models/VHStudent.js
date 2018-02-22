@@ -92,6 +92,6 @@ module.exports.nulifyAnswersIfClosedBrowser = function(id,tryTime,callback){
 }
 
 module.exports.findStudentsBetweenDates = function(sDate,fDate,callback){
-    const query = {$and:[{date:{$gte:sDate}},{date:{$lte:fDate}}]}
+    const query = {$and:[{date:{$gte:moment(parseFloat(sDate))}},{date:{$lte:moment(parseFloat(fDate))}}]};
     VHStudent.find(query,callback);
 }
