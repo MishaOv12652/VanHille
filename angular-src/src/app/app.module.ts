@@ -3,9 +3,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
-import {DatepickerModule} from "ngx-date-picker";
-import {DateTimePickerModule} from 'ngx-datetime-picker';
-import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
+
 //components
 import {AppComponent} from './app.component';
 import {CloudlinksComponent} from './cloudlinks/cloudlinks.component';
@@ -21,8 +19,9 @@ import {ReportComponent} from './vanhillequiz/report/report.component';
 import {ChartsModule} from 'ng2-charts/ng2-charts';
 import {FlashMessagesModule} from "angular2-flash-messages";
 import {Ng2SmartTableModule} from 'ng2-smart-table';
-
-
+import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {DpDatePickerModule} from 'ng2-date-picker';
 //services
 import {QuestionsserviceService} from "./services/questionsservice.service";
 import {VanhileformService} from "./services/vanhileform.service";
@@ -83,12 +82,12 @@ const appRoutes: Routes = [
     FormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
-    DatepickerModule,
-    DateTimePickerModule,
     FlashMessagesModule,
     ChartsModule,
-    Ng4LoadingSpinnerModule,
-    Ng2SmartTableModule
+    Ng4LoadingSpinnerModule.forRoot(),
+    Ng2SmartTableModule,
+    NgbModule.forRoot(),
+    DpDatePickerModule
 
 
   ],
