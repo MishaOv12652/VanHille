@@ -1,12 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-// import {Node} from '@angular/compiler';
 // import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {AuthService} from '../services/auth.service';
 import {CloudlinksService} from '../services/cloudlinks.service';
 import {FlashMessagesService} from 'angular2-flash-messages'
 import {CustomEditorComponent} from "./custom-editor/custom-editor.component";
-import {CompleterEditorComponent} from "ng2-smart-table/components/cell/cell-editors/completer-editor.component";
-
 
 
 @Component({
@@ -30,20 +27,20 @@ export class CloudlinksComponent implements OnInit {
       } else {
         if (this.auth_service.loggedIn()) {
           this.tables_array = tables.cloudLinksTables;
-          this.tables_array.forEach((cloudlinkTable)=>{
+          this.tables_array.forEach((cloudlinkTable) => {
             cloudlinkTable['settings_obj'].columns.url.editor['component'] = CustomEditorComponent;
           })
         } else {
-          let editMode={
-            actions:{
-              edit:false,
-              add:false,
-              delete:false,
-              columnTitle:""
+          let editMode = {
+            actions: {
+              edit: false,
+              add: false,
+              delete: false,
+              columnTitle: ""
             }
           };
           tables.cloudLinksTables.forEach((cloudLinkTable) => {
-            let tempsettings = Object.assign(cloudLinkTable['settings_obj'],editMode);
+            let tempsettings = Object.assign(cloudLinkTable['settings_obj'], editMode);
             cloudLinkTable['settings_obj'] = tempsettings;
           });
         }
@@ -55,7 +52,7 @@ export class CloudlinksComponent implements OnInit {
   }
 
   addTable() {
-    document.getElementById('').setAttribute('value','');
+    document.getElementById('').setAttribute('value', '');
     this.table_settings_object = {
       delete: {
         confirmDelete: true,
@@ -86,8 +83,8 @@ export class CloudlinksComponent implements OnInit {
         },
         desc: {
           title: 'Description',
-          editor:{
-            type:'textarea'
+          editor: {
+            type: 'textarea'
           }
         },
         url: {
@@ -119,10 +116,6 @@ export class CloudlinksComponent implements OnInit {
 
   onCreateConfirm(event, tableId) {
     if (window.confirm('Are you sure you want to create?')) {
-      // if (!(event.newData['url'].includes("http://")) && !(event.newData['url'].includes("https://"))) {
-      //   event.newData['url'] = "https://" + event.newData['url'];
-      // }
-      // event.newData['url'] = '<a href="' + event.newData['url'] + '">' + "link" + '</a>';
       this.cloud_links_service.addEntryToCloudLinkTable(tableId.tableId, event.newData).subscribe(data => {
         if (!data.err) {
           this.flashmessage.show('new Entry was added to the table ' + tableId.tableId, {
