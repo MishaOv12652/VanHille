@@ -5,6 +5,7 @@ import {AuthService} from '../services/auth.service';
 import {CloudlinksService} from '../services/cloudlinks.service';
 import {FlashMessagesService} from 'angular2-flash-messages'
 import {CustomEditorComponent} from "./custom-editor/custom-editor.component";
+import {CompleterEditorComponent} from "ng2-smart-table/components/cell/cell-editors/completer-editor.component";
 
 
 
@@ -29,8 +30,10 @@ export class CloudlinksComponent implements OnInit {
       } else {
         if (this.auth_service.loggedIn()) {
           this.tables_array = tables.cloudLinksTables;
+          this.tables_array.forEach((cloudlinkTable)=>{
+            cloudlinkTable['settings_obj'].columns.url.editor['component'] = CustomEditorComponent;
+          })
         } else {
-          //this.tables_array = tables.cloudLinksTables;
           let editMode={
             actions:{
               edit:false,
@@ -52,6 +55,7 @@ export class CloudlinksComponent implements OnInit {
   }
 
   addTable() {
+    document.getElementById('').setAttribute('value','');
     this.table_settings_object = {
       delete: {
         confirmDelete: true,
@@ -87,11 +91,11 @@ export class CloudlinksComponent implements OnInit {
           }
         },
         url: {
-          title: 'URL',
+          title: 'Link',
           type: 'html',
           editor: {
             type: 'custom',
-            component: CustomEditorComponent,
+            component: CustomEditorComponent
           },
         }
       }
