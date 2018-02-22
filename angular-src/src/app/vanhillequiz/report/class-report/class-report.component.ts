@@ -26,13 +26,22 @@ export class ClassReportComponent implements OnInit {
   radarChartData: any[] = [{}];
   //get the try number for the calc
   tryNum: any = localStorage.getItem('tryNum');
-  //show comparison mode 
+  //show comparison mode
   showpast: boolean = false;
   noDupArr:[any];
-  //delete those four after finishing 
+  //delete those four after finishing
   Options: [any];
   groupNum: Number;
   courseNum: Number;
+  //bar chart options
+  barChartLabels:string[] = ['רמה 1', 'רמה 2', 'רמה 3', 'רמה 4', 'רמה 5'];
+  barChartType:string = 'bar';
+  barChartLegend:boolean = true;
+  barChartData:any=[] = [{},{}];
+  barChartOptions:any = {
+    scaleShowVerticalLines: false,
+    responsive: true
+  };
   radarChartPastData: any[] = [{
   }];
 
@@ -48,7 +57,7 @@ export class ClassReportComponent implements OnInit {
 
   /**
    * options for radar chart
-   * 
+   *
    */
   private radarChartLabels: string[] = ['רמה 1', 'רמה 2', 'רמה 3', 'רמה 4', 'רמה 5'];
 
@@ -132,7 +141,7 @@ export class ClassReportComponent implements OnInit {
                 }else{
                   this.courseNumPostOptions[index] = data.quiz[index].courseNum;
                 }
-                
+
               }else{
                 this.courseNumPreOptions[index] = data.quiz[index].courseNum;
               }
@@ -197,21 +206,22 @@ export class ClassReportComponent implements OnInit {
       this.reportServise.getQuizesByGroupAndCourse(this.courseNumPre,this.groupNumPre).subscribe(data=>{
         if(data.success){
           this.radarChartDataPre = [{ data: data.quiz[0].results, label: data.quiz[0].groupNum + " - " + data.quiz[0].courseNum }];
+          this.barChartData = [{ data: data.quiz[0].results, label: data.quiz[0].groupNum + " - " + data.quiz[0].courseNum }];
         }else{
           return false;
         }
-        
-      }) 
+
+      })
     }
     if(PrePost == 2){
       this.reportServise.getQuizesByGroupAndCourse(this.courseNumPost,this.groupNumPost).subscribe(data=>{
         if(data.success){
-          console.log(JSON.stringify(data));
           this.radarChartDataPost = [{ data: data.quiz[0].results, label: data.quiz[0].groupNum + " - " + data.quiz[0].courseNum }];
+          this.barChartData.push({ data: data.quiz[0].results, label: data.quiz[0].groupNum + " - " + data.quiz[0].courseNum });
         }else{
           return false;
         }
-        
+
       //   console.log(JSON.stringify(data));
       //   if(data.quiz.length>1)
       //   this.radarChartDataPost = [{ data: data.quiz[1].results, label: data.quiz[1].groupNum + " - " + data.quiz[1].courseNum }];
