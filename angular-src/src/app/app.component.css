@@ -1,7 +1,13 @@
-.margin{
-    margin-top: 50px;
+.margin {
+  margin-top: 50px;
 }
-.backimg{
-    background-image: url("../assets/background.jpg");
-    background-repeat: no-repeat;
+
+.backimg {
+  background-image: url("../assets/background.jpg");
+  /*background-repeat: no-repeat;*/
+  height: 150%;
+
+
+  background-position: center;
+  background-size: cover;
 }
