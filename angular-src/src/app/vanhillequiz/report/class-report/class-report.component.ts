@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { VanhilereportService } from "../../../services/vanhilereport.service";
 import { FlashMessagesService } from "angular2-flash-messages";
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import set = Reflect.set;
 
 @Component({
   selector: 'app-class-report',
@@ -37,7 +38,7 @@ export class ClassReportComponent implements OnInit {
   barChartLabels:string[] = ['רמה 1', 'רמה 2', 'רמה 3', 'רמה 4', 'רמה 5'];
   barChartType:string = 'bar';
   barChartLegend:boolean = true;
-  barChartData:any=[] = [{},{}];
+  barChartData:any[any] = [{data:[],label:""}];
   barChartOptions:any = {
     scaleShowVerticalLines: false,
     responsive: true
@@ -105,12 +106,13 @@ export class ClassReportComponent implements OnInit {
       this.groupNumPost = null;
       this.radarChartDataPost = [{data:"",label:''}];
     }
+    this.barChartData=[{data:"",label:""}];
   }
 
   calcAll() {
     this.reportServise.createAllResults(this.tryNum).subscribe(data => {
       if (data.success) {
-        console.log(data.resQuiz[0].results)
+        //console.log(data.resQuiz[0].results)
         this.radarChartData = [{ data: data.resQuiz[0].results, label:data.resQuiz[0].groupNum + " - " + data.resQuiz[0].courseNum }];
         //  this.Options = data.resQuiz;
       } else {
@@ -154,7 +156,6 @@ export class ClassReportComponent implements OnInit {
   }
 
   findGroupNumByCourseNumSelected(PrePost:Number){
-    console.log("PrePost: " + PrePost)
     if(PrePost == 1){
       this.reportServise.getQuizByCourseNum(this.courseNumPre).subscribe(data=>{
         if(data.success){
@@ -206,30 +207,25 @@ export class ClassReportComponent implements OnInit {
       this.reportServise.getQuizesByGroupAndCourse(this.courseNumPre,this.groupNumPre).subscribe(data=>{
         if(data.success){
           this.radarChartDataPre = [{ data: data.quiz[0].results, label: data.quiz[0].groupNum + " - " + data.quiz[0].courseNum }];
-          this.barChartData = [{ data: data.quiz[0].results, label: data.quiz[0].groupNum + " - " + data.quiz[0].courseNum }];
+          setTimeout(()=>{
+            this.barChartData = [{ data: data.quiz[0].results, label: data.quiz[0].groupNum + " - " + data.quiz[0].courseNum }];
+          },500);
         }else{
           return false;
         }
-
-      })
+      });
     }
     if(PrePost == 2){
       this.reportServise.getQuizesByGroupAndCourse(this.courseNumPost,this.groupNumPost).subscribe(data=>{
         if(data.success){
           this.radarChartDataPost = [{ data: data.quiz[0].results, label: data.quiz[0].groupNum + " - " + data.quiz[0].courseNum }];
-          this.barChartData.push({ data: data.quiz[0].results, label: data.quiz[0].groupNum + " - " + data.quiz[0].courseNum });
+          setTimeout(()=>{
+            this.barChartData = [this.barChartData[0],{ data: data.quiz[0].results, label: data.quiz[0].groupNum + " - " + data.quiz[0].courseNum }];
+          },500);
         }else{
           return false;
         }
-
-      //   console.log(JSON.stringify(data));
-      //   if(data.quiz.length>1)
-      //   this.radarChartDataPost = [{ data: data.quiz[1].results, label: data.quiz[1].groupNum + " - " + data.quiz[1].courseNum }];
-      // else{
-      //   this.flashmessage.show('',{ cssClass: 'alert-danger', timeout: 3000 });
-      //   return false;
-      // }
-      })
+      });
     }
   }
 
