@@ -20,6 +20,7 @@ export class QuestionsComponent implements OnInit {
   User: any = localStorage.getItem('User');
   tryTime: any = localStorage.getItem('tryNum');
   radiogroup: any;
+  counterConfig:Object;
 
   //calc User variables
   CorrectAnswersForQuestions: any[] = [];
@@ -39,6 +40,11 @@ export class QuestionsComponent implements OnInit {
   ngOnInit() {
     this.qnumber = 1;
     this.nextQuestion(this.qnumber.toString());
+    this.counterConfig={
+      leftTime: 1800,
+      template:"$!m!:$!s!",
+      size:'medium'
+    }
   }
 
 
@@ -48,9 +54,9 @@ export class QuestionsComponent implements OnInit {
     if (this.qnumber > 25) {
       return false;
     }
-    
+
     this.questionService.getNextQuestion(id).subscribe(data => {
-      
+
       if (data.success) {
         this.Qid = data.question.Qid;
         this.question = data.question.Question;
@@ -189,7 +195,7 @@ export class QuestionsComponent implements OnInit {
   }
   //calcs the Users Correct Answers for difficulties
   calcUser() {
-    
+
     this.saveAnswer();
     console.log("calc start: " + this.CorrectAnsPerDiff);
     this.questionService.getAllQuestions().subscribe(data => {
@@ -221,47 +227,22 @@ export class QuestionsComponent implements OnInit {
                   switch (parseInt(this.CorrectAnswersForQuestions[index].diff)) {
                     case 1:
                       this.CorrectAnsPerDiff[0] = parseInt(this.CorrectAnsPerDiff[0]) + 1;
-                      // this.CorrectAnsPerDiff[0] += 1;
-                      // console.log("CorrectAnsPerDiff[0]: " + this.CorrectAnsPerDiff[0]);
-                      // console.log("case 1 CorrectAnsPerDiff" + this.CorrectAnsPerDiff);
                       break;
                     case 2:
                       this.CorrectAnsPerDiff[1] = parseInt(this.CorrectAnsPerDiff[1]) + 1;
-                      //this.CorrectAnsPerDiff[1] += 1;
-                      //this.CorrectAnsPerDiff[1]++;
-                      // console.log("CorrectAnsPerDiff[1]: " + this.CorrectAnsPerDiff[1]);
-                      // console.log("case 2 CorrectAnsPerDiff" + this.CorrectAnsPerDiff);
                       break;
                     case 3:
                       this.CorrectAnsPerDiff[2] = parseInt(this.CorrectAnsPerDiff[2]) + 1;
-                      //this.CorrectAnsPerDiff[2] += 1;
-                      //this.CorrectAnsPerDiff[2]++;
-                      // console.log("CorrectAnsPerDiff[2]: " + this.CorrectAnsPerDiff[2]);
-                      // console.log("case 3 CorrectAnsPerDiff" + this.CorrectAnsPerDiff);
                       break;
                     case 4:
                       this.CorrectAnsPerDiff[3] = parseInt(this.CorrectAnsPerDiff[3]) + 1;
-                      //this.CorrectAnsPerDiff[3] += 1;
-                      // this.CorrectAnsPerDiff[3]++;
-                      // console.log("CorrectAnsPerDiff[3]: " + this.CorrectAnsPerDiff[3]);
-                      // console.log("case 4 CorrectAnsPerDiff" + this.CorrectAnsPerDiff);
                       break;
                     case 5:
                       this.CorrectAnsPerDiff[4] = parseInt(this.CorrectAnsPerDiff[4]) + 1;
-                      //this.CorrectAnsPerDiff[4] += 1;
-                      //this.CorrectAnsPerDiff[4]++;
-                      // console.log("CorrectAnsPerDiff[4]: " + this.CorrectAnsPerDiff[4]);
-                      // console.log("case 5 CorrectAnsPerDiff" + this.CorrectAnsPerDiff);
                       break;
                   }
                 }
               }
-              // for (var index = 0; index < this.CorrectAnsPerDiff.length; index++) {
-              //   console.log("index: " + this.CorrectAnsPerDiff[index]);
-
-              // }
-              //this.CorrectAnsPerDiff = this.CorrectAnsPerDiff.slice(0,-1);
-              // console.log("CorrectAnsPerDiff: " + this.CorrectAnsPerDiff)
               this.saveCorrectUserAnswers();
 
             }
@@ -282,10 +263,12 @@ export class QuestionsComponent implements OnInit {
       this.qnumber--;
       this.nextQuestion(this.qnumber.toString());
     }
-    
+
   }
 
+  calcUserAfterTimerFinished(){
 
+  }
 
 
 }

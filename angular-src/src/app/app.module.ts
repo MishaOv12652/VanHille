@@ -22,6 +22,7 @@ import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {DpDatePickerModule} from 'ng2-date-picker';
+import { CountdownModule } from 'ngx-countdown';
 //services
 import {QuestionsserviceService} from "./services/questionsservice.service";
 import {VanhileformService} from "./services/vanhileform.service";
@@ -87,8 +88,8 @@ const appRoutes: Routes = [
     Ng4LoadingSpinnerModule.forRoot(),
     Ng2SmartTableModule,
     NgbModule.forRoot(),
-    DpDatePickerModule
-
+    DpDatePickerModule,
+    CountdownModule
 
   ],
   providers: [
