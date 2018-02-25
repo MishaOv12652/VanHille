@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const config = require('../config/db');
 const moment = require('moment');
-//const allCalc = require('../ClacModules/CalcAll');
 const allCalc = require('../ClacModules/calcClass');
 
 const VanHileSchema = mongoose.Schema({
@@ -26,9 +25,6 @@ module.exports.getResultsBygroupNumAndCourseNum = function (gNum, cNum, callback
     cNum = parseInt(cNum);
     const query = {$and:[{groupNum: gNum, courseNum: cNum}]};
     VanHile.find(query,{},{sort:{date:-1}},callback);
-    // const OneH = moment().subtract(1, 'hours');
-    // const query = { $and: [{ groupNum: gNum, courseNum: cNum, date: { $lt: OneH } }] };
-    // VanHile.findOne(query,{},{sort:{date:-1}}, callback);
 }
 
 module.exports.writeResultsOfClass = function (tryNum,callback) {
