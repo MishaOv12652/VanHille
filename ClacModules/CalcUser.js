@@ -1,75 +1,43 @@
-const User = require('../models/user');
+const User = require('../models/VHStudent');
 const Question = require('../models/questions');
-var async = require('async');
-let correctAnsArray = [];
-const correctAnsPerDiff = [0, 0, 0, 0, 0];
-const UserAnswers = [];
 
-function correctAnswers() {
-    Question.getAllQuestions((err, questions) => {
-        if (err) {
-            console.log("getAllQuestions: " + err);
-        } else {
-            for (var index = 0; index < 25; index++) {
-            correctAnsArray[index] = {ans:questions[index].correctA,diff:questions[index].dif};
-            //console.log("coe:" + "corA: " + correctAnsArray[index].ans + "dif: " + questions[index].dif)
-            }
-            return correctAnsArray;
-        }
-        
-    });
+let answerObjectArray=[];//array that will contain objects with user's ans the question's correct ans and it's difficulty
+let correctAnswersPerDifficulty;
+let userAnswers;
 
-}
+module.exports.calcUser = function (studentId,tryNum,callback) {
+  Question.getAllQuestions((err,questions)=>{
+      correctAnswersPerDifficulty = [0,0,0,0,0];
+      answerObjectArray =[];
+      questions.forEach((question)=>{
+          let answerObj = {
+              correctA:question.correctA,
+              difficulty:question.dif,
+              userAnswer:""
+          };
+          answerObjectArray.push(answerObj);
+      });
 
-function getUserAnswers(ID) {
-    User.getUserById(ID, (err, user) => {
-        if (err) {
-            console.log("getUserAnswers: " + err);
-        } else {
-            UserAnswers = user.Answers;
-            
-        }
-        console.log("UserAnswers: " + UserAnswers)
-    });
-}
+      User.getUserById(studentId,(err,student)=>{
+          if(parseFloat(tryNum) === 1){
+              userAnswers = student[0].Answers1;
+          }else{
+              userAnswers = student[0].Answers2;
+          }
+          for(let i=0;i<25;i++){
+             if(userAnswers[i] !== undefined){
+                 answerObjectArray[i].userAnswer = userAnswers[i];
+             }else{
+                 answerObjectArray[i].userAnswer = 0;
+             }
+          }
+          answerObjectArray.forEach((answerObj)=>{
+             if(parseFloat(answerObj.userAnswer) === parseFloat(answerObj.correctA)){
+                 correctAnswersPerDifficulty[answerObj.difficulty-1]+=1;
+             }
+          });
 
-module.exports.createCorrectAnsArrPerDiff = function (ID) {
-    // correctAnswers().then(function(arr){
-    //     console.log(correctAnsArray)
-    //     return correctAnsArray;
-    // });
-
-    getUserAnswers(ID);
-    // if (correctAnsArray.length == 0 || UserAnswers.length == 0) {
-    //     console.log('somthing went wrong with calc per user proccess');
-    //     return [];
-    // } else {
-    //     for (var index = 0; index < correctAnsArray.length; index++) {
-    //         if (UserAnswers[index] == correctAnsArray[index].ans) {
-    //             switch (correctAnsArray[index].diff) {
-    //                 case 1:
-    //                     correctAnsPerDiff[0]++;
-    //                     break;
-    //                 case 2:
-    //                     correctAnsPerDiff[1]++
-    //                     break;
-    //                 case 3:
-    //                     correctAnsPerDiff[2]++
-    //                     break;
-    //                 case 4:
-    //                     correctAnsPerDiff[3]++
-    //                     break;
-    //                 case 5:
-    //                     correctAnsPerDiff[4]++
-    //                     break;
-    //             }
-    //         }
-
-    //     }
-    //     console.log("correctAnsPerDiff:" + correctAnsPerDiff)
-    //     return correctAnsPerDiff;
-    //}
-    // console.log(correctAnsArray)
-    // return correctAnsArray;
-}
-
+          return callback(err,correctAnswersPerDifficulty);
+      });
+  });
+};

@@ -33,7 +33,15 @@ router.post('/calc/:id',(req,res,next)=>{
     }
 })
 
-
+router.post('/calcStudent/:tryNum/:id',(req,res,next)=>{
+    VHQuiz.createAndSaveStudentResult(req.params.id,req.params.tryNum,(err,studentRes)=>{
+        if(err){
+            res.json({success:false,msg:err});
+        }else{
+            res.json({success:true,user:studentRes});
+        }
+    });
+});
 router.post('/calcAll/:tryNum',(req,res,next)=>{
     VHQuiz.writeResultsOfClass(req.params.tryNum,(err,resQuiz)=>{
         if(err){

@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const config = require('../config/db');
 const moment = require('moment');
 const allCalc = require('../ClacModules/calcClass');
+const userCalc = require('../ClacModules/CalcUser');
 
 const VanHileSchema = mongoose.Schema({
     date: {
@@ -26,7 +27,9 @@ module.exports.getResultsBygroupNumAndCourseNum = function (gNum, cNum, callback
     const query = {$and:[{groupNum: gNum, courseNum: cNum}]};
     VanHile.find(query,{},{sort:{date:-1}},callback);
 }
-
+module.exports.createAndSaveStudentResult = function (studentsId, tryNum, callback) {
+    userCalc.calcUser(studentsId,tryNum,callback);
+};
 module.exports.writeResultsOfClass = function (tryNum,callback) {
     var allresArray;
     allCalc.calcAll(tryNum,(arr, groupNum, courseNum) => {
