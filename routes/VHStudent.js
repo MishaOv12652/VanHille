@@ -9,8 +9,6 @@ const User = require('../models/VHStudent');
 //register a user
 router.post('/register',(req,res,next)=>{
     let newUser = new User({
-        // firstname: req.body.Fname,
-        // lastname: req.body.Lname,
         ID: req.body.ID,
         groupNum:req.body.groupNum,
         courseNum:req.body.courseNum,
@@ -62,7 +60,7 @@ router.get('/',(req,res,next)=>{
 
 router.post('/calc/:tryNum/:id/(:arr)*',(req,res,next)=>{
     var arrparams = [req.params.arr].concat(req.params[0].split('/').slice(1));
-    User.createeCorrectAnsArrPerDiff(req.params.tryNum,req.params.id,arrparams,(err,user)=>{
+    User.saveCorrectAnsArrPerDiff(req.params.tryNum,req.params.id,arrparams,(err,user)=>{
         if(err){
             res.json({success:false,msg:err});
         }else{

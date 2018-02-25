@@ -24,21 +24,13 @@ router.get('/:id',(req,res,next)=>{
     });
 });
 
-router.post('/calc/:id',(req,res,next)=>{
-    User.calc();
-    if(err){
-        res.json({success:false,msg:"כישלון בחישוב לסטודנט במספר ת.ז שלו הוא:" + req.params.id});
-    }else{
-        res.json({success:true,user:user});
-    }
-})
 
 router.post('/calcStudent/:tryNum/:id',(req,res,next)=>{
-    VHQuiz.createAndSaveStudentResult(req.params.id,req.params.tryNum,(err,studentRes)=>{
+    VHQuiz.createStudentResult(req.params.id,req.params.tryNum,(err,studentRes)=>{
         if(err){
             res.json({success:false,msg:err});
         }else{
-            res.json({success:true,user:studentRes});
+            res.json({success:true,studentRes:studentRes});
         }
     });
 });

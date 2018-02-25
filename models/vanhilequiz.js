@@ -27,7 +27,7 @@ module.exports.getResultsBygroupNumAndCourseNum = function (gNum, cNum, callback
     const query = {$and:[{groupNum: gNum, courseNum: cNum}]};
     VanHile.find(query,{},{sort:{date:-1}},callback);
 }
-module.exports.createAndSaveStudentResult = function (studentsId, tryNum, callback) {
+module.exports.createStudentResult = function (studentsId, tryNum, callback) {
     userCalc.calcUser(studentsId,tryNum,callback);
 };
 module.exports.writeResultsOfClass = function (tryNum,callback) {

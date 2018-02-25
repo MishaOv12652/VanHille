@@ -68,7 +68,7 @@ module.exports.getNumUsersDoneTheQuizInTheLastThreeHours = function (k, callback
     VHStudent.count(query, callback);
 }
 
-module.exports.createeCorrectAnsArrPerDiff = function (tryNum, id, arr, callback) {
+module.exports.saveCorrectAnsArrPerDiff = function (tryNum, id, arr, callback) {
     const query = {ID: id};
     console.log("CorrectAnsOfUser: " + arr)
     var str = "correctAperdif" + tryNum;//+ "." + qnumber

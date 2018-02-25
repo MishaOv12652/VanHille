@@ -19,6 +19,12 @@ module.exports.calcUser = function (studentId,tryNum,callback) {
       });
 
       User.getUserById(studentId,(err,student)=>{
+          if(err){
+              return callback(err,null);
+          }
+          if(student.length == 0){
+              return callback("אין סטודנט כזה",null)
+          }
           if(parseFloat(tryNum) === 1){
               userAnswers = student[0].Answers1;
           }else{
