@@ -1,7 +1,6 @@
 import {Component, OnInit, Injectable, AfterViewChecked} from '@angular/core';
-import {QuestionsserviceService} from "../../services/questionsservice.service";
-import {FlashMessagesService} from "angular2-flash-messages";
-import {VanhileformService} from "../../services/vanhileform.service";//update user answer
+import {QuestionsserviceService} from '../../services/questionsservice.service';
+import {FlashMessagesService} from 'angular2-flash-messages';
 import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
 
 @Component({
@@ -39,9 +38,9 @@ export class QuestionsComponent implements OnInit {
     this.nextQuestion(this.qnumber.toString());
     this.counterConfig = {
       leftTime: 1800,
-      template: "$!m!:$!s!",
+      template: '$!m!:$!s!',
       size: 'medium'
-    }
+    };
   }
 
 
@@ -57,6 +56,15 @@ export class QuestionsComponent implements OnInit {
         this.question = data.question.Question;
         this.img = data.question.Image;
         this.Answers = data.question.Answers;
+        this.questionService.getUser(this.User).subscribe(user => {
+          if (parseFloat(this.tryTime) === 1) {
+            if (user.user[0].Answers1[this.qnumber - 1]) {
+              this.radiogroup = 'a' + user.user[0].Answers1[this.qnumber - 1];
+            }
+          } else {
+            this.radiogroup = 'a' + user.user[0].Answers2[this.qnumber - 1];
+          }
+        });
         if (this.qnumber == 25) {
           this.hideButtons();
         }
@@ -71,14 +79,16 @@ export class QuestionsComponent implements OnInit {
     if (this.qnumber == 1) {
       return false;
     } else {
+      this.User = localStorage.getItem('User');
       this.questionService.getUser(this.User).subscribe(user => {
         this.qnumber--;
-        if (this.tryTime == 1) {
-          this.radiogroup = user[0].Answers1[this.qnumber];
+        this.tryTime = localStorage.getItem('tryNum');
+        if (parseFloat(this.tryTime) === 1) {
+          this.radiogroup = 'a' + user.user[0].Answers1[this.qnumber - 1];
         } else {
-          this.radiogroup = user[0].Answers2[this.qnumber];
+          this.radiogroup = 'a' + user.user[0].Answers2[this.qnumber - 1];
         }
-         this.nextQuestion(this.qnumber.toString());
+        this.nextQuestion(this.qnumber.toString());
       });
 
     }
@@ -221,6 +231,7 @@ export class QuestionsComponent implements OnInit {
     });
 
   }
+
   //previous calc method - client side
   // calcUser() {
   //   this.saveAnswer();
