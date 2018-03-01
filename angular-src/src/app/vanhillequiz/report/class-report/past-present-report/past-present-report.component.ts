@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ChartsModule} from 'ng2-charts/ng2-charts';
-import {FlashMessagesService} from "angular2-flash-messages";
-import {VanhilereportService} from "../../../../services/vanhilereport.service";
+import {FlashMessagesService} from 'angular2-flash-messages';
+import {VanhilereportService} from '../../../../services/vanhilereport.service';
 
 @Component({
   selector: 'app-past-present-report',
@@ -27,6 +27,7 @@ export class PastPresentReportComponent implements OnInit {
   groupNumPostOptions: [any];
   groupNum: Number;
   courseNum: Number;
+
   constructor(private reportServise: VanhilereportService,
               private flashmessage: FlashMessagesService) {
   }
@@ -36,7 +37,13 @@ export class PastPresentReportComponent implements OnInit {
   }
 
   switchGraphs() {
-    this.showBarGraph = !this.showBarGraph;
+    if (this.courseNumPost === undefined || this.courseNumPre === undefined || this.groupNumPre === undefined
+      || this.groupNumPost === undefined) {
+      this.flashmessage.show('אנא בחר את הקבוצות להשוואה לפני מעבר לגרף ברים', {cssClass: 'alert-danger', timeout: 3000});
+    } else {
+      this.showBarGraph = !this.showBarGraph;
+    }
+
   }
 
   /**
