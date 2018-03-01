@@ -103,7 +103,7 @@ export class ClassReportComponent implements OnInit {
   }
 
   calcAll() {
-    this.reportServise.createAllResults(this.tryNum).subscribe(data => {
+    this.reportServise.createAllResults(this.tryNum,this.courseNum,this.groupNum).subscribe(data => {
       if (data.success) {
         this.radarChartData = [{
           data: data.resQuiz[0].results,

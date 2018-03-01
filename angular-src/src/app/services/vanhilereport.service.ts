@@ -88,7 +88,7 @@ export class VanhilereportService {
   findCourseAndGroupNumOptions() {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(`http://localhost:3050/VanHilleQuiz/VanHilleQuiz/uniqueQuizes`, {headers: headers})
+    return this.http.get(`http://localhost:3050/VanHilleQuiz/unique/Quizes`, {headers: headers})
       .map(res => res.json());
   }
 }

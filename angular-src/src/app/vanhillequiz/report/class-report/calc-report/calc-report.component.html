@@ -9,18 +9,19 @@
 </div>
 <div class="button-group" style="margin-top: 5px">
   <div style="margin-top:5px">
-    <select name="courseNum" class="form-control" [(ngModel)]="courseNum"
-            (change)="findGroupNumByCourseNumSelected(2)">
+    <select name="courseNum" class="form-control" [(ngModel)]="courseNum">
       <option disabled hidden [value]="selectUndefinedOptionValue">בחר מספר קורס</option>
-      <option *ngFor="let coursePostOption of courseNumPostOptions" [value]="coursePostOption">
-        {{coursePostOption}}
+      <option *ngFor="let courseOption of groupAndCourseNumOptions" [value]="courseOption.courseNum">
+        {{courseOption.courseNum}}
       </option>
     </select>
   </div>
   <div style="margin-top:5px;margin-bottom: 5px">
     <select name="groupNum" class="form-control" [(ngModel)]="groupNum">
       <option disabled hidden [value]="selectUndefinedOptionValue">בחר מס' קבוצת לימוד</option>
-      <option *ngFor="let gpro of groupNumPostOptions" [value]="gpro">{{gpro}}</option>
+      <option *ngFor="let groupOption of groupAndCourseNumOptions" [value]="groupOption.groupNum">
+        {{groupOption.groupNum}}
+      </option>
     </select>
   </div>
   <button type="button" class="btn btn-success btn-block" (click)="calcAll()">חשב נתונים כללים</button>

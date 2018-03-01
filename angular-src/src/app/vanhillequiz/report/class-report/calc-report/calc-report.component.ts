@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {VanhilereportService} from '../../../../services/vanhilereport.service';
 import {FlashMessagesService} from 'angular2-flash-messages';
+//import {SnotifyService} from 'ng-snotify';
 import {ChartsModule} from 'ng2-charts/ng2-charts';
 
 @Component({
@@ -27,6 +28,7 @@ export class CalcReportComponent implements OnInit {
       'rgba(102, 0, 204, 0.2)'
     ]
   }];
+  radarChartType: string = 'radar';
   // values for calculation
   radarChartData: any[] = [{}];
   tryNum: any = localStorage.getItem('tryNum');
@@ -35,7 +37,8 @@ export class CalcReportComponent implements OnInit {
   groupAndCourseNumOptions: [any];
 
   constructor(private reportService: VanhilereportService,
-              private flashMessagesService: FlashMessagesService) {
+              private flashMessagesService: FlashMessagesService,
+              ) {
   }
 
   ngOnInit() {
@@ -49,11 +52,12 @@ export class CalcReportComponent implements OnInit {
     this.reportService.createAllResults(this.tryNum, this.courseNum, this.groupNum).subscribe(data => {
       if (data.success) {
         this.radarChartData = [{
-          data: data.resQuiz[0].results,
-          label: `${data.resQuiz[0].groupNum} - ${data.resQuiz[0].courseNum}`
+          data: data.classResult[0].results.slice(0,5),
+          label: `${data.classResult[0].groupNum} - ${data.classResult[0].courseNum}`
         }];
         //  this.Options = data.resQuiz;
       } else {
+        //this.snotifyMessage.error(data.msg, 'שגיאה', {style: 'material'});
         this.flashMessagesService.show(data.msg, {cssClass: 'alert-danger', timeout: 3000});
       }
     });
