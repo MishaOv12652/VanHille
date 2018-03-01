@@ -34,15 +34,15 @@ export class CalcReportComponent implements OnInit {
   tryNum: any = localStorage.getItem('tryNum');
   groupNum: Number;
   courseNum: Number;
-  groupAndCourseNumOptions: [any];
+  courseNumOptions: [any];
+  groupNumOptions: [any];
 
   constructor(private reportService: VanhilereportService,
-              private flashMessagesService: FlashMessagesService,
-              ) {
+              private flashMessagesService: FlashMessagesService,) {
   }
 
   ngOnInit() {
-    this.findCourseAndGroupNumOptions();
+    this.getAllUniqueCourseNum();
   }
 
   /**
@@ -52,7 +52,7 @@ export class CalcReportComponent implements OnInit {
     this.reportService.createAllResults(this.tryNum, this.courseNum, this.groupNum).subscribe(data => {
       if (data.success) {
         this.radarChartData = [{
-          data: data.classResult[0].results.slice(0,5),
+          data: data.classResult[0].results.slice(0, 5),
           label: `${data.classResult[0].groupNum} - ${data.classResult[0].courseNum}`
         }];
         //  this.Options = data.resQuiz;
@@ -66,15 +66,26 @@ export class CalcReportComponent implements OnInit {
   /**
    * finds CourseAndGroupNumOptions
    */
-  findCourseAndGroupNumOptions() {
-    this.reportService.findCourseAndGroupNumOptions().subscribe(options => {
-      if (!options.success) {
-        this.flashMessagesService.show(options.msg, {cssClass: 'alert-danger', timeout: 3000});
+  getAllUniqueCourseNum() {
+    this.reportService.getAllUniqueCourseNum().subscribe(data => {
+      if (!data.success) {
+        this.flashMessagesService.show(data.msg, {cssClass: 'alert-danger', timeout: 3000});
       } else {
-        this.groupAndCourseNumOptions = options.classResults;
+        this.courseNumOptions = data.result;
       }
     });
   }
+
+  getCorepondingGroupNums() {
+    this.reportService.getCorepondingGroupNums(this.courseNum).subscribe(data => {
+      if (!data.success) {
+        this.flashMessagesService.show(data.msg, {cssClass: 'alert-danger', timeout: 3000});
+      } else {
+        this.groupNumOptions = data.result;
+      }
+    });
+  }
+
 
   /**
    * clears the radar graph

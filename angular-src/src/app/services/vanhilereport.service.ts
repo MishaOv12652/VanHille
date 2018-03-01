@@ -85,10 +85,18 @@ export class VanhilereportService {
     // .map(res=>res.json());
   }
 
-  findCourseAndGroupNumOptions() {
+
+  getAllUniqueCourseNum() {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(`http://localhost:3050/VanHilleQuiz/unique/Quizes`, {headers: headers})
+    return this.http.get(`http://localhost:3050/VHS/get/unique/courseNums`, {headers: headers})
+      .map(res => res.json());
+  }
+
+  getCorepondingGroupNums(courseNum) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(`http://localhost:3050/VHS/get/unique/corresponding/groupNums/${courseNum}`, {headers: headers})
       .map(res => res.json());
   }
 }

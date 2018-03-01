@@ -1,6 +1,12 @@
+/**
+ *
+ * @param id
+ * @param callback
+ */
 const mongoose = require('mongoose');
 const config = require('../config/db');
 const moment = require('moment');
+const lodash = require('lodash/array');
 
 
 const VHStudentSchema = mongoose.Schema({
@@ -31,11 +37,6 @@ const VHStudentSchema = mongoose.Schema({
 }, {collection: 'VHStudents'});
 
 const VHStudent = module.exports = mongoose.model('VHStudent', VHStudentSchema);
-/**
- *
- * @param id
- * @param callback
- */
 module.exports.getUserById = function (id, callback) {
     const query = {ID: id};
     VHStudent.find(query, callback);
@@ -143,7 +144,31 @@ module.exports.findStudentsBetweenDates = function (sDate, fDate, callback) {
  * @param groupNum
  * @param callback
  */
-module.exports.getStudentsByCourseAndGroupNum = function (courseNum,groupNum,callback) {
-    const query = {$and:[{courseNum:parseFloat(courseNum),groupNum:parseFloat(groupNum)}]};
-    VHStudent.find(query,callback);
+module.exports.getStudentsByCourseAndGroupNum = function (courseNum, groupNum, callback) {
+    const query = {$and: [{courseNum: parseFloat(courseNum), groupNum: parseFloat(groupNum)}]};
+    VHStudent.find(query, callback);
 }
+
+module.exports.getAllUniqueCourseNum = function (callback) {
+    VHStudent.find({}, (err, result) => {
+        if (result.length === 0) {
+            return callback('אין תוצאות של סטודנטיפ', []);
+        } else {
+            return callback(null, lodash.uniqBy(result, 'courseNum'));
+        }
+    });
+};
+
+module.exports.getCorepondingGroupNums = function (courseNum,callback) {
+    const query = {courseNum:courseNum};
+    VHStudent.find(query,(err,res)=>{
+        if (res.length === 0) {
+            return callback('אין תוצאות של סטודנטיפ', []);
+        } else {
+            return callback(null, lodash.uniqBy(res, 'groupNum'));
+        }
+    });
+};
+
+
+
