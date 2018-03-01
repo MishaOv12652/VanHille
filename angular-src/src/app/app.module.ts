@@ -38,6 +38,10 @@ import {LoginComponent} from './login/login.component';
 import {ProfileComponent} from './profile/profile.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import { CustomEditorComponent } from './cloudlinks/custom-editor/custom-editor.component';
+import { PastPresentReportComponent } from './vanhillequiz/report/class-report/past-present-report/past-present-report.component';
+import { CalcReportComponent } from './vanhillequiz/report/class-report/calc-report/calc-report.component';
+import { BarViewComponent } from './vanhillequiz/report/class-report/past-present-report/bar-view/bar-view.component';
+import { RadarViewComponent } from './vanhillequiz/report/class-report/past-present-report/radar-view/radar-view.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -74,6 +78,10 @@ const appRoutes: Routes = [
     ProfileComponent,
     DashboardComponent,
     CustomEditorComponent,
+    PastPresentReportComponent,
+    CalcReportComponent,
+    BarViewComponent,
+    RadarViewComponent,
   ],
   entryComponents: [CustomEditorComponent],
   imports: [

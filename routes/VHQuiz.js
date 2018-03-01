@@ -82,4 +82,14 @@ router.get('/quizByCnum/:cNum',(req,res,next)=>{
         }
     });
 });
+
+router.get('/uniqueQuizes',(req,res,next)=>{
+   VHQuiz.getAllUniqueQuizes((err,classResults)=>{
+       if(err){
+           res.json({success:false,msg:err});
+       }else{
+           res.json({success:true,classResults:classResults});
+       }
+   })
+});
 module.exports = router;

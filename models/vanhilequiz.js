@@ -4,7 +4,7 @@ const moment = require('moment');
 const allCalc = require('../ClacModules/calcClass');
 const classCalc = require('../ClacModules/calcClassRes');
 const userCalc = require('../ClacModules/CalcUser');
-
+const lodash = require('lodash/array');
 const VanHileSchema = mongoose.Schema({
     date: {
         type: Date, default: moment().utc(new Date())
@@ -90,3 +90,13 @@ module.exports.getQuizByCourseNum = function(courseNum,callback){
     const query = {courseNum:courseNum};
     VanHile.find(query,{},{sort:{date:1}},callback);
 };
+
+module.exports.getAllUniqueQuizes = function (callback) {
+    VanHile.find({},(err,result)=>{
+        if(result.length === 0){
+            return callback('אין תוצאות של שאלונים',[]);
+        }else{
+            return callback(err,lodash.unionWith(result,lodash.isEqual));
+        }
+    })
+}
