@@ -34,16 +34,25 @@ router.post('/calcStudent/:tryNum/:id',(req,res,next)=>{
         }
     });
 });
-router.post('/calcAll/:tryNum',(req,res,next)=>{
-    VHQuiz.writeResultsOfClass(req.params.tryNum,(err,resQuiz)=>{
+// router.post('/calcAll/:tryNum',(req,res,next)=>{
+//     VHQuiz.writeResultsOfClass(req.params.tryNum,(err,resQuiz)=>{
+//         if(err){
+//             res.json({success:false,msg:err});
+//         }else{
+//             res.json({success:true,resQuiz:resQuiz});
+//         }
+//     });
+// });
+
+router.post('/calcClass/:tryNum/:courseNum/:groupNum',(req,res,next)=>{
+    VHQuiz.createAndSaveClassResults(req.params.tryNum,req.params.courseNum,req.params.groupNum,(err,classResult)=>{
         if(err){
             res.json({success:false,msg:err});
         }else{
-            res.json({success:true,resQuiz:resQuiz});
+            res.json({success:true,classResult:classResult});
         }
-    });  
+    });
 });
-
 router.get('/studentSemester/get',(req,res,next)=>{
     VHQuiz.getAllQuizesDoneInTheLastSemeter((err,quiz)=>{
         if(err){

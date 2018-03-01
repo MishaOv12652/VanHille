@@ -9,12 +9,12 @@ const studentModel = require('../models/VHStudent');
 const lodash = require('lodash/array');
 
 module.exports.calcClass = function (tryNum, courseNum, groupNum, callback) {
-    studentModel.getStudentsByCourseAndGroupNum(groupNum, courseNum, (err, students) => {
+    studentModel.getStudentsByCourseAndGroupNum(courseNum,groupNum, (err, students) => {
         if (err) {
-
+            return callback(err,[],-1,-1);
         } else {
             if (students.length === 0) {
-
+                return callback("אין סטודנטים שעשו את השאלון עם מספרי הקורס או הקבוצות שבחרת",[],-1,-1);
             } else {
                 numOfStudentsDoneTheQuiz = 0;
                 corAnswersPerDiffArray = [0, 0, 0, 0, 0];
@@ -27,8 +27,8 @@ module.exports.calcClass = function (tryNum, courseNum, groupNum, callback) {
                             arrayToAdd = student.correctAperdif2;
                             break;
                     }
-                    lodash.zipWith(corAnswersPerDiffArray, arrayToAdd, (a, b) => {
-                        corAnswersPerDiffArray = parseFloat(a) + parseFloat(b);
+                    corAnswersPerDiffArray = lodash.zipWith(corAnswersPerDiffArray, arrayToAdd, (a, b) => {
+                        return parseFloat(a) + parseFloat(b);
                     });
                     numOfStudentsDoneTheQuiz++;
                 });

@@ -31,22 +31,44 @@ const VHStudentSchema = mongoose.Schema({
 }, {collection: 'VHStudents'});
 
 const VHStudent = module.exports = mongoose.model('VHStudent', VHStudentSchema);
-
+/**
+ *
+ * @param id
+ * @param callback
+ */
 module.exports.getUserById = function (id, callback) {
     const query = {ID: id};
     VHStudent.find(query, callback);
 };
-
+/**
+ *
+ * @param newUser
+ * @param callback
+ */
 module.exports.addUser = function (newUser, callback) {
     newUser.save(callback);
-}
+};
+/**
+ *
+ * @param id
+ * @param groupNum
+ * @param callback
+ */
 module.exports.updateGroupNumOfUser = function (id, groupNum, callback) {
     const query = {ID: id};
     VHStudent.findOneAndUpdate(query, {groupNum: groupNum, date: moment().utc(new Date())}, {
         safe: true,
         new: true
     }, callback)
-}
+};
+/**
+ *
+ * @param id
+ * @param ansNum
+ * @param qnumber
+ * @param tryNum
+ * @param callback
+ */
 module.exports.saveUserAns = function (id, ansNum, qnumber, tryNum, callback) {
     qnumber = (qnumber - 1).toString();
     var str = "Answers" + tryNum + "." + qnumber;
@@ -55,19 +77,33 @@ module.exports.saveUserAns = function (id, ansNum, qnumber, tryNum, callback) {
     const query = {ID: id};
     VHStudent.findOneAndUpdate(query, {$set: setter}, {safe: true, new: true}, callback);
 }
-
+/**
+ *
+ * @param k
+ * @param callback
+ */
 module.exports.getAllUsersDoneTheQuizInTheLastThreeHours = function (k, callback) {
     var three = moment().subtract(3, 'hours').valueOf();
     const query = {date: {$gte: three}}
     VHStudent.find(query, callback);
 }
-
+/**
+ *
+ * @param k
+ * @param callback
+ */
 module.exports.getNumUsersDoneTheQuizInTheLastThreeHours = function (k, callback) {
     var three = moment().subtract(3, 'hours').valueOf();
     const query = {date: {$gte: three}}
     VHStudent.count(query, callback);
 }
-
+/**
+ *
+ * @param tryNum
+ * @param id
+ * @param arr
+ * @param callback
+ */
 module.exports.saveCorrectAnsArrPerDiff = function (tryNum, id, arr, callback) {
     const query = {ID: id};
     console.log("CorrectAnsOfUser: " + arr)
@@ -77,7 +113,12 @@ module.exports.saveCorrectAnsArrPerDiff = function (tryNum, id, arr, callback) {
     VHStudent.findOneAndUpdate(query, {$set: setter}, {safe: true, new: true}, callback);
 
 }
-
+/**
+ *
+ * @param id
+ * @param tryTime
+ * @param callback
+ */
 module.exports.nulifyAnswersIfClosedBrowser = function (id, tryTime, callback) {
     const query = {ID: id};
     if (tryTime == 1)
@@ -86,8 +127,23 @@ module.exports.nulifyAnswersIfClosedBrowser = function (id, tryTime, callback) {
         VHStudent.findOneAndUpdate(query, {Answers2: []}, {safe: true, upsert: true, new: true}, callback);
 
 }
-
+/**
+ *
+ * @param sDate
+ * @param fDate
+ * @param callback
+ */
 module.exports.findStudentsBetweenDates = function (sDate, fDate, callback) {
     const query = {$and: [{date: {$gte: moment(parseFloat(sDate))}}, {date: {$lte: moment(parseFloat(fDate))}}]};
     VHStudent.find(query, callback);
+}
+/**
+ *
+ * @param courseNum
+ * @param groupNum
+ * @param callback
+ */
+module.exports.getStudentsByCourseAndGroupNum = function (courseNum,groupNum,callback) {
+    const query = {$and:[{courseNum:parseFloat(courseNum),groupNum:parseFloat(groupNum)}]};
+    VHStudent.find(query,callback);
 }

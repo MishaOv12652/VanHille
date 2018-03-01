@@ -85,8 +85,8 @@ router.post('/nullifyAnswers/:id/:tryNum',(req,res,next)=>{
         }else{
             res.json({success:true,student:student});
         }
-    })
-})
+    });
+});
 
 router.post('/updateGroupNum/:id/:groupNum',(req,res,next)=>{
     User.updateGroupNumOfUser(req.params.id,req.params.groupNum,(err,updatedStudent)=>{
@@ -95,7 +95,17 @@ router.post('/updateGroupNum/:id/:groupNum',(req,res,next)=>{
         }else{
             res.json({success:true,updatedStudent:updatedStudent});
         }
-    })
+    });
     
-})
+});
+
+router.get('/:courseNum/:groupNum',(req,res,next)=>{
+   User.getStudentsByCourseAndGroupNum(req.params.courseNum,req.params.groupNum,(err,students)=>{
+      if(err){
+          res.json({success:false,msg:err});
+      }else{
+          res.json({success:true,students:students});
+      }
+   });
+});
 module.exports = router;
