@@ -83,7 +83,7 @@ router.get('/quizByCnum/:cNum',(req,res,next)=>{
     });
 });
 
-router.get('/uniqueQuizes',(req,res,next)=>{
+router.get('/unique/Quizes',(req,res,next)=>{
    VHQuiz.getAllUniqueQuizes((err,classResults)=>{
        if(err){
            res.json({success:false,msg:err});

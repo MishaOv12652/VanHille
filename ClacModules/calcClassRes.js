@@ -35,7 +35,7 @@ module.exports.calcClass = function (tryNum, courseNum, groupNum, callback) {
                 for (let i=0;i<5;i++){
                     corAnswersPerDiffArray[i] = (corAnswersPerDiffArray[i]/(numOfStudentsDoneTheQuiz*5))*100;
                 }
-                return callback(corAnswersPerDiffArray,courseNum,groupNum);
+                return callback(null,corAnswersPerDiffArray,courseNum,groupNum);
             }
         }
     });
