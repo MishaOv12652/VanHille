@@ -1,3 +1,23 @@
-<p>
-  radar-view works!
-</p>
+<div class="col-md-6">
+  <div class="col-md-offset-3">
+    <h3 class="header">תוצאות אחרי</h3>
+  </div>
+  <div style="display: block;background-color: white">
+    <canvas baseChart [colors]="radarcolors" [datasets]="radarChartDataPost" [labels]="radarChartLabels"
+            [options]="radarChartOptions"
+            [chartType]="radarChartType" (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
+  </div>
+</div>
+<div class="col-md-6 ">
+  <div class="col-md-offset-3">
+    <h3 class="header">תוצאות לפני</h3>
+  </div>
+  <div style="display: block;background-color: white">
+    <canvas baseChart [colors]="radarcolors" [datasets]="radarChartDataPre" [labels]="radarChartLabels"
+            [options]="radarChartOptions"
+            [chartType]="radarChartType" (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
+  </div>
+  <br>
+</div>
