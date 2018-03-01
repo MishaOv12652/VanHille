@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ChartsModule} from 'ng2-charts/ng2-charts';
+
 
 @Component({
   selector: 'app-radar-view',
@@ -26,8 +27,8 @@ export class RadarViewComponent implements OnInit {
     ]
   }];
 
-  radarChartDataPre: any[] = [{}];
-  radarChartDataPost: any[] = [{}];
+  @Input() radarChartDataPre: any[] = [{}];
+  @Input() radarChartDataPost: any[] = [{}];
   constructor() { }
 
   ngOnInit() {

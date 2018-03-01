@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ChartsModule} from 'ng2-charts/ng2-charts';
 
 @Component({
@@ -11,7 +11,7 @@ export class BarViewComponent implements OnInit {
   barChartLabels: string[] = ['רמה 1', 'רמה 2', 'רמה 3', 'רמה 4', 'רמה 5'];
   barChartType: string = 'bar';
   barChartLegend: boolean = true;
-  barChartData: any[any] = [{data: [], label: ''}];
+  @Input() barChartData: any[any] = [{data: [], label: ''}];
   barChartOptions: any = {
     scaleShowVerticalLines: false,
     responsive: true

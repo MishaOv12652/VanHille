@@ -13,11 +13,11 @@ export class PastPresentReportComponent implements OnInit {
   // pre data
   courseNumPre: any;
   groupNumPre: any;
-  radarChartDataPre: [{ data: string; label: string }];
+  radarChartDataPre: [any] = [{}];
   // post date
   groupNumPost: any;
   courseNumPost: any;
-  radarChartDataPost: [{ data: string; label: string }];
+  radarChartDataPost: [any] = [{}];
   // bar chart data
   barChartData: { data: string; label: string; }[];
   // options for choise fields pre and post results
@@ -47,14 +47,14 @@ export class PastPresentReportComponent implements OnInit {
     if (PrePost == 1) {
       this.courseNumPre = null;
       this.groupNumPre = null;
-      this.radarChartDataPre = [{data: "", label: ''}];
+      this.radarChartDataPre = [{data: '', label: ''}];
     }
     if (PrePost == 2) {
       this.courseNumPost = null;
       this.groupNumPost = null;
-      this.radarChartDataPost = [{data: "", label: ''}];
+      this.radarChartDataPost = [{data: '', label: ''}];
     }
-    this.barChartData = [{data: "", label: ""}];
+    this.barChartData = [{data: '', label: ''}];
   }
 
   findResultsForComparison() {
@@ -86,7 +86,7 @@ export class PastPresentReportComponent implements OnInit {
   }
 
   findGroupNumByCourseNumSelected(PrePost: any) {
-    if (parseFloat(PrePost) == 1) {
+    if (parseFloat(PrePost) === 1) {
       this.reportServise.getQuizByCourseNum(this.courseNumPre).subscribe(data => {
         if (data.success) {
           this.groupNumPreOptions = [data.quiz[0].groupNum];
@@ -98,7 +98,7 @@ export class PastPresentReportComponent implements OnInit {
         }
       });
     }
-    if (parseFloat(PrePost) == 2) {
+    if (parseFloat(PrePost) === 2) {
       this.reportServise.getQuizByCourseNum(this.courseNumPost).subscribe(data => {
         if (data.success) {
           if (data.quiz.length > 1) {
@@ -115,7 +115,7 @@ export class PastPresentReportComponent implements OnInit {
   }
 
   findQuizByGroupAndCourseNum(PrePost: any) {
-    if (parseFloat(PrePost) == 1) {
+    if (parseFloat(PrePost) === 1) {
       this.reportServise.getQuizesByGroupAndCourse(this.courseNumPre, this.groupNumPre).subscribe(data => {
         if (data.success) {
           this.radarChartDataPre = [{
@@ -133,7 +133,7 @@ export class PastPresentReportComponent implements OnInit {
         }
       });
     }
-    if (parseFloat(PrePost) == 2) {
+    if (parseFloat(PrePost) === 2) {
       this.reportServise.getQuizesByGroupAndCourse(this.courseNumPost, this.groupNumPost).subscribe(data => {
         if (data.success) {
           this.radarChartDataPost = [{

@@ -2,10 +2,10 @@
 
 <div class="row" style="margin-right: 150px">
   <div class="row" *ngIf="!showBarGraph">
-    <app-radar-view></app-radar-view>
+    <app-radar-view [radarChartDataPre]="radarChartDataPre" [radarChartDataPost]="radarChartDataPost"></app-radar-view>
   </div>
   <div class="row" *ngIf="showBarGraph">
-    <app-bar-view></app-bar-view>
+    <app-bar-view [barChartData]="barChartData"></app-bar-view>
   </div>
 
   <div class="button-group col-md-6">
