@@ -47,12 +47,14 @@ export class QuestionsserviceService {
     //  .map(res=>res.json());
   }
 
-  calcUser(id:Number){
+  calcUser(id:Number,tryNum:Number){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:3050/VHS/calc/'+id,{headers:headers})
+    return this.http.post('http://localhost:3050/VanHilleQuiz/calcStudent/' + tryNum + '/' +id,{headers:headers})
       .map(res=>res.json());
     // return this.http.post('VHS/calc/'+id,{headers:headers})
     // .map(res=>res.json());
   }
+
+
 }

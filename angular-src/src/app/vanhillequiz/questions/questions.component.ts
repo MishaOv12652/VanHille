@@ -1,8 +1,7 @@
-import { Component, OnInit, Injectable, AfterViewChecked } from '@angular/core';
-import { QuestionsserviceService } from "../../services/questionsservice.service";
-import { FlashMessagesService } from "angular2-flash-messages";
-import { VanhileformService } from "../../services/vanhileform.service";//update user answer
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import {Component, OnInit, Injectable, AfterViewChecked} from '@angular/core';
+import {QuestionsserviceService} from '../../services/questionsservice.service';
+import {FlashMessagesService} from 'angular2-flash-messages';
+import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-questions',
@@ -20,50 +19,79 @@ export class QuestionsComponent implements OnInit {
   User: any = localStorage.getItem('User');
   tryTime: any = localStorage.getItem('tryNum');
   radiogroup: any;
+  counterConfig: Object;
 
-  //calc User variables
+  // calc User variables
   CorrectAnswersForQuestions: any[] = [];
   AnswersOfUser: Number[] = [];
-  CorrectAnsPerDiff: any[] = [0, 0, 0, 0, 0];
+  // CorrectAnsPerDiff: [];
 
 
-  constructor(
-    private questionService: QuestionsserviceService,
-    private flashmessage: FlashMessagesService,
-    private vanhileservice: VanhileformService,
-    private spinner: Ng4LoadingSpinnerService
-  ) {
+  constructor(private questionService: QuestionsserviceService,
+              private flashmessage: FlashMessagesService,
+              private spinner: Ng4LoadingSpinnerService) {
 
   }
 
   ngOnInit() {
     this.qnumber = 1;
     this.nextQuestion(this.qnumber.toString());
+    this.counterConfig = {
+      leftTime: 1800,
+      template: '$!m!:$!s!',
+      size: 'medium'
+    };
   }
-
-
 
 
   nextQuestion(id: String) {
     if (this.qnumber > 25) {
       return false;
     }
-    
+
     this.questionService.getNextQuestion(id).subscribe(data => {
-      
+
       if (data.success) {
         this.Qid = data.question.Qid;
         this.question = data.question.Question;
         this.img = data.question.Image;
         this.Answers = data.question.Answers;
+        this.questionService.getUser(this.User).subscribe(user => {
+          if (parseFloat(this.tryTime) === 1) {
+            if (user.user[0].Answers1[this.qnumber - 1]) {
+              this.radiogroup = 'a' + user.user[0].Answers1[this.qnumber - 1];
+            }
+          } else {
+            this.radiogroup = 'a' + user.user[0].Answers2[this.qnumber - 1];
+          }
+        });
         if (this.qnumber == 25) {
           this.hideButtons();
         }
       } else {
-        this.flashmessage.show('שגיאה לא ניתן לעבור לשאלה הבאה', { cssClass: 'alert-danger', timeout: 3000 });
+        this.flashmessage.show('שגיאה לא ניתן לעבור לשאלה הבאה', {cssClass: 'alert-danger', timeout: 3000});
       }
       this.spinner.hide();
     });
+  }
+
+  backQuestion() {
+    if (this.qnumber == 1) {
+      return false;
+    } else {
+      this.User = localStorage.getItem('User');
+      this.questionService.getUser(this.User).subscribe(user => {
+        this.qnumber--;
+        this.tryTime = localStorage.getItem('tryNum');
+        if (parseFloat(this.tryTime) === 1) {
+          this.radiogroup = 'a' + user.user[0].Answers1[this.qnumber - 1];
+        } else {
+          this.radiogroup = 'a' + user.user[0].Answers2[this.qnumber - 1];
+        }
+        this.nextQuestion(this.qnumber.toString());
+      });
+
+    }
   }
 
   saveAnswer() {
@@ -76,7 +104,7 @@ export class QuestionsComponent implements OnInit {
         if (data.success) {
           this.radiogroup = 0;
           this.qnumber++;
-          if (this.qnumber >25) {
+          if (this.qnumber > 25) {
             return false;
           } else {
             this.nextQuestion(this.qnumber.toString());
@@ -84,7 +112,7 @@ export class QuestionsComponent implements OnInit {
           }
 
         } else {
-          this.flashmessage.show('לא נשמרה התשובה', { cssClass: 'alert-danger', timeout: 3000 });
+          this.flashmessage.show('לא נשמרה התשובה', {cssClass: 'alert-danger', timeout: 3000});
           return false;
         }
       });
@@ -94,14 +122,14 @@ export class QuestionsComponent implements OnInit {
         if (data.success) {
           this.radiogroup = 0;
           this.qnumber++;
-          if (this.qnumber >25) {
+          if (this.qnumber > 25) {
             return false;
           } else {
             this.nextQuestion(this.qnumber.toString());
             return true;
           }
         } else {
-          this.flashmessage.show('לא נשמרה התשובה', { cssClass: 'alert-danger', timeout: 3000 });
+          this.flashmessage.show('לא נשמרה התשובה', {cssClass: 'alert-danger', timeout: 3000});
           return false;
         }
       });
@@ -111,14 +139,14 @@ export class QuestionsComponent implements OnInit {
         if (data.success) {
           this.radiogroup = 0;
           this.qnumber++;
-          if (this.qnumber >25) {
+          if (this.qnumber > 25) {
             return false;
           } else {
             this.nextQuestion(this.qnumber.toString());
             return true;
           }
         } else {
-          this.flashmessage.show('לא נשמרה התשובה', { cssClass: 'alert-danger', timeout: 3000 });
+          this.flashmessage.show('לא נשמרה התשובה', {cssClass: 'alert-danger', timeout: 3000});
           return false;
         }
       });
@@ -128,14 +156,14 @@ export class QuestionsComponent implements OnInit {
         if (data.success) {
           this.radiogroup = 0;
           this.qnumber++;
-          if (this.qnumber >25) {
+          if (this.qnumber > 25) {
             return false;
           } else {
             this.nextQuestion(this.qnumber.toString());
             return true;
           }
         } else {
-          this.flashmessage.show('לא נשמרה התשובה', { cssClass: 'alert-danger', timeout: 3000 });
+          this.flashmessage.show('לא נשמרה התשובה', {cssClass: 'alert-danger', timeout: 3000});
           return false;
         }
       });
@@ -145,23 +173,22 @@ export class QuestionsComponent implements OnInit {
         if (data.success) {
           this.radiogroup = 0;
           this.qnumber++;
-          if (this.qnumber >25) {
+          if (this.qnumber > 25) {
             return false;
           } else {
             this.nextQuestion(this.qnumber.toString());
             return true;
           }
         } else {
-          this.flashmessage.show('לא נשמרה התשובה', { cssClass: 'alert-danger', timeout: 3000 });
+          this.flashmessage.show('לא נשמרה התשובה', {cssClass: 'alert-danger', timeout: 3000});
           return false;
         }
       });
     } else {
-      this.flashmessage.show('לא נבחרה תשובה', { cssClass: 'alert-danger', timeout: 3000 });
+      this.flashmessage.show('לא נבחרה תשובה', {cssClass: 'alert-danger', timeout: 3000});
     }
 
   }
-
 
 
   hideButtons() {
@@ -171,121 +198,37 @@ export class QuestionsComponent implements OnInit {
   }
 
 
-
-  saveCorrectUserAnswers() {
-    var arrstring = "";
-    for (var index = 0; index < this.CorrectAnsPerDiff.length; index++) {
-      arrstring = arrstring + this.CorrectAnsPerDiff[index].toString() + '/';
-      console.log("arrstring: " + arrstring)
-
+  saveCorrectUserAnswers(resultArr: any[]) {
+    let arrstring = '';
+    for (let index = 0; index < resultArr.length; index++) {
+      arrstring = arrstring + resultArr[index].toString() + '/';
     }
     this.questionService.saveCorrectAnsPerDiff(this.User, arrstring, this.tryTime).subscribe(data => {
       if (data.success) {
         this.showFinish = true;
       } else {
-        this.flashmessage.show('לא ניתן לשמור תשובות נכונות של סטודנט', { cssClass: 'alert-danger', timeout: 3000 });
-      }
-    });
-  }
-  //calcs the Users Correct Answers for difficulties
-  calcUser() {
-    
-    this.saveAnswer();
-    console.log("calc start: " + this.CorrectAnsPerDiff);
-    this.questionService.getAllQuestions().subscribe(data => {
-      this.spinner.hide();
-      if (data.success) {
-        for (var index = 0; index < data.questions.length; index++) {
-          this.CorrectAnswersForQuestions[index] = { corA: data.questions[index].correctA, diff: data.questions[index].dif };
-        }
-        this.questionService.getUser(this.User).subscribe(data => {
-          if (data.success) {
-            if (this.tryTime == 1) {
-              this.AnswersOfUser = data.user[0].Answers1;
-              if (this.Answers.length < 25) {
-                this.CorrectAnsPerDiff = [0, 0, 0, 0, 0];
-              }
-            }
-            if (this.tryTime == 2) {
-              this.AnswersOfUser = data.user[0].Answers2;
-              if (this.Answers.length < 25) {
-                this.CorrectAnsPerDiff = [0, 0, 0, 0, 0];
-              }
-            }
-            if (this.CorrectAnswersForQuestions.length == 0 || this.AnswersOfUser.length == 0) {
-              this.flashmessage.show('תשובות נכונות לשאלות או תשובות של סטודנט לא קיימים',{cssClass:'alert-danger',timeout:3000});
-              return false;
-            } else {
-              for (var index = 0; index < this.CorrectAnswersForQuestions.length; index++) {
-                if (this.AnswersOfUser[index] == this.CorrectAnswersForQuestions[index].corA) {
-                  switch (parseInt(this.CorrectAnswersForQuestions[index].diff)) {
-                    case 1:
-                      this.CorrectAnsPerDiff[0] = parseInt(this.CorrectAnsPerDiff[0]) + 1;
-                      // this.CorrectAnsPerDiff[0] += 1;
-                      // console.log("CorrectAnsPerDiff[0]: " + this.CorrectAnsPerDiff[0]);
-                      // console.log("case 1 CorrectAnsPerDiff" + this.CorrectAnsPerDiff);
-                      break;
-                    case 2:
-                      this.CorrectAnsPerDiff[1] = parseInt(this.CorrectAnsPerDiff[1]) + 1;
-                      //this.CorrectAnsPerDiff[1] += 1;
-                      //this.CorrectAnsPerDiff[1]++;
-                      // console.log("CorrectAnsPerDiff[1]: " + this.CorrectAnsPerDiff[1]);
-                      // console.log("case 2 CorrectAnsPerDiff" + this.CorrectAnsPerDiff);
-                      break;
-                    case 3:
-                      this.CorrectAnsPerDiff[2] = parseInt(this.CorrectAnsPerDiff[2]) + 1;
-                      //this.CorrectAnsPerDiff[2] += 1;
-                      //this.CorrectAnsPerDiff[2]++;
-                      // console.log("CorrectAnsPerDiff[2]: " + this.CorrectAnsPerDiff[2]);
-                      // console.log("case 3 CorrectAnsPerDiff" + this.CorrectAnsPerDiff);
-                      break;
-                    case 4:
-                      this.CorrectAnsPerDiff[3] = parseInt(this.CorrectAnsPerDiff[3]) + 1;
-                      //this.CorrectAnsPerDiff[3] += 1;
-                      // this.CorrectAnsPerDiff[3]++;
-                      // console.log("CorrectAnsPerDiff[3]: " + this.CorrectAnsPerDiff[3]);
-                      // console.log("case 4 CorrectAnsPerDiff" + this.CorrectAnsPerDiff);
-                      break;
-                    case 5:
-                      this.CorrectAnsPerDiff[4] = parseInt(this.CorrectAnsPerDiff[4]) + 1;
-                      //this.CorrectAnsPerDiff[4] += 1;
-                      //this.CorrectAnsPerDiff[4]++;
-                      // console.log("CorrectAnsPerDiff[4]: " + this.CorrectAnsPerDiff[4]);
-                      // console.log("case 5 CorrectAnsPerDiff" + this.CorrectAnsPerDiff);
-                      break;
-                  }
-                }
-              }
-              // for (var index = 0; index < this.CorrectAnsPerDiff.length; index++) {
-              //   console.log("index: " + this.CorrectAnsPerDiff[index]);
-
-              // }
-              //this.CorrectAnsPerDiff = this.CorrectAnsPerDiff.slice(0,-1);
-              // console.log("CorrectAnsPerDiff: " + this.CorrectAnsPerDiff)
-              this.saveCorrectUserAnswers();
-
-            }
-          } else {
-            this.flashmessage.show('לא ניתן למצוא תשובות של סטודנט', { cssClass: 'alert-danger', timeout: 3000 });
-          }
-        })
-      } else {
-        this.flashmessage.show('לא ניתן למצוא תשובות נכונות לשאלות', { cssClass: 'alert-danger', timeout: 3000 });
+        this.flashmessage.show('לא ניתן לשמור תשובות נכונות של סטודנט', {cssClass: 'alert-danger', timeout: 3000});
       }
     });
   }
 
-  backQuestion() {
-    if(this.qnumber==1){
-      return false;
-    }else{
-      this.qnumber--;
-      this.nextQuestion(this.qnumber.toString());
+  // calcs the Users Correct Answers for difficulties
+  calcUser(finishedInTime) {
+    // handles last question
+    if (finishedInTime) {
+      this.saveAnswer();
+    } else {
+      this.showFinish = true;
     }
-    
+    // console.log("student calc started for student: " + this.User);
+    this.questionService.calcUser(this.User, this.tryTime).subscribe(userResult => {
+      if (!userResult.success) {
+
+      } else {
+        // this.CorrectAnsPerDiff = userResult.studentRes;
+        this.saveCorrectUserAnswers(userResult.studentRes);
+      }
+    });
+
   }
-
-
-
-
 }

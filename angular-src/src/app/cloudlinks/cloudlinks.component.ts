@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 // import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {AuthService} from '../services/auth.service';
 import {CloudlinksService} from '../services/cloudlinks.service';
-import {FlashMessagesService} from 'angular2-flash-messages'
-import {CustomEditorComponent} from "./custom-editor/custom-editor.component";
+import {FlashMessagesService} from 'angular2-flash-messages';
+import {CustomEditorComponent} from './custom-editor/custom-editor.component';
 
 
 @Component({
@@ -17,31 +17,33 @@ export class CloudlinksComponent implements OnInit {
   tables_array: Array<Object>;
 
 
-  constructor(private  cloud_links_service: CloudlinksService, private flashmessage: FlashMessagesService, private auth_service: AuthService) {
+  constructor(
+    private  cloud_links_service: CloudlinksService,
+    private flashmessage: FlashMessagesService,
+    private auth_service: AuthService) {
   }
 
   ngOnInit() {
     this.cloud_links_service.getAllCloudLinkTables().subscribe(tables => {
       if (!tables.success) {
-        this.flashmessage.show(tables.msg, {cssClass: 'alert-danger', timeout: 3000})
+        this.flashmessage.show(tables.msg, {cssClass: 'alert-danger', timeout: 3000});
       } else {
         if (this.auth_service.loggedIn()) {
           this.tables_array = tables.cloudLinksTables;
           this.tables_array.forEach((cloudlinkTable) => {
             cloudlinkTable['settings_obj'].columns.url.editor['component'] = CustomEditorComponent;
-          })
+          });
         } else {
-          let editMode = {
+          const editMode = {
             actions: {
               edit: false,
               add: false,
               delete: false,
-              columnTitle: ""
+              columnTitle: ''
             }
           };
           tables.cloudLinksTables.forEach((cloudLinkTable) => {
-            let tempsettings = Object.assign(cloudLinkTable['settings_obj'], editMode);
-            cloudLinkTable['settings_obj'] = tempsettings;
+            cloudLinkTable['settings_obj'] = Object.assign(cloudLinkTable['settings_obj'], editMode);
           });
         }
         this.tables_array = tables.cloudLinksTables;
@@ -52,7 +54,6 @@ export class CloudlinksComponent implements OnInit {
   }
 
   addTable() {
-    document.getElementById('').setAttribute('value', '');
     this.table_settings_object = {
       delete: {
         confirmDelete: true,
@@ -123,7 +124,7 @@ export class CloudlinksComponent implements OnInit {
             timeout: 3000
           });
         } else {
-          this.flashmessage.show('Something Went Wrong', {cssClass: 'alert-danger', timeout: 3000})
+          this.flashmessage.show('Something Went Wrong', {cssClass: 'alert-danger', timeout: 3000});
         }
       });
       event.confirm.resolve(event.newData);
@@ -137,18 +138,18 @@ export class CloudlinksComponent implements OnInit {
     if (window.confirm('Are you sure you want to save?')) {
       this.cloud_links_service.deleteEntryFromCloudTable(tableId.tableId, event.data).subscribe(data => {
         if (!data.success) {
-          this.flashmessage.show('Something Went Wrong on update delete', {cssClass: 'alert-danger', timeout: 3000})
+          this.flashmessage.show('Something Went Wrong on update delete', {cssClass: 'alert-danger', timeout: 3000});
         } else {
           this.cloud_links_service.addEntryToCloudLinkTable(tableId.tableId, event.newData).subscribe(data => {
             if (!data.success) {
-              this.flashmessage.show('Something Went Wrong on update add', {cssClass: 'alert-danger', timeout: 3000})
+              this.flashmessage.show('Something Went Wrong on update add', {cssClass: 'alert-danger', timeout: 3000});
             } else {
               this.flashmessage.show('An Entry was updated in the table ' + tableId.tableId, {
                 cssClass: 'alert-success',
                 timeout: 3000
-              })
+              });
             }
-          })
+          });
         }
       });
       event.confirm.resolve(event.newData);
@@ -164,9 +165,9 @@ export class CloudlinksComponent implements OnInit {
           this.flashmessage.show('A row was successfully deleted from the table ' + tableId.tableId, {
             cssClass: 'alert-success',
             timeout: 3000
-          })
+          });
         } else {
-          this.flashmessage.show('Something Went Wrong', {cssClass: 'alert-danger', timeout: 3000})
+          this.flashmessage.show('Something Went Wrong', {cssClass: 'alert-danger', timeout: 3000});
         }
       });
       event.confirm.resolve();
@@ -181,12 +182,12 @@ export class CloudlinksComponent implements OnInit {
         this.tables_array.splice(index, 1);
         this.cloud_links_service.deleteCloudLinkTable(this.tableName).subscribe(table => {
           if (!table.success) {
-            this.flashmessage.show(table.msg, {cssClass: 'alert-danger', timeout: 3000})
+            this.flashmessage.show(table.msg, {cssClass: 'alert-danger', timeout: 3000});
           } else {
             this.flashmessage.show('Table ' + this.tableName + ' was deleted', {
               cssClass: 'alert-success',
               timeout: 3000
-            })
+            });
           }
         });
       }
