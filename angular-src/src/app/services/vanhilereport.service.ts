@@ -11,33 +11,33 @@ export class VanhilereportService {
   getUsersLast3Hours() {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.get('http://localhost:3050/VHS/', {headers: headers})
+    // return this.http.get('http://localhost:3050/VHS/', {headers: headers})
+    //   .map(res => res.json());
+    return this.http.get('VHS/', {headers: headers})
       .map(res => res.json());
-    // return this.http.get('VHS/',{headers:headers})
-    // .map(res=>res.json());
   }
 
   getUser(ID: Number) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(`http://localhost:3050/VHS/${ID}`, {headers: headers}).map(res => res.json());
-    //return this.http.get('VHS/'+ID,{headers:headers}).map(res=>res.json());
+    // return this.http.get(`http://localhost:3050/VHS/${ID}`, {headers: headers}).map(res => res.json());
+    return this.http.get(`VHS/${ID}`, {headers: headers}).map(res => res.json());
   }
 
   getAllQuestions() {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.get('http://localhost:3050/VanHilleQuiz/questions', {headers: headers}).map(res => res.json());
-    //return this.http.get('VanHilleQuiz/questions',{headers:headers}).map(res=>res.json());
+    // return this.http.get('http://localhost:3050/VanHilleQuiz/questions', {headers: headers}).map(res => res.json());
+    return this.http.get('VanHilleQuiz/questions', {headers: headers}).map(res => res.json());
   }
 
   createAllResults(tryNum: Number, courseNum: Number, groupNum: Number) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(`http://localhost:3050/VanHilleQuiz/calcClass/${tryNum}/${courseNum}/${groupNum}`, {headers: headers})
+    // return this.http.post(`http://localhost:3050/VanHilleQuiz/calcClass/${tryNum}/${courseNum}/${groupNum}`, {headers: headers})
+    //   .map(res => res.json());
+    return this.http.post(`VanHilleQuiz/calcClass/${tryNum}/${courseNum}/${groupNum}`, {headers: headers})
       .map(res => res.json());
-    //  return this.http.post('VanHilleQuiz/calcAll/'+tryNum,{headers:headers})
-    //  .map(res=>res.json());
   }
 
   // createAllResults(tryNum: Number) {
@@ -52,28 +52,28 @@ export class VanhilereportService {
   getAllQuizesDoneInTheLastSemeter() {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.get('http://localhost:3050/VanHilleQuiz/studentSemester/get', {headers: headers})
+    // return this.http.get('http://localhost:3050/VanHilleQuiz/studentSemester/get', {headers: headers})
+    //   .map(res => res.json());
+    return this.http.get('VanHilleQuiz/studentSemester/get', {headers: headers})
       .map(res => res.json());
-    // return this.http.get('VanHilleQuiz/studentSemester/get',{headers:headers})
-    // .map(res=>res.json());
   }
 
   getQuizesByGroupAndCourse(cNum: Number, gNum: Number) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(`http://localhost:3050/VanHilleQuiz/studentSemester/${cNum}/${gNum}`, {headers: headers})
+    // return this.http.get(`http://localhost:3050/VanHilleQuiz/studentSemester/${cNum}/${gNum}`, {headers: headers})
+    //   .map(res => res.json());
+    return this.http.get(`VanHilleQuiz/studentSemester/${cNum}/${gNum}`, {headers: headers})
       .map(res => res.json());
-    // return this.http.get('VanHilleQuiz/studentSemester/' + cNum + '/' + gNum,{headers:headers})
-    // .map(res=>res.json());
   }
 
   getQuizByCourseNum(cNum: Number) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(`http://localhost:3050/VanHilleQuiz/quizByCnum/${cNum}`, {headers: headers})
+    // return this.http.get(`http://localhost:3050/VanHilleQuiz/quizByCnum/${cNum}`, {headers: headers})
+    //   .map(res => res.json());
+    return this.http.get(`VanHilleQuiz/quizByCnum/${cNum}` + cNum, {headers: headers})
       .map(res => res.json());
-    // return this.http.get('VanHilleQuiz/quizByCnum/' + cNum,{headers:headers})
-    // .map(res=>res.json());
   }
 
   getStudentsBetweenDates(sDate: Date, fDate: Date) {
@@ -81,7 +81,7 @@ export class VanhilereportService {
     headers.append('Content-Type', 'application/json');
     return this.http.get(`http://localhost:3050/VHS/students/${sDate}/${fDate}`, {headers: headers})
       .map(res => res.json());
-    // return this.http.get('/VHS/students/' + sDate + '/' + fDate,{headers:headers})
+    // return this.http.get(`VHS/students/${sDate}/${fDate}`,{headers:headers})
     // .map(res=>res.json());
   }
 
@@ -89,14 +89,18 @@ export class VanhilereportService {
   getAllUniqueCourseNum() {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(`http://localhost:3050/VHS/get/unique/courseNums`, {headers: headers})
+    // return this.http.get(`http://localhost:3050/VHS/get/unique/courseNums`, {headers: headers})
+    //   .map(res => res.json());
+    return this.http.get(`VHS/get/unique/courseNums`, {headers: headers})
       .map(res => res.json());
   }
 
   getCorepondingGroupNums(courseNum) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(`http://localhost:3050/VHS/get/unique/corresponding/groupNums/${courseNum}`, {headers: headers})
+    // return this.http.get(`http://localhost:3050/VHS/get/unique/corresponding/groupNums/${courseNum}`, {headers: headers})
+    //   .map(res => res.json());
+    return this.http.get(`VHS/get/unique/corresponding/groupNums/${courseNum}`, {headers: headers})
       .map(res => res.json());
   }
 }

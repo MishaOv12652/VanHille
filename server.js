@@ -27,23 +27,23 @@ const user = require('./routes/user');
 const cloudLinks = require('./routes/cloudlinks');
 
 //For Heroku Upload
-//  const forceSSL = function() {
-//      return function (req, res, next) {
-//        if (req.headers['x-forwarded-proto'] !== 'https') {
-//          return res.redirect(
-//           ['https://', req.get('Host'), req.url].join('')
-//          );
-//        }
-//        next();
-//      }
-//    }
+ const forceSSL = function() {
+     return function (req, res, next) {
+       if (req.headers['x-forwarded-proto'] !== 'https') {
+         return res.redirect(
+          ['https://', req.get('Host'), req.url].join('')
+         );
+       }
+       next();
+     }
+   }
   
-//    //port number
-//    const port = process.env.PORT || 3050;
-//    app.use(forceSSL());
+   //port number
+   const port = process.env.PORT || 3050;
+   app.use(forceSSL());
 
-//port number
-const port = 3050;
+//port number - for develop
+//const port = 3050;
 //CORS MW
 app.use(cors());
 //Set Static Folder
@@ -67,9 +67,9 @@ app.get('/',(req,res)=>{
 });
 
 //For Heroku Upload
-//  app.get('/*', function(req, res) {
-//      res.sendFile(path.join(__dirname + '/public/index.html'));
-//    });
+ app.get('/*', function(req, res) {
+     res.sendFile(path.join(__dirname + '/public/index.html'));
+   });
 
 //Start Server
 app.listen(port,()=>{

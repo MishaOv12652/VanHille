@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Http, Headers } from "@angular/http";
+import {Injectable} from '@angular/core';
+import {Http, Headers} from "@angular/http";
 import 'rxjs/add/operator/map';
-import { tokenNotExpired } from "angular2-jwt";
+import {tokenNotExpired} from "angular2-jwt";
 
 @Injectable()
 export class AuthService {
@@ -9,53 +9,45 @@ export class AuthService {
   SiteUser: any;
 
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+  }
 
 
   registerSiteUser(SiteUser) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3050/User/register', SiteUser, { headers: headers })
-     .map(res => res.json());
-    //  return this.http.post('User/register', SiteUser, { headers: headers })
-    //  .map(res => res.json());
+    // return this.http.post('http://localhost:3050/User/register', SiteUser, {headers: headers})
+    //   .map(res => res.json());
+    return this.http.post('User/register', SiteUser, {headers: headers})
+      .map(res => res.json());
   }
 
   authUser(SiteUser) {
     let headers = new Headers();
     this.loadToken();
-    headers.append('Authorization',this.authToken);
+    headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3050/User/auth', SiteUser, { headers: headers })
+    // return this.http.post('http://localhost:3050/User/auth', SiteUser, {headers: headers})
+    //   .map(res => res.json());
+    return this.http.post('User/auth', SiteUser, {headers: headers})
       .map(res => res.json());
-      // return this.http.post('User/auth', SiteUser, { headers: headers })
-      // .map(res => res.json());
   }
-  getProfile(){
+
+  getProfile() {
     let headers = new Headers();
     this.loadToken();
-    headers.append('Authorization',this.authToken);
+    headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.get('http://localhost:3050/User/profile', { headers: headers })
+    // return this.http.get('http://localhost:3050/User/profile', {headers: headers})
+    //   .map(res => res.json());
+    return this.http.get('User/profile', {headers: headers})
       .map(res => res.json());
-      // return this.http.get('User/profile', { headers: headers })
-      // .map(res => res.json());
   }
-  // getReports() {
-  //   let headers = new Headers();
-  //   this.loadToken();
-  //   headers.append('Authorization',this.authToken);
-  //   headers.append('Content-Type', 'application/json');
-  //   return this.http.get('http://localhost:3050/User/report', { headers: headers })
-  //     .map(res => res.json());
-  //     // return this.http.get('User/report', { headers: headers })
-  //     // .map(res => res.json());
-  // }
+
 
   storeUserData(token, user) {
     localStorage.setItem('token', token);
-    localStorage.setItem('admin', JSON.stringify(user))
-    //console.log(JSON.stringify(user))
+    localStorage.setItem('admin', JSON.stringify(user));
     this.authToken = token;
     this.SiteUser = user;
   }
@@ -65,8 +57,7 @@ export class AuthService {
     this.authToken = token;
   }
 
-  loggedIn(){
-    //console.log("logged: " + tokenNotExpired());
+  loggedIn() {
     return tokenNotExpired();
   }
 
