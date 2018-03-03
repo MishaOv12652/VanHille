@@ -72,17 +72,17 @@ export class VanhilereportService {
     headers.append('Content-Type', 'application/json');
     // return this.http.get(`http://localhost:3050/VanHilleQuiz/quizByCnum/${cNum}`, {headers: headers})
     //   .map(res => res.json());
-    return this.http.get(`VanHilleQuiz/quizByCnum/${cNum}` + cNum, {headers: headers})
+    return this.http.get(`VanHilleQuiz/quizByCnum/${cNum}`, {headers: headers})
       .map(res => res.json());
   }
 
   getStudentsBetweenDates(sDate: Date, fDate: Date) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(`http://localhost:3050/VHS/students/${sDate}/${fDate}`, {headers: headers})
+    // return this.http.get(`http://localhost:3050/VHS/students/${sDate}/${fDate}`, {headers: headers})
+    //   .map(res => res.json());
+    return this.http.get(`VHS/students/${sDate}/${fDate}`, {headers: headers})
       .map(res => res.json());
-    // return this.http.get(`VHS/students/${sDate}/${fDate}`,{headers:headers})
-    // .map(res=>res.json());
   }
 
 
