@@ -4,16 +4,16 @@
   <div class="form-group col-md-11 col-md-pull-1">
     <div class="input-append">
       <label style="color:white;font-size: 18px"> תאריך התחלה
-        <ngx-datepicker [(ngModel)]="sDate"></ngx-datepicker>
+        <dp-date-picker style="color:black " placeholder="enter a start date" [(ngModel)]="sDate" theme="dp-material"></dp-date-picker>
       </label>
       <label style="color:white;font-size: 18px"> תאריך סיום
-        <ngx-datepicker [(ngModel)]="fDate"></ngx-datepicker>
+          <dp-date-picker style="color:black " placeholder="enter a finish date" [(ngModel)]="fDate" theme="dp-material"></dp-date-picker>
       </label>
       <button type="button" class="btn btn-success pull-left" (click)="findStudentsBetweenDates()">חפש</button>
     </div>
     <br>
     <div class="input-append">
-      <label style="color:white;font-size: 18px" for="">ת.ז של הסטודנט</label>
+      <label style="color:white;font-size: 18px">ת.ז של הסטודנט</label>
       <select name="selectID" class="form-control" [(ngModel)]="selectID" (change)="findCorrectAnswerData()">
         <option *ngFor="let op of Options" [value]="op.ID">{{op.ID}}</option>
       </select>
@@ -37,3 +37,4 @@
     </div>
 
   </div>
+</div>

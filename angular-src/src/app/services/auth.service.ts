@@ -15,10 +15,10 @@ export class AuthService {
   registerSiteUser(SiteUser) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    //return this.http.post('http://localhost:3050/User/register', SiteUser, { headers: headers })
-    //  .map(res => res.json());
-     return this.http.post('User/register', SiteUser, { headers: headers })
+    return this.http.post('http://localhost:3050/User/register', SiteUser, { headers: headers })
      .map(res => res.json());
+    //  return this.http.post('User/register', SiteUser, { headers: headers })
+    //  .map(res => res.json());
   }
 
   authUser(SiteUser) {
@@ -26,20 +26,20 @@ export class AuthService {
     this.loadToken();
     headers.append('Authorization',this.authToken);
     headers.append('Content-Type', 'application/json');
-    // return this.http.post('http://localhost:3050/User/auth', SiteUser, { headers: headers })
-    //   .map(res => res.json());
-      return this.http.post('User/auth', SiteUser, { headers: headers })
+    return this.http.post('http://localhost:3050/User/auth', SiteUser, { headers: headers })
       .map(res => res.json());
+      // return this.http.post('User/auth', SiteUser, { headers: headers })
+      // .map(res => res.json());
   }
   getProfile(){
     let headers = new Headers();
     this.loadToken();
     headers.append('Authorization',this.authToken);
     headers.append('Content-Type', 'application/json');
-    // return this.http.get('http://localhost:3050/User/profile', { headers: headers })
-    //   .map(res => res.json());
-      return this.http.get('User/profile', { headers: headers })
+    return this.http.get('http://localhost:3050/User/profile', { headers: headers })
       .map(res => res.json());
+      // return this.http.get('User/profile', { headers: headers })
+      // .map(res => res.json());
   }
   // getReports() {
   //   let headers = new Headers();

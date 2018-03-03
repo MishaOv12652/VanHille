@@ -1,0 +1,37 @@
+<div class="col-md-offset-2">
+  <h3 class="header">תוצאות נוכחיות</h3>
+</div>
+<div style="display: block;background-color: white">
+  <canvas baseChart [colors]="radarColors" [datasets]="radarChartData" [labels]="radarChartLabels"
+          [options]="radarChartOptions"
+          [chartType]="radarChartType" (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)"></canvas>
+</div>
+<div class="button-group" style="margin-top: 5px">
+  <div style="margin-top:5px">
+    <select name="courseNum" class="form-control" [(ngModel)]="courseNum" (change)="getCorepondingGroupNums()">
+      <option disabled hidden [value]="selectUndefinedOptionValue">בחר מספר קורס</option>
+      <option *ngFor="let courseOption of courseNumOptions" [value]="courseOption.courseNum">
+        {{courseOption.courseNum}}
+      </option>
+    </select>
+  </div>
+  <div style="margin-top:5px;margin-bottom: 5px">
+    <select name="groupNum" class="form-control" [(ngModel)]="groupNum">
+      <option disabled hidden [value]="selectUndefinedOptionValue">בחר מס' קבוצת לימוד</option>
+      <option *ngFor="let groupOption of groupNumOptions" [value]="groupOption.groupNum">
+        {{groupOption.groupNum}}
+      </option>
+    </select>
+  </div>
+  <div style="margin-top:5px;margin-bottom: 5px">
+    <select name="groupNum" class="form-control" [(ngModel)]="tryNum">
+      <option disabled hidden [value]="selectUndefinedOptionValue">בחר מס' ניסיון</option>
+      <option *ngFor="let tryNumOption of tryNumOptions" [value]="tryNumOption">
+        {{tryNumOption}}
+      </option>
+    </select>
+  </div>
+  <button type="button" class="btn btn-success btn-block" (click)="calcAll()">חשב נתונים כללים</button>
+  <button type="button" class="btn btn-danger  btn-block" (click)="clearRadar()">נקה גרף</button>
+</div>
