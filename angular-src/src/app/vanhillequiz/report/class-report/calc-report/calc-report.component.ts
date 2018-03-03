@@ -31,11 +31,12 @@ export class CalcReportComponent implements OnInit {
   radarChartType: string = 'radar';
   // values for calculation
   radarChartData: any[] = [{}];
-  tryNum: any = localStorage.getItem('tryNum');
+  tryNum: Number; // any = localStorage.getItem('tryNum');
   groupNum: Number;
   courseNum: Number;
   courseNumOptions: [any];
   groupNumOptions: [any];
+  tryNumOptions: [any] = [1, 2];
 
   constructor(private reportService: VanhilereportService,
               private flashMessagesService: FlashMessagesService,) {

@@ -25,10 +25,10 @@
     </select>
   </div>
   <div style="margin-top:5px;margin-bottom: 5px">
-    <select name="groupNum" class="form-control" [(ngModel)]="groupNum">
+    <select name="groupNum" class="form-control" [(ngModel)]="tryNum">
       <option disabled hidden [value]="selectUndefinedOptionValue">בחר מס' ניסיון</option>
-      <option *ngFor="let groupOption of groupNumOptions" [value]="groupOption.groupNum">
-        {{groupOption.groupNum}}
+      <option *ngFor="let tryNumOption of tryNumOptions" [value]="tryNumOption">
+        {{tryNumOption}}
       </option>
     </select>
   </div>
