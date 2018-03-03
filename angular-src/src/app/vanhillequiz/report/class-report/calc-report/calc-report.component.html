@@ -9,7 +9,7 @@
 </div>
 <div class="button-group" style="margin-top: 5px">
   <div style="margin-top:5px">
-    <select name="courseNum" class="form-control" [(ngModel)]="courseNum" (change)="getCorepondingGroupNums">
+    <select name="courseNum" class="form-control" [(ngModel)]="courseNum" (change)="getCorepondingGroupNums()">
       <option disabled hidden [value]="selectUndefinedOptionValue">בחר מספר קורס</option>
       <option *ngFor="let courseOption of courseNumOptions" [value]="courseOption.courseNum">
         {{courseOption.courseNum}}
@@ -19,6 +19,14 @@
   <div style="margin-top:5px;margin-bottom: 5px">
     <select name="groupNum" class="form-control" [(ngModel)]="groupNum">
       <option disabled hidden [value]="selectUndefinedOptionValue">בחר מס' קבוצת לימוד</option>
+      <option *ngFor="let groupOption of groupNumOptions" [value]="groupOption.groupNum">
+        {{groupOption.groupNum}}
+      </option>
+    </select>
+  </div>
+  <div style="margin-top:5px;margin-bottom: 5px">
+    <select name="groupNum" class="form-control" [(ngModel)]="groupNum">
+      <option disabled hidden [value]="selectUndefinedOptionValue">בחר מס' ניסיון</option>
       <option *ngFor="let groupOption of groupNumOptions" [value]="groupOption.groupNum">
         {{groupOption.groupNum}}
       </option>

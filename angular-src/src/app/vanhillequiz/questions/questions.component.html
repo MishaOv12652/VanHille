@@ -1,25 +1,25 @@
 <div *ngIf="!showFinish" class="row">
   <!-- <app-timer></app-timer> -->
   <h2 class=" header">שאלה מס' {{qnumber}}</h2>
-
+  <div class="card pull-left" dir="rtl" style="background-color: white">
+    <div class="card-header">
+      <h4>זמן שנותר לסיום</h4>
+    </div>
+    <div class="card-body text-center">
+      <countdown [config]="counterConfig" (finished)="calcUser(false)"></countdown>
+    </div>
+  </div>
 </div>
 <div *ngIf="!showFinish" class="margin">
 
   <div class="row" dir="rtl">
-    <div class="card pull-left" dir="rtl" style="background-color: white">
-      <div class="card-header">
-        <h4>זמן שנותר לסיום</h4>
-      </div>
-      <div class="card-body text-center">
-        <countdown [config]="counterConfig" (finished)="calcUser(false)"></countdown>
-      </div>
-    </div>
+
     <div>
       <div class="row">
-        <div class="pull-left col-md-offset-2">
+        <div class="col-md-4">
           <img class="media-object" src="{{img}}">
         </div>
-        <div class="pull-right col-md-offset-2">
+        <div class="col-md-7">
           <h3 [innerHTML]="question"></h3>
         </div>
       </div>
