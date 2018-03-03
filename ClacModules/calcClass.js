@@ -84,11 +84,11 @@ module.exports.calcAll = function (tryNum, callback) {
                         finalResults[2] = (CorAnswerLvl3/TotalAnswersPerLvl)*100;
                         finalResults[3] = (CorAnswerLvl4/TotalAnswersPerLvl)*100;
                         finalResults[4] = (CorAnswerLvl5/TotalAnswersPerLvl)*100;
-                        CorAnswerLvl1 = 0
-                        CorAnswerLvl2 = 0
-                        CorAnswerLvl3 = 0
-                        CorAnswerLvl4 = 0
-                        CorAnswerLvl5 = 0
+                        CorAnswerLvl1 = 0;
+                        CorAnswerLvl2 = 0;
+                        CorAnswerLvl3 = 0;
+                        CorAnswerLvl4 = 0;
+                        CorAnswerLvl5 = 0;
                         finArr = finalResults;
                         finalResults = [0,0,0,0,0];
                         return callback(finArr, groupNum, courseNum);

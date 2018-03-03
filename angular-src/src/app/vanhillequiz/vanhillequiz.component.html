@@ -1,8 +1,6 @@
 <div class="margin">
   <h1 class="header">שאלון ואן-הילה</h1>
-  <!-- <app-questions></app-questions> -->
-  <!-- <app-answers></app-answers> -->
-  <app-vanhileform *ngIf="showForm" (showvnahileform) = "showhideform($event)"></app-vanhileform>
+  <app-vanhileform *ngIf="showForm" (showvnahileform)="showhideform($event)"></app-vanhileform>
   <app-questions *ngIf="!showForm"></app-questions>
-  <!-- <app-answers *ngIf="!showForm"></app-answers> -->
+
 </div>
