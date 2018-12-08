@@ -38,7 +38,7 @@ export class QuestionsComponent implements OnInit {
     this.nextQuestion(this.qnumber.toString());
     this.counterConfig = {
       leftTime: 5400,
-      template: '$!m!:$!s!',
+      template: '$!h!:$!m!:$!s!',
       size: 'medium'
     };
   }
