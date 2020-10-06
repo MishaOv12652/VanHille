@@ -45,9 +45,9 @@
     </section>
   </div>
   <div class="row col-md-8 pull-left">
-    <button id="next" type="button" class="btn btn-primary" (click)="saveAnswer()">שאלה הבאה</button>
-    <button id="back" type="button" class="btn btn-danger" (click)="backQuestion()">שאלה קודמת</button>
-    <button *ngIf="finish" id="finish" type="button" class="btn btn-danger" (click)="calcUser(true)">סיים שאלון</button>
+    <button id="next" type="button" [disabled]="!radiogroup" class="btn btn-primary" (click)="saveAnswer()">שאלה הבאה</button>
+    <button id="back" type="button"  class="btn btn-danger" (click)="backQuestion()">שאלה קודמת</button>
+    <button *ngIf="finish" id="finish" type="button" [disabled]="!radiogroup" class="btn btn-danger" (click)="calcUser(true)">סיים שאלון</button>
   </div>
 
 </div>

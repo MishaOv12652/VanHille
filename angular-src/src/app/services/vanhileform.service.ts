@@ -31,7 +31,6 @@ export class VanhileformService {
     headers.append('Content-Type', 'application/json');
     // return this.http.get('http://localhost:3050/VHS/' + ID, {headers: headers}).map(res => res.json());
     // return this.http.get('VHS/' + ID, {headers: headers}).map(res => res.json());
-    console.log(environment.url);
     return this.http.get(`${environment.url}VHS/${ID}`, {headers: headers}).map(res => res.json());
   }
 
