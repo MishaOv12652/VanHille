@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "cd angular-src && npm install && ng build",
+    "postinstall": "cd angular-src && npm install && npx ng build",
     "start": "node server.js"
   },
   "dependencies": {
