@@ -12,6 +12,7 @@
   },
   "private": true,
   "dependencies": {
+    "@akveo/ng2-completer": "^9.0.1",
     "@angular/animations": "^5.2.6",
     "@angular/common": "^5.2.6",
     "@angular/compiler": "^5.2.6",

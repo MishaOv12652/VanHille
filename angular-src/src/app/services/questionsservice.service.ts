@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
-
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class QuestionsserviceService {
@@ -13,21 +13,24 @@ export class QuestionsserviceService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     // return this.http.get('http://localhost:3050/VHS/' + ID, {headers: headers}).map(res => res.json());
-    return this.http.get('VHS/' + ID, {headers: headers}).map(res => res.json());
+    // return this.http.get('VHS/' + ID, {headers: headers}).map(res => res.json());
+    return this.http.get(`${environment.url}VHS/` + ID, {headers: headers}).map(res => res.json());
   }
 
   getAllQuestions() {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     // return this.http.get('http://localhost:3050/VanHilleQuiz/questions', {headers: headers}).map(res => res.json());
-    return this.http.get('VanHilleQuiz/questions', {headers: headers}).map(res => res.json());
+    // return this.http.get('VanHilleQuiz/questions', {headers: headers}).map(res => res.json());
+    return this.http.get(`${environment.url}VanHilleQuiz/questions`, {headers: headers}).map(res => res.json());
   }
 
   saveCorrectAnsPerDiff(id: Number, arr: any, tryNum: Number) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     // return this.http.post('http://localhost:3050/VHS/calc/' + tryNum + '/' + id + '/' + arr, {headers: headers}).map(res => res.json());
-    return this.http.post('/VHS/calc/' + tryNum + '/' + id + '/' + arr, {headers: headers}).map(res => res.json());
+    // return this.http.post('/VHS/calc/' + tryNum + '/' + id + '/' + arr, {headers: headers}).map(res => res.json());
+    return this.http.post(`${environment.url}VHS/calc/${tryNum}/${id}/`, {answers: arr}, {headers: headers}).map(res => res.json());
   }
 
   getNextQuestion(id: String) {
@@ -35,7 +38,9 @@ export class QuestionsserviceService {
     headers.append('Content-Type', 'application/json');
     // return this.http.get('http://localhost:3050/VanHilleQuiz/' + id, {headers: headers})
     //   .map(res => res.json());
-    return this.http.get('VanHilleQuiz/' + id, {headers: headers})
+    // return this.http.get('VanHilleQuiz/' + id, {headers: headers})
+    //   .map(res => res.json());
+    return this.http.get(`${environment.url}VanHilleQuiz/${id}`, {headers: headers})
       .map(res => res.json());
   }
 
@@ -44,7 +49,9 @@ export class QuestionsserviceService {
     headers.append('Content-Type', 'application/json');
     // return this.http.put('http://localhost:3050/VHS/' + id + '/' + ansNum + '/' + qnumber + '/' + tryNum, {headers: headers})
     //   .map(res => res.json());
-    return this.http.put('VHS/' + id + '/' + ansNum + '/' + qnumber + '/' + tryNum, {headers: headers})
+    // return this.http.put('VHS/' + id + '/' + ansNum + '/' + qnumber + '/' + tryNum, {headers: headers})
+    //   .map(res => res.json());
+    return this.http.put(`${environment.url}VHS/${id}/${ansNum}/${qnumber}/${tryNum}`, {headers: headers})
       .map(res => res.json());
   }
 
@@ -53,7 +60,9 @@ export class QuestionsserviceService {
     headers.append('Content-Type', 'application/json');
     // return this.http.post('http://localhost:3050/VanHilleQuiz/calcStudent/' + tryNum + '/' + id, {headers: headers})
     //   .map(res => res.json());
-    return this.http.post('VanHilleQuiz/calcStudent/' + tryNum + '/' + id, {headers: headers})
+    // return this.http.post('VanHilleQuiz/calcStudent/' + tryNum + '/' + id, {headers: headers})
+    //   .map(res => res.json());
+    return this.http.post(`${environment.url}VanHilleQuiz/calcStudent/${tryNum}/${id}`, {headers: headers})
       .map(res => res.json());
   }
 

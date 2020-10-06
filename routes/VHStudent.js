@@ -57,9 +57,10 @@ router.get('/', (req, res, next) => {
         }
     });
 });
-
-router.post('/calc/:tryNum/:id/(:arr)*', (req, res, next) => {
-    var arrparams = [req.params.arr].concat(req.params[0].split('/').slice(1));
+// /(:arr)*
+router.post('/calc/:tryNum/:id', (req, res, next) => {
+    // var arrparams = [req.params.arr].concat(req.params[0].split('/').slice(1));
+    let arrparams = req.body.answers;
     User.saveCorrectAnsArrPerDiff(req.params.tryNum, req.params.id, arrparams, (err, user) => {
         if (err) {
             res.json({success: false, msg: err});

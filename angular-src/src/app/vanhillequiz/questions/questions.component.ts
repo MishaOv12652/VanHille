@@ -199,11 +199,12 @@ export class QuestionsComponent implements OnInit {
 
 
   saveCorrectUserAnswers(resultArr: any[]) {
-    let arrstring = '';
-    for (let index = 0; index < resultArr.length; index++) {
-      arrstring = arrstring + resultArr[index].toString() + '/';
-    }
-    this.questionService.saveCorrectAnsPerDiff(this.User, arrstring, this.tryTime).subscribe(data => {
+    // let arrstring = '';
+    // for (let index = 0; index < resultArr.length; index++) {
+    //   arrstring = arrstring + resultArr[index].toString() + '/';
+    //   console.log(arrstring);
+    // }
+    this.questionService.saveCorrectAnsPerDiff(this.User, resultArr, this.tryTime).subscribe(data => {
       if (data.success) {
         this.showFinish = true;
       } else {
@@ -223,6 +224,7 @@ export class QuestionsComponent implements OnInit {
     // console.log("student calc started for student: " + this.User);
     this.questionService.calcUser(this.User, this.tryTime).subscribe(userResult => {
       if (!userResult.success) {
+        console.log(userResult);
 
       } else {
         // this.CorrectAnsPerDiff = userResult.studentRes;

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http, Headers} from "@angular/http";
 import 'rxjs/add/operator/map';
 import {tokenNotExpired} from "angular2-jwt";
-
+import {environment} from '../../environments/environment';
 @Injectable()
 export class AuthService {
   authToken: any;
@@ -18,7 +18,9 @@ export class AuthService {
     headers.append('Content-Type', 'application/json');
     // return this.http.post('http://localhost:3050/User/register', SiteUser, {headers: headers})
     //   .map(res => res.json());
-    return this.http.post('User/register', SiteUser, {headers: headers})
+    // return this.http.post('User/register', SiteUser, {headers: headers})
+    //   .map(res => res.json());
+    return this.http.post(`${environment.url}User/register`, SiteUser, {headers: headers})
       .map(res => res.json());
   }
 
@@ -29,7 +31,9 @@ export class AuthService {
     headers.append('Content-Type', 'application/json');
     // return this.http.post('http://localhost:3050/User/auth', SiteUser, {headers: headers})
     //   .map(res => res.json());
-    return this.http.post('User/auth', SiteUser, {headers: headers})
+    // return this.http.post('User/auth', SiteUser, {headers: headers})
+    //   .map(res => res.json());
+    return this.http.post(`${environment.url}User/auth`, SiteUser, {headers: headers})
       .map(res => res.json());
   }
 
@@ -40,7 +44,9 @@ export class AuthService {
     headers.append('Content-Type', 'application/json');
     // return this.http.get('http://localhost:3050/User/profile', {headers: headers})
     //   .map(res => res.json());
-    return this.http.get('User/profile', {headers: headers})
+    // return this.http.get('User/profile', {headers: headers})
+    //   .map(res => res.json());
+    return this.http.get(`${environment.url}User/profile`, {headers: headers})
       .map(res => res.json());
   }
 

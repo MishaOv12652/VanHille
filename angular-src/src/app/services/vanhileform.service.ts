@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class VanhileformService {
@@ -29,7 +30,9 @@ export class VanhileformService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     // return this.http.get('http://localhost:3050/VHS/' + ID, {headers: headers}).map(res => res.json());
-    return this.http.get('VHS/' + ID, {headers: headers}).map(res => res.json());
+    // return this.http.get('VHS/' + ID, {headers: headers}).map(res => res.json());
+    console.log(environment.url);
+    return this.http.get(`${environment.url}VHS/${ID}`, {headers: headers}).map(res => res.json());
   }
 
   createUser(user) {
@@ -37,7 +40,9 @@ export class VanhileformService {
     headers.append('Content-Type', 'application/json');
     // return this.http.post('http://localhost:3050/VHS/register', user, {headers: headers})
     //   .map(res => res.json());
-    return this.http.post('VHS/register', user, {headers: headers})
+    // return this.http.post('VHS/register', user, {headers: headers})
+    //   .map(res => res.json());
+    return this.http.post(`${environment.url}VHS/register`, user, {headers: headers})
       .map(res => res.json());
   }
 
@@ -46,7 +51,9 @@ export class VanhileformService {
     headers.append('Content-Type', 'application/json');
     // return this.http.post('http://localhost:3050/VHS/nullifyAnswers/' + id + '/' + tryNum, {headers: headers})
     //   .map(res => res.json());
-    return this.http.post('/VHS/nullifyAnswers/' + id + '/' + tryNum, {headers: headers})
+    // return this.http.post('/VHS/nullifyAnswers/' + id + '/' + tryNum, {headers: headers})
+    //   .map(res => res.json());
+    return this.http.post(`${environment.url}VHS/nullifyAnswers/${id}/${tryNum}`, {headers: headers})
       .map(res => res.json());
   }
 
@@ -55,7 +62,9 @@ export class VanhileformService {
     headers.append('Content-Type', 'application/json');
     // return this.http.post('http://localhost:3050/VHS/updateGroupNum/' + id + '/' + groupNum, {headers: headers})
     //   .map(res => res.json());
-    return this.http.post('/VHS/updateGroupNum/' + id + '/' + groupNum, {headers: headers})
+    // return this.http.post('/VHS/updateGroupNum/' + id + '/' + groupNum, {headers: headers})
+    //   .map(res => res.json());
+    return this.http.post(`${environment.url}VHS/updateGroupNum/${id}/${groupNum}`, {headers: headers})
       .map(res => res.json());
   }
 }

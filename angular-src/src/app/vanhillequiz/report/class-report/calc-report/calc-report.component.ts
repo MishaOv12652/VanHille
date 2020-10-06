@@ -36,10 +36,10 @@ export class CalcReportComponent implements OnInit {
   courseNum: Number;
   courseNumOptions: [any];
   groupNumOptions: [any];
-  tryNumOptions: [any] = [1, 2];
+  tryNumOptions = [1, 2];
 
   constructor(private reportService: VanhilereportService,
-              private flashMessagesService: FlashMessagesService,) {
+              private flashMessagesService: FlashMessagesService) {
   }
 
   ngOnInit() {
