@@ -18,19 +18,32 @@ module.exports.calcClass = function (tryNum, courseNum, groupNum, callback) {
             } else {
                 numOfStudentsDoneTheQuiz = 0;
                 corAnswersPerDiffArray = [0, 0, 0, 0, 0];
+                let studentDidQuiz = true;
                 students.forEach((student) => {
                     switch (parseFloat(tryNum)) {
                         case 1:
-                            arrayToAdd = student.correctAperdif1.length === 0 ? [0, 0, 0, 0, 0] : student.correctAperdif1;
+                            if (student.correctAperdif1.length === 0) {
+                                studentDidQuiz = false;
+                            } else {
+                                arrayToAdd = student.correctAperdif1;
+                            }
                             break;
                         case 2:
-                            arrayToAdd = student.correctAperdif2.length === 0 ? [0, 0, 0, 0, 0] : student.correctAperdif2;
+                            if (student.correctAperdif2.length === 0) {
+                                studentDidQuiz = false;
+                            } else {
+                                arrayToAdd = student.correctAperdif2;
+                            }
+                            // arrayToAdd = student.correctAperdif2.length === 0 ? [0, 0, 0, 0, 0] : student.correctAperdif2;
                             break;
                     }
-                    corAnswersPerDiffArray = lodash.zipWith(corAnswersPerDiffArray, arrayToAdd, (a, b) => {
-                        return parseFloat(a) + parseFloat(b);
-                    });
-                    numOfStudentsDoneTheQuiz++;
+                    if(studentDidQuiz){
+                        corAnswersPerDiffArray = lodash.zipWith(corAnswersPerDiffArray, arrayToAdd, (a, b) => {
+                            return parseFloat(a) + parseFloat(b);
+                        });
+                        numOfStudentsDoneTheQuiz++;
+                    }
+                   
                 });
                 for (let i = 0; i < 5; i++) {
                     corAnswersPerDiffArray[i] = (corAnswersPerDiffArray[i] / (numOfStudentsDoneTheQuiz * 5)) * 100;
