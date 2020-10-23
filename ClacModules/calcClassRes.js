@@ -18,8 +18,8 @@ module.exports.calcClass = function (tryNum, courseNum, groupNum, callback) {
             } else {
                 numOfStudentsDoneTheQuiz = 0;
                 corAnswersPerDiffArray = [0, 0, 0, 0, 0];
-                let studentDidQuiz = true;
                 students.forEach((student) => {
+                    let studentDidQuiz = true;
                     switch (parseFloat(tryNum)) {
                         case 1:
                             if (student.correctAperdif1.length === 0) {
@@ -37,13 +37,12 @@ module.exports.calcClass = function (tryNum, courseNum, groupNum, callback) {
                             // arrayToAdd = student.correctAperdif2.length === 0 ? [0, 0, 0, 0, 0] : student.correctAperdif2;
                             break;
                     }
-                    if(studentDidQuiz){
+                    if (studentDidQuiz) {
                         corAnswersPerDiffArray = lodash.zipWith(corAnswersPerDiffArray, arrayToAdd, (a, b) => {
                             return parseFloat(a) + parseFloat(b);
                         });
                         numOfStudentsDoneTheQuiz++;
                     }
-                   
                 });
                 for (let i = 0; i < 5; i++) {
                     corAnswersPerDiffArray[i] = (corAnswersPerDiffArray[i] / (numOfStudentsDoneTheQuiz * 5)) * 100;
