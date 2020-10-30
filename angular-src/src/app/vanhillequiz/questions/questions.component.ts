@@ -192,9 +192,13 @@ export class QuestionsComponent implements OnInit {
 
 
   hideButtons() {
-    document.getElementById('next').style.display = 'none';
-    document.getElementById('back').style.display = 'none';
+    // document.getElementById('next').style.display = 'none';
+    // document.getElementById('back').style.display = 'none';
     this.finish = true;
+  }
+
+  showNext(){
+    return this.qnumber > 0 && this.qnumber < 25;
   }
 
 
