@@ -45,11 +45,10 @@
     </section>
   </div>
   <div class="row col-md-8 pull-left">
-    <button *ngIf="qnumber === 25" id="finish" type="button" [disabled]="!radiogroup" class="btn btn-danger" (click)="calcUser(true)">סיים שאלון</button>
-    <button id="next" *ngIf="showNext()" type="button" [disabled]="!radiogroup" class="btn btn-primary" (click)="saveAnswer()">שאלה הבאה</button>
+    <button *ngIf="qnumber === 25" id="finish" type="button" [disabled]="disableButton()" class="btn btn-success" (click)="calcUser(true)">סיים שאלון</button>
+    <button id="next" *ngIf="showNext()" type="button" [disabled]="disableButton()" class="btn btn-primary" (click)="saveAnswer()">שאלה הבאה</button>
     <button id="back" *ngIf="qnumber > 1" type="button"  class="btn btn-danger" (click)="backQuestion()">שאלה קודמת</button>
   </div>
-
 </div>
 <div *ngIf="showFinish" class="col-md-7 margin" style="color: white" dir="rtl">
   <h2>סיימת את השאלון, בהצלחה!</h2>

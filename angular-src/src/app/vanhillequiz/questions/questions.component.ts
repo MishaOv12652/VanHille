@@ -201,6 +201,10 @@ export class QuestionsComponent implements OnInit {
     return this.qnumber > 0 && this.qnumber < 25;
   }
 
+  disableButton(){
+    return this.radiogroup === 'a' + undefined;
+  }
+
 
   saveCorrectUserAnswers(resultArr: any[]) {
     // let arrstring = '';
