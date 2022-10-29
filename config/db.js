@@ -1,4 +1,4 @@
 module.exports={
-    database:"mongodb://Mishaov:Mrort987@ds127983.mlab.com:27983/mathquiz",
+    database:"mongodb+srv://misha:<password>@cluster0.xqxae.mongodb.net/?retryWrites=true&w=majority/vanhille",
     secret:'yoursecret'
 }
