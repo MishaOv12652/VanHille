@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const session = require('express-session')
 const passport = require('passport');
 const mongoose = require('mongoose');
 const config = require('./config/db');
@@ -51,6 +52,7 @@ app.use(express.static(path.join(__dirname,'public')));
 //Body Parser MW
 app.use(bodyParser.json())
 //passport MW
+app.use(session({secret: 'secret'}))
 app.use(passport.initialize());
 app.use(passport.session());
 require('./config/passport')(passport);
