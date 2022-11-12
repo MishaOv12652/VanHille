@@ -28,7 +28,7 @@ module.exports.calcClass = function (tryNum, courseNum, groupNum, callback) {
                             break;
                     }
                     corAnswersPerDiffArray = lodash.zipWith(corAnswersPerDiffArray, arrayToAdd, (a, b) => {
-                        return parseFloat(a) + parseFloat(b);
+                        return parseFloat(a || 0) + parseFloat(b || 0);
                     });
                     numOfStudentsDoneTheQuiz++;
                 });
