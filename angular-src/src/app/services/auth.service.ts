@@ -19,13 +19,23 @@ export class AuthService {
     return this.http.get<any>('User/profile');
   }
 
-  storeUserData(token: string, user: string) {
+  storeUserData(token: string, user: string, role: string) {
     localStorage.setItem('token', token);
     localStorage.setItem('admin', JSON.stringify(user));
+    localStorage.setItem('role', role);
   }
 
   getToken(): string | null {
     return localStorage.getItem('token');
+  }
+
+  getRole(): string | null {
+    return localStorage.getItem('role');
+  }
+
+  hasRole(...roles: string[]): boolean {
+    const role = this.getRole();
+    return !!role && roles.includes(role);
   }
 
   loggedIn(): boolean {

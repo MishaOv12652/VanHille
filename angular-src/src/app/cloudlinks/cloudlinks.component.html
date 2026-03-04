@@ -11,7 +11,7 @@
     </div>
   </div>
 </div>
-<div class="btn-group col-md-offset-7" *ngIf="auth_service.loggedIn()">
+<div class="btn-group col-md-offset-7" *ngIf="auth_service.hasRole('educator','admin')">
   <button class="btn btn-danger" data-toggle="modal" data-target="#deleteTableFormModal">Delete A Table</button>
   <button class="btn btn-success" data-toggle="modal" data-target="#addTableFormModal">Add A Table</button>
 </div>

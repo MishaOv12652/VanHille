@@ -27,7 +27,7 @@
         <li>
           <a [routerLink]="['literature']">ספרות</a>
         </li>
-        <li>
+        <li *ngIf="auth.hasRole('student')">
           <a href="javascript:;" data-toggle="collapse" data-target="#demo">כלים פדגוגיים</a>
           <ul id="demo" class="collapse">
             <li>
@@ -41,7 +41,7 @@
             <li>
               <a href="javascript:;" data-toggle="collapse" data-target="#VanHilleRepo">דו"חות ואן הילה</a>
               <ul id="VanHilleRepo" class="collapse">
-                <li>
+                <li *ngIf="auth.hasRole('student')">
                   <a [routerLink]="['vanhille/studentreport']">דו"ח לסטודנט</a>
                 </li>
                 <li>

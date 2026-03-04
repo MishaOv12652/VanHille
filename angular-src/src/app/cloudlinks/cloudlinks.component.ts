@@ -30,7 +30,7 @@ export class CloudlinksComponent implements OnInit {
       if (!tables.success) {
         this.toastr.error(tables.msg);
       } else {
-        if (this.auth_service.loggedIn()) {
+        if (this.auth_service.hasRole('educator', 'admin')) {
           this.tables_array = tables.cloudLinksTables;
           this.tables_array.forEach((cloudlinkTable) => {
             cloudlinkTable['settings_obj'].columns.url.editor['component'] = CustomEditorComponent;

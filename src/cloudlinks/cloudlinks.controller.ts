@@ -1,11 +1,14 @@
-import { Controller, Get, Post, Delete, Param, Body } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Param, Body, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { RolesGuard } from '../auth/guards/roles.guard';
+import { Roles } from '../auth/decorators/roles.decorator';
 import { CloudlinksService } from './cloudlinks.service';
 
 @Controller('CloudLinks')
 export class CloudlinksController {
   constructor(private readonly cloudlinksService: CloudlinksService) {}
 
-  // GET /CloudLinks/getAllCloudLinks
+  // GET /CloudLinks/getAllCloudLinks — public
   @Get('getAllCloudLinks')
   async getAllCloudLinks() {
     try {
@@ -16,7 +19,9 @@ export class CloudlinksController {
     }
   }
 
-  // POST /CloudLinks/addCloudLinkTable
+  // POST /CloudLinks/addCloudLinkTable — educator, admin
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('educator', 'admin')
   @Post('addCloudLinkTable')
   async addCloudLinkTable(
     @Body() body: { tableId: string; settings_obj: Record<string, any>; data: any[] },
@@ -29,7 +34,9 @@ export class CloudlinksController {
     }
   }
 
-  // POST /CloudLinks/deleteEntry/:CloudLinkTableId
+  // POST /CloudLinks/deleteEntry/:CloudLinkTableId — educator, admin
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('educator', 'admin')
   @Post('deleteEntry/:CloudLinkTableId')
   async deleteEntry(
     @Param('CloudLinkTableId') tableId: string,
@@ -44,7 +51,7 @@ export class CloudlinksController {
     }
   }
 
-  // GET /CloudLinks/:CloudLinkTableId
+  // GET /CloudLinks/:CloudLinkTableId — public
   @Get(':CloudLinkTableId')
   async getCloudLinkByTableId(@Param('CloudLinkTableId') tableId: string) {
     try {
@@ -55,7 +62,9 @@ export class CloudlinksController {
     }
   }
 
-  // POST /CloudLinks/:CloudLinkTableId — add entry to table
+  // POST /CloudLinks/:CloudLinkTableId — add entry, educator, admin
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('educator', 'admin')
   @Post(':CloudLinkTableId')
   async addEntry(
     @Param('CloudLinkTableId') tableId: string,
@@ -70,7 +79,9 @@ export class CloudlinksController {
     }
   }
 
-  // DELETE /CloudLinks/:CloudLinkTableId
+  // DELETE /CloudLinks/:CloudLinkTableId — educator, admin
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('educator', 'admin')
   @Delete(':CloudLinkTableId')
   async deleteTable(@Param('CloudLinkTableId') tableId: string) {
     try {

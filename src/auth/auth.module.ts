@@ -8,6 +8,7 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './jwt.strategy';
 import { JwtAuthGuard } from './jwt-auth.guard';
+import { RolesGuard } from './guards/roles.guard';
 import { SiteUser, SiteUserSchema } from './schemas/site-user.schema';
 
 @Module({
@@ -24,7 +25,7 @@ import { SiteUser, SiteUserSchema } from './schemas/site-user.schema';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, JwtStrategy, JwtAuthGuard],
-  exports: [JwtAuthGuard, PassportModule],
+  providers: [AuthService, JwtStrategy, JwtAuthGuard, RolesGuard],
+  exports: [JwtAuthGuard, RolesGuard, PassportModule],
 })
 export class AuthModule {}

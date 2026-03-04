@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './guards/auth.guard';
+import { roleGuard } from './guards/role.guard';
 
 export const routes: Routes = [
   {
@@ -7,6 +9,8 @@ export const routes: Routes = [
   },
   {
     path: 'vanhilequiz',
+    canActivate: [roleGuard],
+    data: { roles: ['student'] },
     loadComponent: () => import('./vanhillequiz/vanhillequiz.component').then(m => m.VanhillequizComponent)
   },
   {
@@ -19,10 +23,13 @@ export const routes: Routes = [
   },
   {
     path: 'vanhille/studentreport',
+    canActivate: [authGuard],
     loadComponent: () => import('./vanhillequiz/report/student-report/student-report.component').then(m => m.StudentReportComponent)
   },
   {
     path: 'vanhille/classreport',
+    canActivate: [roleGuard],
+    data: { roles: ['student', 'educator', 'admin'] },
     loadComponent: () => import('./vanhillequiz/report/class-report/class-report.component').then(m => m.ClassReportComponent)
   },
   {
@@ -35,10 +42,12 @@ export const routes: Routes = [
   },
   {
     path: 'profile',
+    canActivate: [authGuard],
     loadComponent: () => import('./profile/profile.component').then(m => m.ProfileComponent)
   },
   {
     path: 'dashboard',
+    canActivate: [authGuard],
     loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent)
   },
 ];

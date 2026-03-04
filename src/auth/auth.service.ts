@@ -22,6 +22,7 @@ export class AuthService {
         email: dto.email,
         username: dto.username,
         password: hash,
+        role: dto.role ?? 'student',
       });
       return { success: true, msg: 'משתמש נרשם' };
     } catch (err) {
@@ -49,6 +50,7 @@ export class AuthService {
         id: user._id,
         username: user.username,
         email: user.email,
+        role: user.role,
       },
     };
   }

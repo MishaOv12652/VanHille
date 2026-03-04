@@ -16,6 +16,7 @@ export class RegisterComponent implements OnInit {
   email: string = '';
   username: string = '';
   password: string = '';
+  role: string = 'student';
 
   constructor(
     private siteRegServ: SiteRegisterServiceService,
@@ -27,7 +28,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {}
 
   register() {
-    const SiteUser = { email: this.email, username: this.username, password: this.password };
+    const SiteUser = { email: this.email, username: this.username, password: this.password, role: this.role };
 
     if (!this.siteRegServ.validateRegister(SiteUser)) {
       this.toastr.error('אנא מלא את כל השדות!');

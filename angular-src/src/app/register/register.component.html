@@ -14,6 +14,14 @@
     <label for="">סיסמא</label>
     <input type="password" name="password" [(ngModel)]="password" class="form-control" placeholder="הכנס סיסמא">
   </div>
+  <div class="form-group col-md-10 col-md-pull-0" dir="rtl">
+    <label for="">תפקיד</label>
+    <select name="role" [(ngModel)]="role" class="form-control">
+      <option value="student">סטודנט</option>
+      <option value="educator">מחנך/ת</option>
+      <option value="admin">מנהל</option>
+    </select>
+  </div>
   <div class="form-group col-md-10 col-md-pull-0">
     <button type="submit" class="btn btn-primary btn-lg">הרשם</button>
   </div>
