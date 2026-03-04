@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     const SiteUser = { username: this.username, password: this.password };
     this.auth.authUser(SiteUser).subscribe(data => {
       if (data.success) {
-        this.auth.storeUserData(data.token, data.siteUser.username, data.siteUser.role);
+        this.auth.storeUserData(data.token, data.siteUser.username);
         this.toastr.success('התחברת בהצלחה');
         this.router.navigate(['/profile']);
       } else {

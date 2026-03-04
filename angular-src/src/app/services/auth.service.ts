@@ -19,10 +19,9 @@ export class AuthService {
     return this.http.get<any>('User/profile');
   }
 
-  storeUserData(token: string, user: string, role: string) {
+  storeUserData(token: string, user: string) {
     localStorage.setItem('token', token);
     localStorage.setItem('admin', JSON.stringify(user));
-    localStorage.setItem('role', role);
   }
 
   getToken(): string | null {
@@ -30,7 +29,14 @@ export class AuthService {
   }
 
   getRole(): string | null {
-    return localStorage.getItem('role');
+    const token = this.getToken();
+    if (!token) return null;
+    try {
+      const decoded: any = jwtDecode(token);
+      return decoded.user?.role ?? null;
+    } catch {
+      return null;
+    }
   }
 
   hasRole(...roles: string[]): boolean {
