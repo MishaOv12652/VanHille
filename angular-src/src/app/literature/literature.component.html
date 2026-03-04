@@ -1,0 +1,64 @@
+<div id="lit" class="jumbotron text-center margin">
+  <h2 dir="rtl" style="text-decoration: underline">ספרות</h2>
+
+  <!-- Filter buttons -->
+  <div class="btn-group" dir="rtl" style="margin-bottom: 20px;">
+    <button class="btn" [class.btn-primary]="activeFilter === 'all'" [class.btn-default]="activeFilter !== 'all'"
+            (click)="setFilter('all')">הכל</button>
+    <button class="btn" [class.btn-primary]="activeFilter === 'research'" [class.btn-default]="activeFilter !== 'research'"
+            (click)="setFilter('research')">ספרות מחקרית</button>
+    <button class="btn" [class.btn-primary]="activeFilter === 'educational'" [class.btn-default]="activeFilter !== 'educational'"
+            (click)="setFilter('educational')">ספרות לימודית</button>
+  </div>
+
+  <!-- Table -->
+  <ng2-smart-table
+    [settings]="auth_service.loggedIn() ? tableSettingsAdmin : tableSettings"
+    [source]="filteredEntries"
+    (deleteConfirm)="onDeleteConfirm($event)"
+    style="font-size: 15px">
+  </ng2-smart-table>
+</div>
+
+<!-- Add entry button (admin only) -->
+<div class="btn-group col-md-offset-7" *ngIf="auth_service.loggedIn()">
+  <button class="btn btn-success" data-toggle="modal" data-target="#addLitEntryModal">הוסף רשומה</button>
+</div>
+
+<!-- Add entry modal -->
+<div class="modal fade" id="addLitEntryModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title text-center">הוספת רשומת ספרות</h4>
+      </div>
+      <div class="modal-body" dir="rtl">
+        <form>
+          <div class="form-group">
+            <label>כותרת</label>
+            <input type="text" class="form-control" [(ngModel)]="newEntry.title" name="title" placeholder="כותרת">
+          </div>
+          <div class="form-group">
+            <label>תיאור</label>
+            <textarea class="form-control" [(ngModel)]="newEntry.desc" name="desc" placeholder="תיאור"></textarea>
+          </div>
+          <div class="form-group">
+            <label>קישור (Google Drive URL)</label>
+            <input type="text" class="form-control" [(ngModel)]="newEntry.url" name="url" placeholder="https://...">
+          </div>
+          <div class="form-group">
+            <label>קטגוריה</label>
+            <select class="form-control" [(ngModel)]="newEntry.category" name="category">
+              <option value="research">ספרות מחקרית</option>
+              <option value="educational">ספרות לימודית</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addEntry()">הוסף</button>
+      </div>
+    </div>
+  </div>
+</div>

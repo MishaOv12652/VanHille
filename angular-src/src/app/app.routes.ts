@@ -10,12 +10,8 @@ export const routes: Routes = [
     loadComponent: () => import('./vanhillequiz/vanhillequiz.component').then(m => m.VanhillequizComponent)
   },
   {
-    path: 'reslit',
-    loadComponent: () => import('./reslit/reslit.component').then(m => m.ReslitComponent)
-  },
-  {
-    path: 'edulit',
-    loadComponent: () => import('./edulit/edulit.component').then(m => m.EdulitComponent)
+    path: 'literature',
+    loadComponent: () => import('./literature/literature.component').then(m => m.LiteratureComponent)
   },
   {
     path: 'cloudlinks',

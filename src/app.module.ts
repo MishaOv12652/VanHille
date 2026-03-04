@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { StudentsModule } from './students/students.module';
 import { QuizModule } from './quiz/quiz.module';
 import { CloudlinksModule } from './cloudlinks/cloudlinks.module';
+import { LiteratureModule } from './literature/literature.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { CloudlinksModule } from './cloudlinks/cloudlinks.module';
     StudentsModule,
     QuizModule,
     CloudlinksModule,
+    LiteratureModule,
   ],
 })
 export class AppModule {}
