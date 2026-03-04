@@ -3,10 +3,11 @@
     <h3 class="header">תוצאות אחרי</h3>
   </div>
   <div style="display: block;background-color: white">
-    <canvas baseChart [colors]="radarcolors" [datasets]="radarChartDataPost" [labels]="radarChartLabels"
-            [options]="radarChartOptions"
-            [chartType]="radarChartType" (chartHover)="chartHovered($event)"
-            (chartClick)="chartClicked($event)"></canvas>
+    <canvas baseChart
+            [type]="radarChartType"
+            [data]="postChartData"
+            [options]="radarChartOptions">
+    </canvas>
   </div>
 </div>
 <div class="col-md-6 ">
@@ -14,10 +15,11 @@
     <h3 class="header">תוצאות לפני</h3>
   </div>
   <div style="display: block;background-color: white">
-    <canvas baseChart [colors]="radarcolors" [datasets]="radarChartDataPre" [labels]="radarChartLabels"
-            [options]="radarChartOptions"
-            [chartType]="radarChartType" (chartHover)="chartHovered($event)"
-            (chartClick)="chartClicked($event)"></canvas>
+    <canvas baseChart
+            [type]="radarChartType"
+            [data]="preChartData"
+            [options]="radarChartOptions">
+    </canvas>
   </div>
   <br>
 </div>

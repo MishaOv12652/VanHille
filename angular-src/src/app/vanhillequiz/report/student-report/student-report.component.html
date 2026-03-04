@@ -4,10 +4,10 @@
   <div class="form-group col-md-11 col-md-pull-1">
     <div class="input-append">
       <label style="color:white;font-size: 18px"> תאריך התחלה
-        <dp-date-picker style="color:black " placeholder="enter a start date" [(ngModel)]="sDate" theme="dp-material"></dp-date-picker>
+        <input type="date" class="form-control" [(ngModel)]="sDate" style="color:black;display:inline;width:auto">
       </label>
       <label style="color:white;font-size: 18px"> תאריך סיום
-          <dp-date-picker style="color:black " placeholder="enter a finish date" [(ngModel)]="fDate" theme="dp-material"></dp-date-picker>
+        <input type="date" class="form-control" [(ngModel)]="fDate" style="color:black;display:inline;width:auto">
       </label>
       <button type="button" class="btn btn-success pull-left" (click)="findStudentsBetweenDates()">חפש</button>
     </div>
@@ -19,22 +19,17 @@
       </select>
       <button type="button" class="btn btn-danger pull-left" (click)="clearSelection()">נקה בחירה</button>
     </div>
-
     <br>
     <br>
     <div class="row" style="margin-left:5px">
-      <div class="col-md-6" *ngIf="showHideSecondChart()" style="display: block;background-color: white  ">
+      <div class="col-md-6" *ngIf="showHideSecondChart()" style="display: block;background-color: white">
         <h3 style="text-align: center">תוצאות אחרי</h3>
-        <canvas baseChart [colors]="colors" [datasets]="barChartData2" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
-          [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+        <canvas baseChart [type]="barChartType" [data]="barChartData2" [options]="barChartOptions"></canvas>
       </div>
-      <div class="col-md-6" *ngIf="showHideChartOfUser()" style="display: block;background-color: white  ">
+      <div class="col-md-6" *ngIf="showHideChartOfUser()" style="display: block;background-color: white">
         <h3 style="text-align: center">תוצאות לפני</h3>
-        <canvas baseChart [colors]="colors" [datasets]="barChartData1" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
-          [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+        <canvas baseChart [type]="barChartType" [data]="barChartData1" [options]="barChartOptions"></canvas>
       </div>
-
     </div>
-
   </div>
 </div>

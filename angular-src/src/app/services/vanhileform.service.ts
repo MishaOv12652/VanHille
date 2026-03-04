@@ -1,61 +1,36 @@
-import {Injectable} from '@angular/core';
-import {Http, Headers} from '@angular/http';
-import 'rxjs/add/operator/map';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class VanhileformService {
-  user: any;
 
-  constructor(private http: Http) {
-  }
+  constructor(private http: HttpClient) {}
 
-
-  validateForm(user) {
+  validateForm(user: any): boolean {
     if (user.courseNum == undefined || user.groupNum == undefined || user.ID == undefined) {
       return false;
-    } else {
-      return true;
     }
+    return true;
   }
 
-  validateID(ID: Number) {
-    if (ID.toString().length >= 8 && ID.toString().length <= 9)
-      return true;
-    else
-      return false;
+  validateID(ID: any): boolean {
+    const len = ID.toString().length;
+    return len >= 8 && len <= 9;
   }
 
-  getUser(ID: Number) {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    // return this.http.get('http://localhost:3050/VHS/' + ID, {headers: headers}).map(res => res.json());
-    return this.http.get('VHS/' + ID, {headers: headers}).map(res => res.json());
+  getUser(ID: any) {
+    return this.http.get<any>('VHS/' + ID);
   }
 
-  createUser(user) {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    // return this.http.post('http://localhost:3050/VHS/register', user, {headers: headers})
-    //   .map(res => res.json());
-    return this.http.post('VHS/register', user, {headers: headers})
-      .map(res => res.json());
+  createUser(user: any) {
+    return this.http.post<any>('VHS/register', user);
   }
 
-  nullifyAnswers(id: Number, tryNum: Number) {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    // return this.http.post('http://localhost:3050/VHS/nullifyAnswers/' + id + '/' + tryNum, {headers: headers})
-    //   .map(res => res.json());
-    return this.http.post('/VHS/nullifyAnswers/' + id + '/' + tryNum, {headers: headers})
-      .map(res => res.json());
+  nullifyAnswers(id: any, tryNum: any) {
+    return this.http.post<any>('/VHS/nullifyAnswers/' + id + '/' + tryNum, {});
   }
 
-  updateGroupNumOfStudent(id: Number, groupNum: Number) {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    // return this.http.post('http://localhost:3050/VHS/updateGroupNum/' + id + '/' + groupNum, {headers: headers})
-    //   .map(res => res.json());
-    return this.http.post('/VHS/updateGroupNum/' + id + '/' + groupNum, {headers: headers})
-      .map(res => res.json());
+  updateGroupNumOfStudent(id: any, groupNum: any) {
+    return this.http.post<any>('/VHS/updateGroupNum/' + id + '/' + groupNum, {});
   }
 }

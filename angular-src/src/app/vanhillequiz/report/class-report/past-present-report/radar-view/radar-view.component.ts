@@ -1,44 +1,38 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ChartsModule} from 'ng2-charts/ng2-charts';
-
+import { Component, Input, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { BaseChartDirective } from 'ng2-charts';
+import { ChartData, ChartOptions } from 'chart.js';
 
 @Component({
   selector: 'app-radar-view',
   templateUrl: './radar-view.component.html',
-  styleUrls: ['./radar-view.component.css']
+  styleUrls: ['./radar-view.component.css'],
+  standalone: true,
+  imports: [CommonModule, BaseChartDirective]
 })
 export class RadarViewComponent implements OnInit {
-  radarChartLabels: string[] = ['רמה 1', 'רמה 2', 'רמה 3', 'רמה 4', 'רמה 5'];
-  radarChartType: string = 'radar';
-  radarChartOptions: any = {
-    scale: {
-      ticks: {
-        min: 0,
-        steps: 10,
-        beginAtZero: true,
-        max: 100
-      }
-    }
+  radarChartType = 'radar' as const;
+  radarChartOptions: ChartOptions<'radar'> = {
+    scales: { r: { min: 0, max: 100, ticks: { stepSize: 10 } } }
   };
-  radarcolors: any[] = [{
-    backgroundColor: [
-      'rgba(54, 162, 235, 0.5)',
-      'rgba(102, 0, 204, 0.2)'
-    ]
-  }];
 
   @Input() radarChartDataPre: any[] = [{}];
   @Input() radarChartDataPost: any[] = [{}];
-  constructor() { }
 
-  ngOnInit() {
+  get preChartData(): ChartData<'radar'> {
+    return {
+      labels: ['רמה 1', 'רמה 2', 'רמה 3', 'רמה 4', 'רמה 5'],
+      datasets: this.radarChartDataPre || []
+    };
   }
 
-  private chartClicked(e: any): void {
-    console.log(e);
+  get postChartData(): ChartData<'radar'> {
+    return {
+      labels: ['רמה 1', 'רמה 2', 'רמה 3', 'רמה 4', 'רמה 5'],
+      datasets: this.radarChartDataPost || []
+    };
   }
 
-  private chartHovered(e: any): void {
-    console.log(e);
-  }
+  constructor() {}
+  ngOnInit() {}
 }

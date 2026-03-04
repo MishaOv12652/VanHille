@@ -1,106 +1,48 @@
-import {Injectable} from '@angular/core';
-import {Http, Headers} from '@angular/http';
-import 'rxjs/add/operator/map';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class VanhilereportService {
 
-  constructor(private http: Http) {
-  }
+  constructor(private http: HttpClient) {}
 
   getUsersLast3Hours() {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    // return this.http.get('http://localhost:3050/VHS/', {headers: headers})
-    //   .map(res => res.json());
-    return this.http.get('VHS/', {headers: headers})
-      .map(res => res.json());
+    return this.http.get<any>('VHS/');
   }
 
-  getUser(ID: Number) {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    // return this.http.get(`http://localhost:3050/VHS/${ID}`, {headers: headers}).map(res => res.json());
-    return this.http.get(`VHS/${ID}`, {headers: headers}).map(res => res.json());
+  getUser(ID: any) {
+    return this.http.get<any>(`VHS/${ID}`);
   }
 
   getAllQuestions() {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    // return this.http.get('http://localhost:3050/VanHilleQuiz/questions', {headers: headers}).map(res => res.json());
-    return this.http.get('VanHilleQuiz/questions', {headers: headers}).map(res => res.json());
+    return this.http.get<any>('VanHilleQuiz/questions');
   }
 
-  createAllResults(tryNum: Number, courseNum: Number, groupNum: Number) {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    // return this.http.post(`http://localhost:3050/VanHilleQuiz/calcClass/${tryNum}/${courseNum}/${groupNum}`, {headers: headers})
-    //   .map(res => res.json());
-    return this.http.post(`VanHilleQuiz/calcClass/${tryNum}/${courseNum}/${groupNum}`, {headers: headers})
-      .map(res => res.json());
+  createAllResults(tryNum: any, courseNum: any, groupNum: any) {
+    return this.http.post<any>(`VanHilleQuiz/calcClass/${tryNum}/${courseNum}/${groupNum}`, {});
   }
-
-  // createAllResults(tryNum: Number) {
-  //   let headers = new Headers();
-  //   headers.append('Content-Type', 'application/json');
-  //   return this.http.post('http://localhost:3050/VanHilleQuiz/calcAll/' + tryNum, {headers: headers})
-  //     .map(res => res.json());
-  //   //  return this.http.post('VanHilleQuiz/calcAll/'+tryNum,{headers:headers})
-  //   //  .map(res=>res.json());
-  // }
 
   getAllQuizesDoneInTheLastSemeter() {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    // return this.http.get('http://localhost:3050/VanHilleQuiz/studentSemester/get', {headers: headers})
-    //   .map(res => res.json());
-    return this.http.get('VanHilleQuiz/studentSemester/get', {headers: headers})
-      .map(res => res.json());
+    return this.http.get<any>('VanHilleQuiz/studentSemester/get');
   }
 
-  getQuizesByGroupAndCourse(cNum: Number, gNum: Number) {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    // return this.http.get(`http://localhost:3050/VanHilleQuiz/studentSemester/${cNum}/${gNum}`, {headers: headers})
-    //   .map(res => res.json());
-    return this.http.get(`VanHilleQuiz/studentSemester/${cNum}/${gNum}`, {headers: headers})
-      .map(res => res.json());
+  getQuizesByGroupAndCourse(cNum: any, gNum: any) {
+    return this.http.get<any>(`VanHilleQuiz/studentSemester/${cNum}/${gNum}`);
   }
 
-  getQuizByCourseNum(cNum: Number) {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    // return this.http.get(`http://localhost:3050/VanHilleQuiz/quizByCnum/${cNum}`, {headers: headers})
-    //   .map(res => res.json());
-    return this.http.get(`VanHilleQuiz/quizByCnum/${cNum}`, {headers: headers})
-      .map(res => res.json());
+  getQuizByCourseNum(cNum: any) {
+    return this.http.get<any>(`VanHilleQuiz/quizByCnum/${cNum}`);
   }
 
-  getStudentsBetweenDates(sDate: Date, fDate: Date) {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    // return this.http.get(`http://localhost:3050/VHS/students/${sDate}/${fDate}`, {headers: headers})
-    //   .map(res => res.json());
-    return this.http.get(`VHS/students/${sDate}/${fDate}`, {headers: headers})
-      .map(res => res.json());
+  getStudentsBetweenDates(sDate: any, fDate: any) {
+    return this.http.get<any>(`VHS/students/${sDate}/${fDate}`);
   }
-
 
   getAllUniqueCourseNum() {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    // return this.http.get(`http://localhost:3050/VHS/get/unique/courseNums`, {headers: headers})
-    //   .map(res => res.json());
-    return this.http.get(`VHS/get/unique/courseNums`, {headers: headers})
-      .map(res => res.json());
+    return this.http.get<any>('VHS/get/unique/courseNums');
   }
 
-  getCorepondingGroupNums(courseNum) {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    // return this.http.get(`http://localhost:3050/VHS/get/unique/corresponding/groupNums/${courseNum}`, {headers: headers})
-    //   .map(res => res.json());
-    return this.http.get(`VHS/get/unique/corresponding/groupNums/${courseNum}`, {headers: headers})
-      .map(res => res.json());
+  getCorepondingGroupNums(courseNum: any) {
+    return this.http.get<any>(`VHS/get/unique/corresponding/groupNums/${courseNum}`);
   }
 }

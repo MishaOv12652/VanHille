@@ -1,19 +1,16 @@
 <div *ngIf="!showFinish" class="row">
-  <!-- <app-timer></app-timer> -->
-  <h2 class=" header">שאלה מס' {{qnumber}}</h2>
+  <h2 class="header">שאלה מס' {{qnumber}}</h2>
   <div class="card pull-left" dir="rtl" style="background-color: white">
     <div class="card-header">
       <h4>זמן שנותר לסיום</h4>
     </div>
     <div class="card-body text-center">
-      <countdown [config]="counterConfig" (finished)="calcUser(false)"></countdown>
+      <countdown [config]="counterConfig" (event)="handleCountdownEvent($event)"></countdown>
     </div>
   </div>
 </div>
 <div *ngIf="!showFinish" class="margin">
-
   <div class="row" dir="rtl">
-
     <div>
       <div class="row">
         <div class="col-md-4">
@@ -25,21 +22,10 @@
       </div>
     </div>
   </div>
-
-  <!--<div *ngIf="!showFinish" class="col-md-12 pull-right col-md-offset-3">-->
-    <!--<ul>-->
-      <!--<li *ngFor="let answer of Answers" dir="rtl">-->
-        <!--<label for={{answer.num}} dir="rtl">-->
-            <!---->
-        <!--</label>-->
-        <!--<input id={{answer.num}} type="radio" class="radio" [(ngModel)]=radiogroup name="radiogroup">-->
-      <!--</li>-->
-    <!--</ul>-->
-  <!--</div>-->
   <div *ngIf="!showFinish" class="col-md-12 pull-right col-md-offset-3">
     <section *ngFor="let answer of Answers" dir="rtl">
-      <input id={{answer.num}} type="radio" class="radio" [(ngModel)]=radiogroup name="radiogroup" value={{answer.num}} (checked)="radiogroup == answer.num">
-      <label for={{answer.num}} dir="rtl">
+      <input id="{{answer.num}}" type="radio" class="radio" [(ngModel)]="radiogroup" name="radiogroup" value="{{answer.num}}">
+      <label for="{{answer.num}}" dir="rtl">
         {{answer.ans}}
       </label>
     </section>
@@ -49,7 +35,6 @@
     <button id="back" type="button" class="btn btn-danger" (click)="backQuestion()">שאלה קודמת</button>
     <button *ngIf="finish" id="finish" type="button" class="btn btn-danger" (click)="calcUser(true)">סיים שאלון</button>
   </div>
-
 </div>
 <div *ngIf="showFinish" class="col-md-7 margin" style="color: white" dir="rtl">
   <h2>סיימת את השאלון, בהצלחה!</h2>

@@ -1,19 +1,18 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import { Cell, DefaultEditor, Editor } from 'ng2-smart-table';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { DefaultEditor } from 'ng2-smart-table';
+
 @Component({
   selector: 'app-custom-editor',
   templateUrl: './custom-editor.component.html',
-  styleUrls: ['./custom-editor.component.css']
+  styleUrls: ['./custom-editor.component.css'],
+  standalone: false
 })
 export class CustomEditorComponent extends DefaultEditor implements AfterViewInit {
   @ViewChild('name') name: ElementRef;
   @ViewChild('url') url: ElementRef;
   @ViewChild('htmlValue') htmlValue: ElementRef;
 
-  constructor() {  super();}
-
-  ngOnInit() {
-  }
+  constructor() { super(); }
 
   ngAfterViewInit() {
     if (this.cell.newValue !== '') {

@@ -2,10 +2,11 @@
   <h3 class="header">תוצאות נוכחיות</h3>
 </div>
 <div style="display: block;background-color: white">
-  <canvas baseChart [colors]="radarColors" [datasets]="radarChartData" [labels]="radarChartLabels"
-          [options]="radarChartOptions"
-          [chartType]="radarChartType" (chartHover)="chartHovered($event)"
-          (chartClick)="chartClicked($event)"></canvas>
+  <canvas baseChart
+          [type]="radarChartType"
+          [data]="radarChartData"
+          [options]="radarChartOptions">
+  </canvas>
 </div>
 <div class="button-group" style="margin-top: 5px">
   <div style="margin-top:5px">
