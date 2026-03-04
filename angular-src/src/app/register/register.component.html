@@ -16,11 +16,12 @@
   </div>
   <div class="form-group col-md-10 col-md-pull-0" dir="rtl">
     <label for="">תפקיד</label>
-    <select name="role" [(ngModel)]="role" class="form-control">
+    <select name="role" [(ngModel)]="role" class="form-control" [disabled]="roleLocked">
       <option value="student">סטודנט</option>
       <option value="educator">מחנך/ת</option>
       <option value="admin">מנהל</option>
     </select>
+    <small *ngIf="roleLocked" style="color:#aaa">התפקיד נקבע על ידי ההזמנה</small>
   </div>
   <div class="form-group col-md-10 col-md-pull-0">
     <button type="submit" class="btn btn-primary btn-lg">הרשם</button>

@@ -9,6 +9,8 @@ import { StudentsModule } from './students/students.module';
 import { QuizModule } from './quiz/quiz.module';
 import { CloudlinksModule } from './cloudlinks/cloudlinks.module';
 import { LiteratureModule } from './literature/literature.module';
+import { GroupsModule } from './groups/groups.module';
+import { InvitesModule } from './invites/invites.module';
 
 @Module({
   imports: [
@@ -28,6 +30,8 @@ import { LiteratureModule } from './literature/literature.module';
     QuizModule,
     CloudlinksModule,
     LiteratureModule,
+    GroupsModule,
+    InvitesModule,
   ],
 })
 export class AppModule {}

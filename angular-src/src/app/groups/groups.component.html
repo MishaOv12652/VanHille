@@ -1,0 +1,90 @@
+<div class="jumbotron text-center margin" dir="rtl">
+  <h2 style="text-decoration: underline">ניהול קבוצות</h2>
+
+  <!-- Groups list -->
+  <div *ngIf="groups.length === 0" style="color:#888;margin:20px 0">אין קבוצות עדיין</div>
+
+  <div *ngFor="let group of groups" class="panel panel-default" style="text-align:right">
+    <div class="panel-heading">
+      <strong>{{group.name}}</strong>
+      <span class="pull-left">
+        <button class="btn btn-xs btn-info" style="margin-left:5px"
+                data-toggle="modal" data-target="#inviteModal"
+                (click)="openInviteModal(group)">הזמן בדוא"ל</button>
+        <button class="btn btn-xs btn-danger" (click)="deleteGroup(group._id)">מחק</button>
+      </span>
+    </div>
+    <div class="panel-body">
+      <span>מספר קורס: <strong>{{group.courseNum}}</strong></span> &nbsp;|&nbsp;
+      <span>מספר קבוצה: <strong>{{group.groupNum}}</strong></span> &nbsp;|&nbsp;
+      <span>קוד הצטרפות: <strong style="font-size:18px;letter-spacing:2px">{{group.joinCode}}</strong></span>
+    </div>
+  </div>
+</div>
+
+<!-- Create group button -->
+<div class="btn-group col-md-offset-7">
+  <button class="btn btn-success" data-toggle="modal" data-target="#createGroupModal">צור קבוצה חדשה</button>
+</div>
+
+<!-- Create group modal -->
+<div class="modal fade" id="createGroupModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title text-center">יצירת קבוצה חדשה</h4>
+      </div>
+      <div class="modal-body" dir="rtl">
+        <form>
+          <div class="form-group">
+            <label>שם קבוצה</label>
+            <input type="text" class="form-control" [(ngModel)]="newGroup.name" name="name" placeholder="לדוגמה: קבוצה א 2024">
+          </div>
+          <div class="form-group">
+            <label>מספר קורס</label>
+            <input type="number" class="form-control" [(ngModel)]="newGroup.courseNum" name="courseNum">
+          </div>
+          <div class="form-group">
+            <label>מספר קבוצה</label>
+            <input type="number" class="form-control" [(ngModel)]="newGroup.groupNum" name="groupNum">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="createGroup()">צור</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Invite modal -->
+<div class="modal fade" id="inviteModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title text-center">הזמנה לקבוצה — {{activeGroupName}}</h4>
+      </div>
+      <div class="modal-body" dir="rtl">
+        <form>
+          <div class="form-group">
+            <label>כתובת אימייל</label>
+            <input type="email" class="form-control" [(ngModel)]="inviteEmail" name="inviteEmail" placeholder="example@email.com">
+          </div>
+          <div class="form-group" *ngIf="authService.hasRole('admin')">
+            <label>תפקיד</label>
+            <select class="form-control" [(ngModel)]="inviteRole" name="inviteRole">
+              <option value="student">סטודנט</option>
+              <option value="educator">מחנך/ת</option>
+              <option value="admin">מנהל</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="sendInvite()">שלח הזמנה</button>
+      </div>
+    </div>
+  </div>
+</div>

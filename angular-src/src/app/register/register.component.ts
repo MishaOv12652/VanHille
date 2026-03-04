@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { SiteRegisterServiceService } from '../services/site-register-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
+import { InvitesService } from '../services/invites.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -10,7 +12,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
   standalone: true,
-  imports: [FormsModule]
+  imports: [CommonModule, FormsModule]
 })
 export class RegisterComponent implements OnInit {
   email: string = '';
@@ -18,14 +20,30 @@ export class RegisterComponent implements OnInit {
   password: string = '';
   role: string = 'student';
 
+  // Set when arriving from invite/join code flow
+  inviteToken: string = '';
+  roleLocked: boolean = false;
+
   constructor(
     private siteRegServ: SiteRegisterServiceService,
     private toastr: ToastrService,
     private auth: AuthService,
-    private router: Router
+    private invitesService: InvitesService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    const token = this.route.snapshot.queryParamMap.get('token');
+    const role = this.route.snapshot.queryParamMap.get('role');
+    if (role) {
+      this.role = role;
+      this.roleLocked = true;
+    }
+    if (token) {
+      this.inviteToken = token;
+    }
+  }
 
   register() {
     const SiteUser = { email: this.email, username: this.username, password: this.password, role: this.role };
@@ -41,6 +59,9 @@ export class RegisterComponent implements OnInit {
 
     this.auth.registerSiteUser(SiteUser).subscribe(data => {
       if (data.success) {
+        if (this.inviteToken) {
+          this.invitesService.markUsed(this.inviteToken).subscribe();
+        }
         this.toastr.success('נרשמתה בהצלחה');
         this.router.navigate(['/login']);
       } else {

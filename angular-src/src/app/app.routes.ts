@@ -33,6 +33,16 @@ export const routes: Routes = [
     loadComponent: () => import('./vanhillequiz/report/class-report/class-report.component').then(m => m.ClassReportComponent)
   },
   {
+    path: 'groups',
+    canActivate: [roleGuard],
+    data: { roles: ['educator', 'admin'] },
+    loadComponent: () => import('./groups/groups.component').then(m => m.GroupsComponent)
+  },
+  {
+    path: 'join',
+    loadComponent: () => import('./join/join.component').then(m => m.JoinComponent)
+  },
+  {
     path: 'register',
     loadComponent: () => import('./register/register.component').then(m => m.RegisterComponent)
   },

@@ -27,6 +27,9 @@
         <li>
           <a [routerLink]="['literature']">ספרות</a>
         </li>
+        <li *ngIf="auth.hasRole('educator','admin')">
+          <a [routerLink]="['groups']">ניהול קבוצות</a>
+        </li>
         <li *ngIf="auth.hasRole('student')">
           <a href="javascript:;" data-toggle="collapse" data-target="#demo">כלים פדגוגיים</a>
           <ul id="demo" class="collapse">

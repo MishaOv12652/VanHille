@@ -1,0 +1,44 @@
+<div class="jumbotron text-center margin" dir="rtl">
+
+  <!-- Loading -->
+  <div *ngIf="state === 'loading'">
+    <p>טוען פרטי הזמנה...</p>
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="state === 'error'">
+    <h3 style="color:#d9534f">הזמנה לא תקינה</h3>
+    <p>{{errorMsg}}</p>
+    <a [routerLink]="['/join']" class="btn btn-default">הזן קוד הצטרפות</a>
+  </div>
+
+  <!-- Join code entry -->
+  <div *ngIf="state === 'code-entry'">
+    <h2>הצטרפות לקבוצה</h2>
+    <p>הזן את קוד ההצטרפות שקיבלת מהמרצה</p>
+    <div class="form-group col-md-6 col-md-offset-3">
+      <input type="text" class="form-control text-center"
+             [(ngModel)]="joinCode"
+             placeholder="לדוגמה: ABC123"
+             style="font-size:24px;letter-spacing:4px;text-transform:uppercase">
+    </div>
+    <br><br>
+    <button class="btn btn-primary btn-lg" (click)="submitCode()">בדוק קוד</button>
+  </div>
+
+  <!-- Group info — ready to register -->
+  <div *ngIf="state === 'info'">
+    <h2>הצטרפות לקבוצה</h2>
+    <div class="panel panel-info col-md-6 col-md-offset-3">
+      <div class="panel-heading"><strong>{{groupName}}</strong></div>
+      <div class="panel-body text-right">
+        <p>מספר קורס: <strong>{{courseNum}}</strong></p>
+        <p>מספר קבוצה: <strong>{{groupNum}}</strong></p>
+        <p>תפקיד: <strong>{{role === 'student' ? 'סטודנט' : role === 'educator' ? 'מחנך/ת' : 'מנהל'}}</strong></p>
+      </div>
+    </div>
+    <br>
+    <button class="btn btn-success btn-lg" (click)="proceedToRegister()">המשך להרשמה</button>
+  </div>
+
+</div>
