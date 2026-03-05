@@ -52,4 +52,23 @@ export class GroupsService {
   async findById(id: string): Promise<GroupDocument | null> {
     return this.groupModel.findById(id);
   }
+
+  async toggleUnlock(
+    id: string,
+    userId: string,
+    role: string,
+  ): Promise<GroupDocument | null> {
+    const group = await this.groupModel.findById(id);
+    if (!group) return null;
+    if (role !== 'admin' && group.educatorId !== userId) return null;
+    group.attempt2Locked = !group.attempt2Locked;
+    return group.save();
+  }
+
+  async findByCourseAndGroup(
+    courseNum: number,
+    groupNum: number,
+  ): Promise<GroupDocument | null> {
+    return this.groupModel.findOne({ courseNum, groupNum });
+  }
 }

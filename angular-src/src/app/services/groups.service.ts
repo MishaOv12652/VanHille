@@ -16,4 +16,12 @@ export class GroupsService {
   deleteGroup(id: string) {
     return this.http.delete<any>('Groups/' + id);
   }
+
+  toggleUnlock(id: string) {
+    return this.http.patch<any>('Groups/' + id + '/unlock', {});
+  }
+
+  checkLockStatus(courseNum: number, groupNum: number) {
+    return this.http.get<any>(`Groups/lock-status?courseNum=${courseNum}&groupNum=${groupNum}`);
+  }
 }

@@ -68,6 +68,17 @@ export class GroupsComponent implements OnInit {
     });
   }
 
+  toggleUnlock(group: any) {
+    this.groupsService.toggleUnlock(group._id).subscribe(res => {
+      if (!res.success) this.toastr.error(res.msg);
+      else {
+        group.attempt2Locked = res.attempt2Locked;
+        const msg = res.attempt2Locked ? 'ניסיון 2 נעול' : 'ניסיון 2 נפתח';
+        this.toastr.success(msg);
+      }
+    });
+  }
+
   openInviteModal(group: any) {
     this.activeGroupId = group._id;
     this.activeGroupName = group.name;

@@ -11,13 +11,24 @@
         <button class="btn btn-xs btn-info" style="margin-left:5px"
                 data-toggle="modal" data-target="#inviteModal"
                 (click)="openInviteModal(group)">הזמן בדוא"ל</button>
+        <button class="btn btn-xs" style="margin-left:5px"
+                [class.btn-success]="group.attempt2Locked"
+                [class.btn-warning]="!group.attempt2Locked"
+                (click)="toggleUnlock(group)">
+          {{ group.attempt2Locked ? 'פתח ניסיון 2' : 'נעל ניסיון 2' }}
+        </button>
         <button class="btn btn-xs btn-danger" (click)="deleteGroup(group._id)">מחק</button>
       </span>
     </div>
     <div class="panel-body">
       <span>מספר קורס: <strong>{{group.courseNum}}</strong></span> &nbsp;|&nbsp;
       <span>מספר קבוצה: <strong>{{group.groupNum}}</strong></span> &nbsp;|&nbsp;
-      <span>קוד הצטרפות: <strong style="font-size:18px;letter-spacing:2px">{{group.joinCode}}</strong></span>
+      <span>קוד הצטרפות: <strong style="font-size:18px;letter-spacing:2px">{{group.joinCode}}</strong></span> &nbsp;|&nbsp;
+      <span>ניסיון 2:
+        <strong [style.color]="group.attempt2Locked ? 'red' : 'green'">
+          {{ group.attempt2Locked ? 'נעול' : 'פתוח' }}
+        </strong>
+      </span>
     </div>
   </div>
 </div>

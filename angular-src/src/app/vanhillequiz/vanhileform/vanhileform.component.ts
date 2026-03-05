@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { VanhileformService } from '../../services/vanhileform.service';
+import { GroupsService } from '../../services/groups.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
 
@@ -18,6 +19,7 @@ export class VanhileformComponent implements OnInit {
 
   constructor(
     private vanhileformservice: VanhileformService,
+    private groupsService: GroupsService,
     private toastr: ToastrService
   ) {}
 
@@ -66,14 +68,20 @@ export class VanhileformComponent implements OnInit {
           });
         } else {
           if (data.user[0].Answers1.length == 25 && data.user[0].Answers2.length == 0) {
-            this.vanhileformservice.updateGroupNumOfStudent(user.ID, user.groupNum).subscribe(data => {
-              if (data.success) {
-                localStorage.setItem('User', user.ID.toString());
-                localStorage.setItem('tryNum', '2');
-                this.showvnahileform.emit(false);
-              } else {
-                this.toastr.error(data.msg);
+            this.groupsService.checkLockStatus(user.courseNum, user.groupNum).subscribe(lockRes => {
+              if (lockRes.attempt2Locked) {
+                this.toastr.error('ניסיון 2 נעול על ידי המרצה. אנא פנה למרצה לפתיחתו.');
+                return;
               }
+              this.vanhileformservice.updateGroupNumOfStudent(user.ID, user.groupNum).subscribe(data => {
+                if (data.success) {
+                  localStorage.setItem('User', user.ID.toString());
+                  localStorage.setItem('tryNum', '2');
+                  this.showvnahileform.emit(false);
+                } else {
+                  this.toastr.error(data.msg);
+                }
+              });
             });
           } else if (data.user[0].Answers2.length > 0 && data.user[0].Answers2.length < 25 && data.user[0].correctAperdif2.length == 0) {
             this.toastr.error('היית באמצע השאלון (ניסיון 2) ויצאת, השאלון יתחיל מהתחלה!', '', { timeOut: 5000 });
