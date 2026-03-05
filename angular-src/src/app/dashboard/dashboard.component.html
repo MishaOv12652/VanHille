@@ -1,3 +1,79 @@
-<p>
-  dashboard works!
-</p>
+<div class="jumbotron text-center margin" dir="rtl">
+  <h2 style="text-decoration: underline">לוח בקרה — תוצאות שאלון ואן הילה</h2>
+
+  <!-- No ID in localStorage — prompt entry -->
+  <div *ngIf="!studentId" style="margin:30px auto;max-width:400px">
+    <p style="color:#888">לא נמצאו נתונים שמורים. אנא הכנס את מספר הת.ז שלך:</p>
+    <div class="input-group">
+      <input type="text" class="form-control" [(ngModel)]="inputId" placeholder="מספר ת.ז" (keyup.enter)="lookup()">
+      <span class="input-group-btn">
+        <button class="btn btn-primary" (click)="lookup()">חפש</button>
+      </span>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" style="margin:30px 0;color:#888">טוען נתונים...</div>
+
+  <!-- Not found -->
+  <div *ngIf="notFound && !loading" class="alert alert-warning" style="max-width:500px;margin:30px auto">
+    לא נמצאו תוצאות עבור ת.ז {{ studentId }}. ודא שביצעת את השאלון.
+  </div>
+
+  <!-- Results -->
+  <div *ngIf="student && !loading">
+    <p style="color:#888;margin-bottom:20px">
+      ת.ז: <strong>{{ student.ID }}</strong> &nbsp;|&nbsp;
+      קורס: <strong>{{ student.courseNum }}</strong> &nbsp;|&nbsp;
+      קבוצה: <strong>{{ student.groupNum }}</strong>
+    </p>
+
+    <!-- Attempt 1 -->
+    <div *ngIf="hasAttempt1" class="panel panel-default" style="max-width:600px;margin:20px auto">
+      <div class="panel-heading">
+        <h4 style="margin:0">ניסיון 1 — ציון כולל: {{ totalScore(student.correctAperdif1) }}/25</h4>
+      </div>
+      <div class="panel-body">
+        <canvas baseChart
+          [data]="attempt1Chart"
+          [type]="chartType"
+          [options]="chartOptions">
+        </canvas>
+      </div>
+      <div class="panel-footer text-right">
+        <span *ngFor="let score of student.correctAperdif1; let i = index" style="margin-left:15px">
+          רמה {{ i + 1 }}: <strong>{{ score }}/5</strong>
+        </span>
+      </div>
+    </div>
+
+    <!-- Attempt 2 -->
+    <div *ngIf="hasAttempt2" class="panel panel-default" style="max-width:600px;margin:20px auto">
+      <div class="panel-heading">
+        <h4 style="margin:0">ניסיון 2 — ציון כולל: {{ totalScore(student.correctAperdif2) }}/25</h4>
+      </div>
+      <div class="panel-body">
+        <canvas baseChart
+          [data]="attempt2Chart"
+          [type]="chartType"
+          [options]="chartOptions">
+        </canvas>
+      </div>
+      <div class="panel-footer text-right">
+        <span *ngFor="let score of student.correctAperdif2; let i = index" style="margin-left:15px">
+          רמה {{ i + 1 }}: <strong>{{ score }}/5</strong>
+        </span>
+      </div>
+    </div>
+
+    <!-- Attempt 1 done but attempt 2 not yet -->
+    <div *ngIf="hasAttempt1 && !hasAttempt2" class="alert alert-info" style="max-width:500px;margin:20px auto">
+      ניסיון 2 טרם בוצע. לאחר שהמרצה יפתח את הניסיון תוכל לגשת אליו.
+    </div>
+
+    <!-- No attempts done at all (student registered but no results yet) -->
+    <div *ngIf="!hasAttempt1" class="alert alert-info" style="max-width:500px;margin:20px auto">
+      עדיין לא בוצע שאלון עבור ת.ז זה.
+    </div>
+  </div>
+</div>

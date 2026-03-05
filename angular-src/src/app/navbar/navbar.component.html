@@ -14,8 +14,8 @@
         <li *ngIf="auth.loggedIn()">
           <a [routerLink]="['profile']">פרופיל</a>
         </li>
-        <li *ngIf="auth.loggedIn()">
-          <a [routerLink]="['dashboard']">לוח עבודה</a>
+        <li *ngIf="auth.hasRole('student')">
+          <a [routerLink]="['dashboard']">לוח בקרה</a>
         </li>
       </ul>
     </div>
