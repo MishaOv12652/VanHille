@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { AuthService } from '../services/auth.service';
 import { LiteratureService } from '../services/literature.service';
 import { ToastrService } from 'ngx-toastr';
@@ -11,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './literature.component.html',
   styleUrls: ['./literature.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule, Ng2SmartTableModule]
+  imports: [CommonModule, FormsModule]
 })
 export class LiteratureComponent implements OnInit {
   allEntries: any[] = [];
@@ -63,7 +62,7 @@ export class LiteratureComponent implements OnInit {
       } else {
         this.allEntries = res.entries.map((e: any) => ({
           ...e,
-          url: `<a href='${e.url}' target='_blank'>${e.title}</a>`,
+          rawUrl: e.url,
           categoryLabel: e.category === 'research' ? 'ספרות מחקרית' : 'ספרות לימודית'
         }));
         this.applyFilter();
@@ -100,21 +99,16 @@ export class LiteratureComponent implements OnInit {
     });
   }
 
-  onDeleteConfirm(event: any) {
+  confirmDelete(entry: any) {
     if (window.confirm('האם אתה בטוח שברצונך למחוק?')) {
-      const id = event.data._id;
-      this.literatureService.deleteEntry(id).subscribe(res => {
+      this.literatureService.deleteEntry(entry._id).subscribe(res => {
         if (res.success) {
           this.toastr.success('הרשומה נמחקה בהצלחה');
-          event.confirm.resolve();
           this.loadEntries();
         } else {
           this.toastr.error(res.msg);
-          event.confirm.reject();
         }
       });
-    } else {
-      event.confirm.reject();
     }
   }
 }

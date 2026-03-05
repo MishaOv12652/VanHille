@@ -1,14 +1,63 @@
 <div id="tbls" class="jumbotron text-center margin">
   <h2 dir="rtl" style="text-decoration: underline">קישורים לענן</h2>
-  <div *ngIf="tables_array != undefined">
-    <div *ngFor="let table of tables_array;let i = index">
+  <div *ngIf="tables_array && tables_array.length > 0">
+    <div *ngFor="let table of tables_array">
       <h3 style="text-decoration: underline">{{table.tableId}}</h3>
-      <ng2-smart-table [settings]="table.settings_obj" [source]="table.data"
-                       (createConfirm)="onCreateConfirm($event,tables_array[i])"
-                       (editConfirm)="onEditConfirm($event,tables_array[i])"
-                       (deleteConfirm)="onDeleteConfirm($event,tables_array[i])"
-                       style="font-size: 15px"></ng2-smart-table>
+      <table class="table" style="font-size: 15px;">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Link</th>
+            <th *ngIf="auth_service.hasRole('educator','admin')">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let entry of table.data">
+            <ng-container *ngIf="editingEntry && editingEntry.id === entry.id && editTableId === table.tableId; else viewRow">
+              <td><input class="form-control" [(ngModel)]="editingEntry.id" name="editId"></td>
+              <td><input class="form-control" [(ngModel)]="editingEntry.name" name="editName"></td>
+              <td><input class="form-control" [(ngModel)]="editingEntry.desc" name="editDesc"></td>
+              <td><input class="form-control" [(ngModel)]="editingEntry.url" name="editUrl"></td>
+              <td *ngIf="auth_service.hasRole('educator','admin')">
+                <button class="btn btn-success btn-sm" (click)="confirmEdit(table)">Save</button>
+                <button class="btn btn-default btn-sm" (click)="editingEntry = null">Cancel</button>
+              </td>
+            </ng-container>
+            <ng-template #viewRow>
+              <td>{{entry.id}}</td>
+              <td>{{entry.name}}</td>
+              <td>{{entry.desc}}</td>
+              <td><a [href]="entry.url" target="_blank">{{entry.name}}</a></td>
+              <td *ngIf="auth_service.hasRole('educator','admin')">
+                <button class="btn btn-primary btn-sm" (click)="startEdit(entry, table.tableId)">Edit</button>
+                <button class="btn btn-danger btn-sm" (click)="confirmDelete(table, entry)">Delete</button>
+              </td>
+            </ng-template>
+          </tr>
+          <tr *ngIf="addingToTableId === table.tableId">
+            <td><input class="form-control" [(ngModel)]="newEntry.id" name="newId" placeholder="ID"></td>
+            <td><input class="form-control" [(ngModel)]="newEntry.name" name="newName" placeholder="Name"></td>
+            <td><input class="form-control" [(ngModel)]="newEntry.desc" name="newDesc" placeholder="Description"></td>
+            <td><input class="form-control" [(ngModel)]="newEntry.url" name="newUrl" placeholder="URL"></td>
+            <td *ngIf="auth_service.hasRole('educator','admin')">
+              <button class="btn btn-success btn-sm" (click)="confirmAdd(table)">Add</button>
+              <button class="btn btn-default btn-sm" (click)="addingToTableId = ''">Cancel</button>
+            </td>
+          </tr>
+          <tr *ngIf="!table.data || table.data.length === 0">
+            <td colspan="5" class="text-center">No entries</td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="auth_service.hasRole('educator','admin')" style="margin-bottom: 10px;">
+        <button class="btn btn-info btn-sm" (click)="startAdd(table.tableId)">Add Entry</button>
+      </div>
     </div>
+  </div>
+  <div *ngIf="!tables_array || tables_array.length === 0">
+    <p>No tables found.</p>
   </div>
 </div>
 <div class="btn-group col-md-offset-7" *ngIf="auth_service.hasRole('educator','admin')">

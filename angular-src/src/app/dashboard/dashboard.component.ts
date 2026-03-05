@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { BaseChartDirective } from 'ng2-charts';
+import { NgChartsModule } from 'ng2-charts';
 import { ChartData, ChartOptions } from 'chart.js';
 import { VanhilereportService } from '../services/vanhilereport.service';
 import { ToastrService } from 'ngx-toastr';
@@ -20,7 +20,7 @@ const BAR_COLORS = [
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule, BaseChartDirective]
+  imports: [CommonModule, FormsModule, NgChartsModule]
 })
 export class DashboardComponent implements OnInit {
   studentId: string = '';

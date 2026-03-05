@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BaseChartDirective } from 'ng2-charts';
+import { NgChartsModule } from 'ng2-charts';
 import { ChartData, ChartOptions } from 'chart.js';
 
 @Component({
@@ -8,7 +8,7 @@ import { ChartData, ChartOptions } from 'chart.js';
   templateUrl: './radar-view.component.html',
   styleUrls: ['./radar-view.component.css'],
   standalone: true,
-  imports: [CommonModule, BaseChartDirective]
+  imports: [CommonModule, NgChartsModule]
 })
 export class RadarViewComponent implements OnInit {
   radarChartType = 'radar' as const;

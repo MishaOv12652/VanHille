@@ -12,12 +12,31 @@
   </div>
 
   <!-- Table -->
-  <ng2-smart-table
-    [settings]="auth_service.hasRole('educator','admin') ? tableSettingsAdmin : tableSettings"
-    [source]="filteredEntries"
-    (deleteConfirm)="onDeleteConfirm($event)"
-    style="font-size: 15px">
-  </ng2-smart-table>
+  <table class="table" style="font-size: 15px;" dir="rtl">
+    <thead>
+      <tr>
+        <th>כותרת</th>
+        <th>תיאור</th>
+        <th>קישור</th>
+        <th>קטגוריה</th>
+        <th *ngIf="auth_service.hasRole('educator','admin')">פעולות</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let entry of filteredEntries">
+        <td>{{entry.title}}</td>
+        <td>{{entry.desc}}</td>
+        <td><a [href]="entry.rawUrl" target="_blank">{{entry.title}}</a></td>
+        <td>{{entry.categoryLabel}}</td>
+        <td *ngIf="auth_service.hasRole('educator','admin')">
+          <button class="btn btn-danger btn-sm" (click)="confirmDelete(entry)">מחק</button>
+        </td>
+      </tr>
+      <tr *ngIf="filteredEntries.length === 0">
+        <td colspan="5" class="text-center">אין רשומות להצגה</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 <!-- Add entry button (educator/admin only) -->

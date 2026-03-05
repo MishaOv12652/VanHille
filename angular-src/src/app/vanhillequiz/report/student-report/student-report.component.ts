@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { BaseChartDirective } from 'ng2-charts';
+import { NgChartsModule } from 'ng2-charts';
 import { ChartData, ChartOptions } from 'chart.js';
 import { VanhilereportService } from '../../../services/vanhilereport.service';
 import { ToastrService } from 'ngx-toastr';
@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './student-report.component.html',
   styleUrls: ['./student-report.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule, BaseChartDirective]
+  imports: [CommonModule, FormsModule, NgChartsModule]
 })
 export class StudentReportComponent implements OnInit {
   Options: any[] = [];
