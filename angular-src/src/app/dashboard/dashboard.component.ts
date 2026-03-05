@@ -104,4 +104,25 @@ export class DashboardComponent implements OnInit {
   totalScore(arr: number[]): number {
     return arr?.reduce((a, b) => a + b, 0) ?? 0;
   }
+
+  exportCSV() {
+    if (!this.student) return;
+    const s = this.student;
+    const a1 = s.correctAperdif1?.length ? s.correctAperdif1 : [0,0,0,0,0];
+    const a2 = s.correctAperdif2?.length ? s.correctAperdif2 : [0,0,0,0,0];
+    const t1 = a1.reduce((x: number, y: number) => x + y, 0);
+    const t2 = a2.reduce((x: number, y: number) => x + y, 0);
+    const header = 'ת.ז,קורס,קבוצה,ניסיון1-רמה1,ניסיון1-רמה2,ניסיון1-רמה3,ניסיון1-רמה4,ניסיון1-רמה5,סה"כ1,ניסיון2-רמה1,ניסיון2-רמה2,ניסיון2-רמה3,ניסיון2-רמה4,ניסיון2-רמה5,סה"כ2';
+    const row = `${s.ID},${s.courseNum},${s.groupNum},${a1.join(',')},${t1},${a2.join(',')},${t2}`;
+    const bom = '\uFEFF';
+    const blob = new Blob([bom + header + '\n' + row], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = `student_${s.ID}.csv`; a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  printReport() {
+    window.print();
+  }
 }

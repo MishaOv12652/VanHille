@@ -45,4 +45,8 @@ export class VanhilereportService {
   getCorepondingGroupNums(courseNum: any) {
     return this.http.get<any>(`VHS/get/unique/corresponding/groupNums/${courseNum}`);
   }
+
+  getStudentsByGroup(courseNum: any, groupNum: any) {
+    return this.http.get<any>(`VHS/${courseNum}/${groupNum}`);
+  }
 }

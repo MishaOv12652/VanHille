@@ -35,4 +35,11 @@
   </div>
   <button type="button" class="btn btn-success btn-block" (click)="calcAll()">חשב נתונים כללים</button>
   <button type="button" class="btn btn-danger  btn-block" (click)="clearRadar()">נקה גרף</button>
+  <hr class="no-print">
+  <button type="button" class="btn btn-default btn-block no-print" (click)="exportCSV()">
+    ייצוא CSV — כל הסטודנטים בקבוצה
+  </button>
+  <button type="button" class="btn btn-default btn-block no-print" (click)="printReport()">
+    הדפסה / שמור PDF
+  </button>
 </div>

@@ -5,3 +5,17 @@
 .header {
   color: white;
 }
+
+@media print {
+  .no-print,
+  nav,
+  #wrapper {
+    display: none !important;
+  }
+  .margin {
+    margin-top: 0;
+  }
+  body {
+    background: white;
+  }
+}
