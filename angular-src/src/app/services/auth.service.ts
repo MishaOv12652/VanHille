@@ -28,8 +28,14 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+  private rawToken(): string | null {
+    const t = this.getToken();
+    if (!t) return null;
+    return t.startsWith('JWT ') ? t.slice(4) : t;
+  }
+
   getRole(): string | null {
-    const token = this.getToken();
+    const token = this.rawToken();
     if (!token) return null;
     try {
       const decoded: any = jwtDecode(token);
@@ -45,7 +51,7 @@ export class AuthService {
   }
 
   loggedIn(): boolean {
-    const token = this.getToken();
+    const token = this.rawToken();
     if (!token) return false;
     try {
       const decoded: any = jwtDecode(token);
