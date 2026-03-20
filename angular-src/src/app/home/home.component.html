@@ -1,23 +1,63 @@
-<div class="jumbotron text-center margin">
-  <h1>מתמטיקה - למידה ומחקר</h1>
-  <p>ברוכים הבאים לאתר מתמטיקה - למידה ומחקר</p>
-  <p>לימינכם אופציות הקיימות</p>
-</div>
+<!-- ── Hero ──────────────────────────────────────────── -->
+<section class="hero" dir="rtl">
+  <div class="hero-grid" aria-hidden="true"></div>
 
-<div class="row home-features">
-  <div class="col-md-4">
-    <h3>כותרת 1</h3>
-    <p>Proident est excepteur esse non voluptate do anim est. Velit do amet laborum ea consequat nulla. Proident quis aliqua
-      laborum laboris elit enim consectetur nisi ad. Reprehenderit in proident eiusmod consequat et labore.</p>
+  <div class="hero-body">
+    <span class="hero-badge">פלטפורמה חינוכית</span>
+    <h1 class="hero-title">מתמטיקה</h1>
+    <p class="hero-subtitle">למידה ומחקר</p>
+    <p class="hero-desc">
+      פלטפורמה מתקדמת ללימוד מתמטיקה, הכוללת שאלון ואן הילה,
+      דו&quot;חות מפורטים וכלים פדגוגיים לסטודנטים ולמחנכים.
+    </p>
+    <div class="hero-actions">
+      <a [routerLink]="['login']"      class="btn hero-btn-primary">כניסה למערכת</a>
+      <a [routerLink]="['cloudlinks']" class="btn hero-btn-ghost">גלה עוד ←</a>
+    </div>
   </div>
-  <div class="col-md-4">
-    <h3>כותרת 2</h3>
-    <p>Proident est excepteur esse non voluptate do anim est. Velit do amet laborum ea consequat nulla. Proident quis aliqua
-      laborum laboris elit enim consectetur nisi ad. Reprehenderit in proident eiusmod consequat et labore.</p>
+
+  <div class="hero-deco" aria-hidden="true">∑</div>
+</section>
+
+<!-- ── Feature cards ─────────────────────────────────── -->
+<section class="features" dir="rtl">
+  <div class="row">
+
+    <div class="col-md-4">
+      <div class="feature-card">
+        <div class="feature-icon feature-icon--blue">Δ</div>
+        <h3 class="feature-title">שאלון ואן הילה</h3>
+        <p class="feature-text">
+          אבחון רמת ההבנה הגיאומטרית של הסטודנט באמצעות שאלון
+          ואן הילה המובנה, עם משוב מיידי ומעקב התקדמות.
+        </p>
+        <a [routerLink]="['vanhilequiz']" class="feature-link">למילוי השאלון ←</a>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="feature-card">
+        <div class="feature-icon feature-icon--teal">∫</div>
+        <h3 class="feature-title">דו&quot;חות מפורטים</h3>
+        <p class="feature-text">
+          צפייה בתוצאות על-פי שלבי ואן הילה, השוואה בין תקופות
+          ובין קבוצות, וייצוג גרפי ברור לתמיכה בהוראה ממוקדת.
+        </p>
+        <a [routerLink]="['vanhille/classreport']" class="feature-link">לדו&quot;חות ←</a>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="feature-card">
+        <div class="feature-icon feature-icon--purple">∞</div>
+        <h3 class="feature-title">ספרות וקישורים</h3>
+        <p class="feature-text">
+          גישה מרכזית למאמרים, ספרי לימוד וקישורים לענן
+          הרלוונטיים להוראת מתמטיקה ומחקר פדגוגי.
+        </p>
+        <a [routerLink]="['literature']" class="feature-link">לספרות ←</a>
+      </div>
+    </div>
+
   </div>
-  <div class="col-md-4">
-    <h3>כותרת 3</h3>
-    <p>Proident est excepteur esse non voluptate do anim est. Velit do amet laborum ea consequat nulla. Proident quis aliqua
-      laborum laboris elit enim consectetur nisi ad. Reprehenderit in proident eiusmod consequat et labore.</p>
-  </div>
-</div>
+</section>
