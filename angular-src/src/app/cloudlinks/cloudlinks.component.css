@@ -1,3 +1,120 @@
-.margin {
-  margin-top: var(--space-md, 16px);
+/* ── Page shell ── */
+.cl-page {
+  max-width: 1040px;
+  padding: 0 var(--space-md);
+}
+
+/* ── Page header ── */
+.cl-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+}
+
+.cl-page-title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-text);
+  text-decoration: underline;
+  margin: 0;
+}
+
+.cl-page-actions {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+/* ── Per-table section ── */
+.cl-section {
+  margin-bottom: var(--space-lg);
+  overflow: hidden;
+}
+
+.cl-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface-light);
+}
+
+.cl-section-title {
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  color: var(--color-text);
+  text-decoration: underline;
+  margin: 0;
+}
+
+/* ── Table ── */
+.cl-table {
+  margin-bottom: 0;
+  font-size: var(--font-size-base);
+}
+
+.cl-cell-id {
+  font-family: 'Courier New', monospace;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.cl-cell-name {
+  font-weight: 600;
+}
+
+.cl-cell-desc {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  max-width: 260px;
+}
+
+.cl-link {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.cl-link:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.cl-actions {
+  white-space: nowrap;
+}
+
+.cl-actions .btn + .btn {
+  margin-right: var(--space-xs);
+}
+
+/* Inline add row highlight */
+.cl-add-row > td {
+  background: rgba(79, 163, 224, 0.05);
+  border-top: 1px solid rgba(79, 163, 224, 0.2) !important;
+}
+
+/* Empty state */
+.cl-empty {
+  text-align: center;
+  color: var(--color-text-muted);
+  padding: var(--space-lg) 0 !important;
+  font-style: italic;
+}
+
+/* No tables at all */
+.cl-no-tables {
+  text-align: center;
+  padding: var(--space-xl) var(--space-lg);
+  color: var(--color-text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.cl-no-tables p {
+  margin: 0;
+  font-size: var(--font-size-md);
 }

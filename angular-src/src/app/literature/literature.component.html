@@ -1,57 +1,82 @@
-<div id="lit" class="jumbotron text-center margin">
-  <h2 dir="rtl" style="text-decoration: underline">ספרות</h2>
+<!-- ══════════════════════════════════════════════
+     LITERATURE PAGE
+     ══════════════════════════════════════════════ -->
+<div class="lit-page margin">
 
-  <!-- Filter buttons -->
-  <div class="btn-group" dir="rtl" style="margin-bottom: 20px;">
-    <button class="btn" [class.btn-primary]="activeFilter === 'all'" [class.btn-default]="activeFilter !== 'all'"
-            (click)="setFilter('all')">הכל</button>
-    <button class="btn" [class.btn-primary]="activeFilter === 'research'" [class.btn-default]="activeFilter !== 'research'"
-            (click)="setFilter('research')">ספרות מחקרית</button>
-    <button class="btn" [class.btn-primary]="activeFilter === 'educational'" [class.btn-default]="activeFilter !== 'educational'"
-            (click)="setFilter('educational')">ספרות לימודית</button>
+  <!-- ── Header row ── -->
+  <div class="lit-header" dir="rtl">
+    <h2 class="lit-title">ספרות</h2>
+    <button
+      *ngIf="auth_service.hasRole('educator','admin')"
+      class="btn btn-success btn-sm lit-add-btn"
+      data-toggle="modal"
+      data-target="#addLitEntryModal">
+      + הוסף רשומה
+    </button>
   </div>
 
-  <!-- Table -->
-  <table class="table" style="font-size: 15px;" dir="rtl">
-    <thead>
-      <tr>
-        <th>כותרת</th>
-        <th>תיאור</th>
-        <th>קישור</th>
-        <th>קטגוריה</th>
-        <th *ngIf="auth_service.hasRole('educator','admin')">פעולות</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let entry of filteredEntries">
-        <td>{{entry.title}}</td>
-        <td>{{entry.desc}}</td>
-        <td><a [href]="entry.rawUrl" target="_blank">{{entry.title}}</a></td>
-        <td>{{entry.categoryLabel}}</td>
-        <td *ngIf="auth_service.hasRole('educator','admin')">
-          <button class="btn btn-danger btn-sm" (click)="confirmDelete(entry)">מחק</button>
-        </td>
-      </tr>
-      <tr *ngIf="filteredEntries.length === 0">
-        <td colspan="5" class="text-center">אין רשומות להצגה</td>
-      </tr>
-    </tbody>
-  </table>
+  <!-- ── Filter tabs ── -->
+  <div class="lit-filters" dir="rtl">
+    <button class="lit-filter-btn" [class.active]="activeFilter === 'all'"         (click)="setFilter('all')">הכל</button>
+    <button class="lit-filter-btn" [class.active]="activeFilter === 'research'"    (click)="setFilter('research')">ספרות מחקרית</button>
+    <button class="lit-filter-btn" [class.active]="activeFilter === 'educational'" (click)="setFilter('educational')">ספרות לימודית</button>
+  </div>
+
+  <!-- ── Table card ── -->
+  <div class="card-dark lit-table-card">
+    <table class="table table-hover" dir="rtl">
+      <thead>
+        <tr>
+          <th>כותרת</th>
+          <th>תיאור</th>
+          <th>קישור</th>
+          <th>קטגוריה</th>
+          <th *ngIf="auth_service.hasRole('educator','admin')">פעולות</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let entry of filteredEntries">
+          <td class="lit-cell-title">{{ entry.title }}</td>
+          <td class="lit-cell-desc">{{ entry.desc }}</td>
+          <td><a [href]="entry.rawUrl" target="_blank" class="lit-link">{{ entry.title }}</a></td>
+          <td>
+            <span class="lit-badge" [class.lit-badge--research]="entry.category === 'research'">
+              {{ entry.categoryLabel }}
+            </span>
+          </td>
+          <td *ngIf="auth_service.hasRole('educator','admin')">
+            <button class="btn btn-danger btn-sm" (click)="confirmDelete(entry)">מחק</button>
+          </td>
+        </tr>
+
+        <!-- Empty state -->
+        <tr *ngIf="filteredEntries.length === 0">
+          <td [attr.colspan]="auth_service.hasRole('educator','admin') ? 5 : 4" class="lit-empty">
+            <div class="lit-empty-inner">
+              <span class="lit-empty-icon">📚</span>
+              <p>אין רשומות להצגה</p>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 </div>
 
-<!-- Add entry button (educator/admin only) -->
-<div class="btn-group col-md-offset-7" *ngIf="auth_service.hasRole('educator','admin')">
-  <button class="btn btn-success" data-toggle="modal" data-target="#addLitEntryModal">הוסף רשומה</button>
-</div>
 
-<!-- Add entry modal -->
+<!-- ══════════════════════════════════════════════
+     ADD ENTRY MODAL
+     ══════════════════════════════════════════════ -->
 <div class="modal fade" id="addLitEntryModal" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
+
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title text-center">הוספת רשומת ספרות</h4>
+        <h4 class="modal-title">הוספת רשומת ספרות</h4>
       </div>
+
       <div class="modal-body" dir="rtl">
         <form>
           <div class="form-group">
@@ -60,7 +85,7 @@
           </div>
           <div class="form-group">
             <label>תיאור</label>
-            <textarea class="form-control" [(ngModel)]="newEntry.desc" name="desc" placeholder="תיאור"></textarea>
+            <textarea class="form-control" [(ngModel)]="newEntry.desc" name="desc" placeholder="תיאור" rows="3"></textarea>
           </div>
           <div class="form-group">
             <label>קישור (Google Drive URL)</label>
@@ -75,9 +100,12 @@
           </div>
         </form>
       </div>
+
       <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">ביטול</button>
         <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addEntry()">הוסף</button>
       </div>
+
     </div>
   </div>
 </div>
