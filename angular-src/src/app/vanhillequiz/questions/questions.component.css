@@ -12,17 +12,17 @@ h3 {
   color: var(--color-text, white);
 }
 
+/* ── Answer option rows ── */
 section {
   clear: both;
-  margin: 0 80px;
+  margin: 0;
 }
 
 /* Answer option labels */
 label {
   width: 100%;
   border-radius: var(--radius-sm, 3px);
-  border: 1px solid #D1D3D4;
-  color: white;
+  border: 1px solid rgba(255,255,255,0.12);
 }
 
 /* Hide the native radio input */
@@ -37,11 +37,12 @@ input.radio:empty ~ label {
   font-size: 15px;
   line-height: 2.5em;
   text-indent: 1.25em;
-  margin-top: 1em;
+  margin-top: 8px;
   cursor: pointer;
   user-select: none;
-  background-color: var(--color-accent, #1a948e);
-  color: white;
+  background-color: var(--color-surface-light, #343450);
+  color: var(--color-text, white);
+  border-radius: var(--radius-sm, 4px);
 }
 
 /* Default left indicator strip */
@@ -61,26 +62,29 @@ input.radio:empty ~ label:before {
 input.radio:hover:not(:checked) ~ label:before {
   content: '\2714';
   text-indent: .9em;
-  color: #C2C2C2;
+  color: rgba(255,255,255,0.4);
 }
 
 input.radio:hover:not(:checked) ~ label {
-  color: #eee;
+  color: #fff;
+  background-color: var(--color-surface-light, #343450);
 }
 
 /* Checked state */
 input.radio:checked ~ label:before {
   content: '\2714';
   text-indent: .9em;
-  color: #9CE2AE;
+  color: #fff;
   background-color: var(--color-success, #4DCB6D);
 }
 
 input.radio:checked ~ label {
-  color: white;
+  color: #fff;
+  background-color: rgba(77, 203, 109, 0.15);
+  border-color: rgba(77, 203, 109, 0.35);
 }
 
 /* Focus ring */
 input.radio:focus ~ label:before {
-  box-shadow: 0 0 0 3px var(--color-primary, #4fa3e0);
+  box-shadow: 0 0 0 3px rgba(79, 163, 224, 0.4);
 }

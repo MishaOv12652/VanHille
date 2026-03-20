@@ -1,41 +1,55 @@
-<div *ngIf="!showFinish" class="row">
-  <h2 class="header">שאלה מס' {{qnumber}}</h2>
-  <div class="card pull-left" dir="rtl" style="background-color: white">
-    <div class="card-header">
-      <h4>זמן שנותר לסיום</h4>
+<!-- ── Quiz in progress ───────────────────────────────── -->
+<ng-container *ngIf="!showFinish">
+
+  <!-- Progress bar + timer -->
+  <div class="quiz-progress-header" dir="rtl">
+    <span class="quiz-progress-label">שאלה {{ qnumber }} מתוך 25</span>
+    <div class="quiz-progress-track">
+      <div class="quiz-progress-fill" [style.width.%]="(qnumber / 25) * 100"></div>
     </div>
-    <div class="card-body text-center">
-      <countdown [config]="counterConfig" (event)="handleCountdownEvent($event)"></countdown>
-    </div>
-  </div>
-</div>
-<div *ngIf="!showFinish" class="margin">
-  <div class="row" dir="rtl">
-    <div>
-      <div class="row">
-        <div class="col-md-4">
-          <img class="media-object" src="{{img}}">
-        </div>
-        <div class="col-md-7">
-          <h3 [innerHTML]="question"></h3>
-        </div>
-      </div>
+    <div class="quiz-timer-badge">
+      ⏱&nbsp;<countdown [config]="counterConfig" (event)="handleCountdownEvent($event)"></countdown>
     </div>
   </div>
-  <div *ngIf="!showFinish" class="col-md-12 pull-right col-md-offset-3">
-    <section *ngFor="let answer of Answers" dir="rtl">
-      <input id="{{answer.num}}" type="radio" class="radio" [(ngModel)]="radiogroup" name="radiogroup" value="{{answer.num}}">
-      <label for="{{answer.num}}" dir="rtl">
-        {{answer.ans}}
-      </label>
-    </section>
+
+  <!-- Question card -->
+  <div class="quiz-question-card" dir="rtl">
+
+    <!-- Question body: image + text -->
+    <div class="quiz-question-body">
+      <img *ngIf="img" class="quiz-question-img" [src]="img" alt="תמונה לשאלה">
+      <h3 class="quiz-question-text" [innerHTML]="question"></h3>
+    </div>
+
+    <!-- Answer options -->
+    <div class="quiz-answers">
+      <section *ngFor="let answer of Answers" dir="rtl">
+        <input
+          id="{{ answer.num }}"
+          type="radio"
+          class="radio"
+          [(ngModel)]="radiogroup"
+          name="radiogroup"
+          value="{{ answer.num }}"
+        >
+        <label for="{{ answer.num }}" dir="rtl">{{ answer.ans }}</label>
+      </section>
+    </div>
+
+    <!-- Navigation buttons -->
+    <div class="quiz-nav">
+      <button id="next" type="button" class="btn btn-primary"  (click)="saveAnswer()">שאלה הבאה ←</button>
+      <button id="back" type="button" class="btn btn-default"  (click)="backQuestion()">→ שאלה קודמת</button>
+      <button *ngIf="finish" id="finish" type="button" class="btn btn-success" (click)="calcUser(true)">סיים שאלון ✓</button>
+    </div>
+
   </div>
-  <div class="row col-md-8 pull-left">
-    <button id="next" type="button" class="btn btn-primary" (click)="saveAnswer()">שאלה הבאה</button>
-    <button id="back" type="button" class="btn btn-danger" (click)="backQuestion()">שאלה קודמת</button>
-    <button *ngIf="finish" id="finish" type="button" class="btn btn-danger" (click)="calcUser(true)">סיים שאלון</button>
-  </div>
-</div>
-<div *ngIf="showFinish" class="col-md-7 margin" style="color: white" dir="rtl">
-  <h2>סיימת את השאלון, בהצלחה!</h2>
+
+</ng-container>
+
+<!-- ── Finish screen ──────────────────────────────────── -->
+<div *ngIf="showFinish" class="quiz-finish-card" dir="rtl">
+  <div class="quiz-finish-icon">✓</div>
+  <h2 class="quiz-finish-title">סיימת את השאלון!</h2>
+  <p class="quiz-finish-sub">תשובותיך נשמרו בהצלחה. בהצלחה!</p>
 </div>

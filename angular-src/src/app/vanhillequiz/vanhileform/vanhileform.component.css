@@ -1,6 +1,4 @@
-.margin {
-  margin-top: var(--space-md, 16px);
-}
+/* vanhileform uses the shared .auth-card layout from styles.css */
 
 h2, label {
   color: var(--color-text, white);
