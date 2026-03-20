@@ -1,10 +1,10 @@
-.header{
-    text-decoration: underline;
-    text-align: center;
-    /* margin-right: 250px; */
-    margin-right: 150px;
-    color: white;
+.header {
+  text-decoration: underline;
+  text-align: center;
+  color: var(--color-text, white);
+  margin-bottom: var(--space-md, 16px);
 }
-h1,h2{
-    color: white;
+
+h1, h2 {
+  color: var(--color-text, white);
 }

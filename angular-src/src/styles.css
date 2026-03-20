@@ -1,21 +1,165 @@
-/* You can add global styles to this file, and also import other style files */
-.margin {
-  margin-top: 100px;
-}
-.header {
-  color: white;
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root {
+  /* --- Layout --- */
+  --sidebar-width: 215px;
+  --sidebar-gap:    25px;
+  --navbar-height:  51px;
+
+  /* --- Colour palette --- */
+  --color-bg:            #1e1e2e;
+  --color-sidebar-bg:    #16213e;
+  --color-sidebar-hover: #0f3460;
+  --color-sidebar-active:#4fa3e0;
+
+  --color-primary:       #4fa3e0;
+  --color-primary-hover: #357abd;
+  --color-accent:        #1a948e;
+  --color-success:       #4dcb6d;
+  --color-danger:        #d9534f;
+  --color-warning:       #f0ad4e;
+
+  --color-text:          #f0f4f8;
+  --color-text-muted:    #a0aec0;
+  --color-text-dark:     #2d3748;
+
+  --color-surface:       #2a2a3e;
+  --color-surface-light: #343450;
+  --color-border:        rgba(255, 255, 255, 0.08);
+
+  /* --- Typography --- */
+  --font-base: 'Segoe UI', 'Helvetica Neue', Tahoma, Arial, sans-serif;
+  --font-size-sm:   12px;
+  --font-size-base: 14px;
+  --font-size-md:   16px;
+  --font-size-lg:   20px;
+  --font-size-xl:   24px;
+  --line-height-base: 1.6;
+
+  /* --- Spacing --- */
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  40px;
+
+  /* --- Shape --- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+
+  /* --- Elevation --- */
+  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+
+  /* --- Motion --- */
+  --transition: 0.2s ease;
 }
 
+/* ============================================================
+   BASE RESET & GLOBALS
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   LAYOUT — centralised sidebar offset
+   On desktop the sidebar is fixed to the right (RTL layout).
+   Adding padding-right to the body means NO component needs
+   its own margin-right to avoid the sidebar.
+   ============================================================ */
+@media (min-width: 768px) {
+  body {
+    padding-right: calc(var(--sidebar-width) + var(--sidebar-gap));
+  }
+}
+
+/* ============================================================
+   SHARED UTILITIES
+   ============================================================ */
+
+/* Standard top spacing for page content (sits below fixed navbar) */
+.margin {
+  margin-top: var(--space-lg);
+}
+
+/* Page-level headings */
+.header {
+  color: var(--color-text);
+  text-align: center;
+  text-decoration: underline;
+  margin-bottom: var(--space-md);
+}
+
+/* ============================================================
+   CARD / PANEL HELPERS
+   ============================================================ */
+.card-dark {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+/* Bootstrap 3 coloured panel overrides */
+.panel-green > .panel-heading {
+  border-color: var(--color-success);
+  background-color: var(--color-success);
+  color: #fff;
+}
+.panel-green { border-color: var(--color-success); }
+
+.panel-red > .panel-heading {
+  border-color: var(--color-danger);
+  background-color: var(--color-danger);
+  color: #fff;
+}
+.panel-red { border-color: var(--color-danger); }
+
+.panel-yellow > .panel-heading {
+  border-color: var(--color-warning);
+  background-color: var(--color-warning);
+  color: #fff;
+}
+.panel-yellow { border-color: var(--color-warning); }
+
+/* ============================================================
+   FOCUS RING (accessibility)
+   ============================================================ */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   PRINT
+   ============================================================ */
 @media print {
   .no-print,
   nav,
   #wrapper {
     display: none !important;
   }
-  .margin {
+
+  body {
+    background: #fff;
+    padding-right: 0;
     margin-top: 0;
   }
-  body {
-    background: white;
+
+  .margin {
+    margin-top: 0;
   }
 }

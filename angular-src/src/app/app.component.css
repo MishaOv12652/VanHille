@@ -1,13 +1,12 @@
+/* Main content wrapper — sits below the fixed navbar */
 .margin {
-  margin-top: 50px;
+  margin-top: var(--space-lg, 24px);
+  padding-bottom: var(--space-xl, 40px);
 }
 
 .backimg {
   background-image: url("../assets/background.jpg");
-  /*background-repeat: no-repeat;*/
   height: 150%;
-
-
   background-position: center;
   background-size: cover;
 }

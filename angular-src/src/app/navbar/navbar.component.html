@@ -1,60 +1,82 @@
 <div id="wrapper">
   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
+    <!-- Brand -->
     <div class="navbar-header pull-right">
-      <a class="navbar-brand" [routerLink]="['/']">Math</a>
+      <a class="navbar-brand" [routerLink]="['/']">ואן-הילה</a>
     </div>
+
+    <!-- Top nav: auth links + user pill -->
     <div>
       <ul class="nav navbar-nav navbar-left top-nav">
         <li *ngIf="!auth.loggedIn()">
-          <a [routerLink]="['login']">כניסה</a>
+          <a [routerLink]="['login']" routerLinkActive="active">כניסה</a>
         </li>
         <li *ngIf="auth.loggedIn()">
           <a (click)="onLogout()" href="#">התנתק</a>
         </li>
         <li *ngIf="auth.loggedIn()">
-          <a [routerLink]="['profile']">פרופיל</a>
+          <a [routerLink]="['profile']" routerLinkActive="active">פרופיל</a>
         </li>
         <li *ngIf="auth.hasRole('student')">
-          <a [routerLink]="['dashboard']">לוח בקרה</a>
+          <a [routerLink]="['dashboard']" routerLinkActive="active">לוח בקרה</a>
+        </li>
+        <!-- User pill -->
+        <li *ngIf="auth.loggedIn()">
+          <span class="user-pill">
+            <span class="user-avatar">{{ (auth.getUsername() || '?')[0] }}</span>
+            <span class="user-name">{{ auth.getUsername() }}</span>
+          </span>
         </li>
       </ul>
     </div>
+
+    <!-- Sidebar nav (RTL) -->
     <div class="collapse navbar-collapse navbar-ex1-collapse" dir="rtl">
       <ul class="nav navbar-nav side-nav pull-right">
-        <li>
+
+        <li routerLinkActive="active">
           <a [routerLink]="['cloudlinks']">קישורים לענן</a>
         </li>
-        <li>
+
+        <li routerLinkActive="active">
           <a [routerLink]="['literature']">ספרות</a>
         </li>
-        <li *ngIf="auth.hasRole('educator','admin')">
+
+        <li *ngIf="auth.hasRole('educator','admin')" routerLinkActive="active">
           <a [routerLink]="['groups']">ניהול קבוצות</a>
         </li>
-        <li *ngIf="auth.hasRole('student')">
+
+        <li *ngIf="auth.hasRole('student')" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: false }">
           <a href="javascript:;" data-toggle="collapse" data-target="#demo">כלים פדגוגיים</a>
           <ul id="demo" class="collapse">
-            <li>
+            <li routerLinkActive="active">
               <a [routerLink]="['vanhilequiz']">שאלון ואן הילה</a>
             </li>
           </ul>
         </li>
-        <li *ngIf="auth.loggedIn()">
+
+        <li *ngIf="auth.loggedIn()" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: false }">
           <a href="javascript:;" data-toggle="collapse" data-target="#repo">דו"חות</a>
           <ul id="repo" class="collapse">
-            <li>
+            <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">
               <a href="javascript:;" data-toggle="collapse" data-target="#VanHilleRepo">דו"חות ואן הילה</a>
               <ul id="VanHilleRepo" class="collapse">
-                <li *ngIf="auth.hasRole('student')">
+                <li *ngIf="auth.hasRole('student')" routerLinkActive="active">
                   <a [routerLink]="['vanhille/studentreport']">דו"ח לסטודנט</a>
                 </li>
-                <li>
+                <li routerLinkActive="active">
                   <a [routerLink]="['vanhille/classreport']">דו"ח כללי</a>
                 </li>
               </ul>
             </li>
           </ul>
         </li>
+
       </ul>
     </div>
+
   </nav>
 </div>

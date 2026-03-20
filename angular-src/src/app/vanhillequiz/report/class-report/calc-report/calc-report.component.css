@@ -1,7 +1,6 @@
-.header{
+.header {
   text-decoration: underline;
   text-align: center;
-  /* margin-right: 250px; */
-  margin-right: 150px;
-  color: white;
+  color: var(--color-text, white);
+  margin-bottom: var(--space-md, 16px);
 }

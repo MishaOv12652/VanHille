@@ -61,6 +61,12 @@ export class AuthService {
     }
   }
 
+  getUsername(): string | null {
+    const raw = localStorage.getItem('admin');
+    if (!raw) return null;
+    try { return JSON.parse(raw); } catch { return raw; }
+  }
+
   logout() {
     localStorage.clear();
   }

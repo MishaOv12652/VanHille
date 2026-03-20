@@ -1,6 +1,7 @@
-.margin{
-    margin-right: 75px;
+.margin {
+  margin-top: var(--space-md, 16px);
 }
-h2, label{
-    color: white;
+
+h2, label {
+  color: var(--color-text, white);
 }

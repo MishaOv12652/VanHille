@@ -1,4 +1,8 @@
-.margin{
-    margin-top: 50px;
-    margin-right: 245px;
+.home-features {
+  color: var(--color-text, #f0f4f8);
+  padding: 0 var(--space-md, 16px);
+}
+
+.home-features h3 {
+  color: var(--color-primary, #4fa3e0);
 }
