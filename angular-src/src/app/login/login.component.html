@@ -1,16 +1,59 @@
-<div class="col-md-10" style="text-align: center;color: white">
-  <h2 class="page-header">טופס כניסה</h2>
+<div class="auth-wrapper">
+  <div class="auth-card" dir="rtl">
+
+    <!-- Header -->
+    <div class="auth-header">
+      <div class="auth-logo">∑</div>
+      <h2 class="auth-title">ברוכים הבאים</h2>
+      <p class="auth-subtitle">היכנסו לחשבונכם כדי להמשיך</p>
+    </div>
+
+    <!-- Form -->
+    <form (submit)="login()" class="auth-form" novalidate>
+
+      <div class="form-group">
+        <label for="login-username">שם משתמש</label>
+        <input
+          id="login-username"
+          type="text"
+          name="username"
+          [(ngModel)]="username"
+          class="form-control"
+          placeholder="הכנס שם משתמש"
+          autocomplete="username"
+          [disabled]="loading"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="login-password">סיסמא</label>
+        <input
+          id="login-password"
+          type="password"
+          name="password"
+          [(ngModel)]="password"
+          class="form-control"
+          placeholder="הכנס סיסמא"
+          autocomplete="current-password"
+          [disabled]="loading"
+        >
+      </div>
+
+      <button type="submit" class="btn btn-primary auth-submit" [disabled]="loading">
+        <ng-container *ngIf="!loading">התחבר</ng-container>
+        <ng-container *ngIf="loading">
+          <span class="auth-spinner">
+            <span></span><span></span><span></span>
+          </span>
+        </ng-container>
+      </button>
+
+    </form>
+
+    <!-- Footer link -->
+    <div class="auth-footer">
+      אין לכם חשבון?&nbsp;<a [routerLink]="['/register']">הרשמו כאן</a>
+    </div>
+
+  </div>
 </div>
-<form (submit)="login()" style="color:white">
-  <div class="form-group col-md-10 col-md-pull-0" dir="rtl">
-    <label for="">שם משתמש</label>
-    <input type="text" name="username" [(ngModel)]="username" class="form-control" placeholder="הכנס שם משתמש">
-  </div>
-  <div class="form-group col-md-10 col-md-pull-0" dir="rtl">
-    <label for="">סיסמא</label>
-    <input type="password" name="password" [(ngModel)]="password" class="form-control" placeholder="הכנס סיסמא">
-  </div>
-  <div class="form-group col-md-10 col-md-pull-0">
-    <button type="submit" class="btn btn-primary btn-lg">התחבר</button>
-  </div>
-</form>

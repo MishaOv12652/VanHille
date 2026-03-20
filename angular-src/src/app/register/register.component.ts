@@ -4,7 +4,7 @@ import { SiteRegisterServiceService } from '../services/site-register-service.se
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../services/auth.service';
 import { InvitesService } from '../services/invites.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -12,17 +12,18 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule, RouterLink]
 })
 export class RegisterComponent implements OnInit {
-  email: string = '';
-  username: string = '';
-  password: string = '';
-  role: string = 'student';
+  email:    string  = '';
+  username: string  = '';
+  password: string  = '';
+  role:     string  = 'student';
+  loading:  boolean = false;
 
   // Set when arriving from invite/join code flow
-  inviteToken: string = '';
-  roleLocked: boolean = false;
+  inviteToken: string  = '';
+  roleLocked:  boolean = false;
 
   constructor(
     private siteRegServ: SiteRegisterServiceService,
@@ -35,18 +36,18 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     const token = this.route.snapshot.queryParamMap.get('token');
-    const role = this.route.snapshot.queryParamMap.get('role');
-    if (role) {
-      this.role = role;
-      this.roleLocked = true;
-    }
-    if (token) {
-      this.inviteToken = token;
-    }
+    const role  = this.route.snapshot.queryParamMap.get('role');
+    if (role)  { this.role = role; this.roleLocked = true; }
+    if (token) { this.inviteToken = token; }
   }
 
   register() {
-    const SiteUser = { email: this.email, username: this.username, password: this.password, role: this.role };
+    const SiteUser = {
+      email:    this.email,
+      username: this.username,
+      password: this.password,
+      role:     this.role
+    };
 
     if (!this.siteRegServ.validateRegister(SiteUser)) {
       this.toastr.error('אנא מלא את כל השדות!');
@@ -57,16 +58,23 @@ export class RegisterComponent implements OnInit {
       return false;
     }
 
-    this.auth.registerSiteUser(SiteUser).subscribe(data => {
-      if (data.success) {
-        if (this.inviteToken) {
-          this.invitesService.markUsed(this.inviteToken).subscribe();
+    this.loading = true;
+    this.auth.registerSiteUser(SiteUser).subscribe({
+      next: data => {
+        this.loading = false;
+        if (data.success) {
+          if (this.inviteToken) {
+            this.invitesService.markUsed(this.inviteToken).subscribe();
+          }
+          this.toastr.success('נרשמתה בהצלחה');
+          this.router.navigate(['/login']);
+        } else {
+          this.toastr.error('לא נרשמתה בהצלחה');
         }
-        this.toastr.success('נרשמתה בהצלחה');
-        this.router.navigate(['/login']);
-      } else {
-        this.toastr.error('לא נרשמתה בהצלחה');
-        this.router.navigate(['/register']);
+      },
+      error: () => {
+        this.loading = false;
+        this.toastr.error('שגיאת חיבור, נסה שוב');
       }
     });
     return true;
