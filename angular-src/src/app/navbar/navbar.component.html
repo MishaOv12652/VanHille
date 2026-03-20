@@ -1,4 +1,6 @@
 <div id="wrapper">
+
+  <!-- ── Top navbar ──────────────────────────────────── -->
   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 
     <!-- Brand -->
@@ -21,8 +23,8 @@
         <li *ngIf="auth.hasRole('student')">
           <a [routerLink]="['dashboard']" routerLinkActive="active">לוח בקרה</a>
         </li>
-        <!-- User pill -->
-        <li *ngIf="auth.loggedIn()">
+        <!-- User pill (desktop only) -->
+        <li *ngIf="auth.loggedIn()" class="hidden-xs">
           <span class="user-pill">
             <span class="user-avatar">{{ (auth.getUsername() || '?')[0] }}</span>
             <span class="user-name">{{ auth.getUsername() }}</span>
@@ -31,8 +33,21 @@
       </ul>
     </div>
 
-    <!-- Sidebar nav (RTL) -->
-    <div class="collapse navbar-collapse navbar-ex1-collapse" dir="rtl">
+    <!-- Hamburger (mobile only) -->
+    <button
+      class="hamburger visible-xs"
+      type="button"
+      [class.is-open]="sidebarOpen"
+      (click)="toggleSidebar()"
+      aria-label="תפריט"
+    >
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+
+    <!-- Desktop sidebar (RTL, fixed-right, hidden on mobile) -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse hidden-xs" dir="rtl">
       <ul class="nav navbar-nav side-nav pull-right">
 
         <li routerLinkActive="active">
@@ -79,4 +94,131 @@
     </div>
 
   </nav>
+
+  <!-- ── Mobile drawer ────────────────────────────────── -->
+
+  <!-- Backdrop -->
+  <div
+    class="mobile-backdrop"
+    [class.is-open]="sidebarOpen"
+    (click)="closeSidebar()"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Drawer panel -->
+  <div
+    class="mobile-drawer"
+    [class.is-open]="sidebarOpen"
+    dir="rtl"
+    role="dialog"
+    aria-modal="true"
+    aria-label="תפריט ניווט"
+  >
+    <!-- Drawer header -->
+    <div class="drawer-header">
+      <span class="drawer-brand">ואן-הילה</span>
+      <button class="drawer-close" type="button" (click)="closeSidebar()" aria-label="סגור">✕</button>
+    </div>
+
+    <!-- User info (if logged in) -->
+    <div *ngIf="auth.loggedIn()" class="drawer-user">
+      <span class="drawer-avatar">{{ (auth.getUsername() || '?')[0] }}</span>
+      <span class="drawer-username">{{ auth.getUsername() }}</span>
+    </div>
+
+    <!-- Nav links -->
+    <nav class="drawer-nav">
+      <ul>
+
+        <li>
+          <a [routerLink]="['cloudlinks']" routerLinkActive="active" (click)="closeSidebar()">
+            קישורים לענן
+          </a>
+        </li>
+
+        <li>
+          <a [routerLink]="['literature']" routerLinkActive="active" (click)="closeSidebar()">
+            ספרות
+          </a>
+        </li>
+
+        <li *ngIf="auth.hasRole('educator','admin')">
+          <a [routerLink]="['groups']" routerLinkActive="active" (click)="closeSidebar()">
+            ניהול קבוצות
+          </a>
+        </li>
+
+        <!-- Pedagogical tools (student only) -->
+        <li *ngIf="auth.hasRole('student')" class="has-children" [class.is-open]="toolsOpen">
+          <button class="drawer-group-toggle" type="button" (click)="toolsOpen = !toolsOpen">
+            <span>כלים פדגוגיים</span>
+            <span class="drawer-chevron">{{ toolsOpen ? '▴' : '▾' }}</span>
+          </button>
+          <ul *ngIf="toolsOpen" class="drawer-sub">
+            <li>
+              <a [routerLink]="['vanhilequiz']" routerLinkActive="active" (click)="closeSidebar()">
+                שאלון ואן הילה
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Reports (logged-in users) -->
+        <li *ngIf="auth.loggedIn()" class="has-children" [class.is-open]="reportsOpen">
+          <button class="drawer-group-toggle" type="button" (click)="reportsOpen = !reportsOpen">
+            <span>דו"חות</span>
+            <span class="drawer-chevron">{{ reportsOpen ? '▴' : '▾' }}</span>
+          </button>
+          <ul *ngIf="reportsOpen" class="drawer-sub">
+            <li class="has-children" [class.is-open]="vhReportsOpen">
+              <button class="drawer-group-toggle drawer-group-toggle--sub" type="button"
+                      (click)="vhReportsOpen = !vhReportsOpen">
+                <span>דו"חות ואן הילה</span>
+                <span class="drawer-chevron">{{ vhReportsOpen ? '▴' : '▾' }}</span>
+              </button>
+              <ul *ngIf="vhReportsOpen" class="drawer-sub drawer-sub--nested">
+                <li *ngIf="auth.hasRole('student')">
+                  <a [routerLink]="['vanhille/studentreport']" routerLinkActive="active" (click)="closeSidebar()">
+                    דו"ח לסטודנט
+                  </a>
+                </li>
+                <li>
+                  <a [routerLink]="['vanhille/classreport']" routerLinkActive="active" (click)="closeSidebar()">
+                    דו"ח כללי
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Auth actions -->
+        <li class="drawer-divider"></li>
+
+        <li *ngIf="auth.loggedIn()">
+          <a [routerLink]="['profile']" routerLinkActive="active" (click)="closeSidebar()">
+            פרופיל
+          </a>
+        </li>
+
+        <li *ngIf="auth.hasRole('student')">
+          <a [routerLink]="['dashboard']" routerLinkActive="active" (click)="closeSidebar()">
+            לוח בקרה
+          </a>
+        </li>
+
+        <li *ngIf="auth.loggedIn()">
+          <a href="#" (click)="onLogout()">התנתק</a>
+        </li>
+
+        <li *ngIf="!auth.loggedIn()">
+          <a [routerLink]="['login']" routerLinkActive="active" (click)="closeSidebar()">
+            כניסה
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+  </div>
+
 </div>
