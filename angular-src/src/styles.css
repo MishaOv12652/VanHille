@@ -136,6 +136,364 @@ body {
 .panel-yellow { border-color: var(--color-warning); }
 
 /* ============================================================
+   BOOTSTRAP 3 — DARK THEME OVERRIDES
+   All Bootstrap 3 components used in the app are re-skinned
+   here so they look cohesive on the dark background.
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   JUMBOTRON
+   ---------------------------------------------------------- */
+.jumbotron {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
+}
+
+.jumbotron h1,
+.jumbotron h2,
+.jumbotron p {
+  color: var(--color-text);
+}
+
+/* ----------------------------------------------------------
+   PANELS
+   ---------------------------------------------------------- */
+.panel {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  color: var(--color-text);
+}
+
+.panel-default {
+  border-color: var(--color-border);
+}
+
+.panel-default > .panel-heading {
+  background-color: var(--color-surface-light);
+  border-color: var(--color-border);
+  color: var(--color-text);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.panel-default > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: var(--color-border);
+}
+
+.panel-body {
+  color: var(--color-text);
+}
+
+.panel-footer {
+  background-color: var(--color-surface-light);
+  border-top-color: var(--color-border);
+  color: var(--color-text-muted);
+}
+
+/* ----------------------------------------------------------
+   TABLES
+   ---------------------------------------------------------- */
+.table {
+  color: var(--color-text);
+}
+
+.table > thead > tr > th {
+  background-color: var(--color-surface-light);
+  border-bottom-color: var(--color-border);
+  color: var(--color-text-muted);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.table > tbody > tr > td,
+.table > tbody > tr > th,
+.table > tfoot > tr > td {
+  border-top-color: var(--color-border);
+  color: var(--color-text);
+  vertical-align: middle;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.table-hover > tbody > tr:hover {
+  background-color: rgba(79, 163, 224, 0.08);
+  cursor: default;
+}
+
+.table-bordered,
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > td {
+  border-color: var(--color-border);
+}
+
+/* ----------------------------------------------------------
+   FORMS
+   ---------------------------------------------------------- */
+label {
+  color: var(--color-text-muted);
+  font-weight: 500;
+  margin-bottom: var(--space-xs);
+}
+
+.form-control {
+  background-color: var(--color-surface-light);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+
+.form-control::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.6;
+}
+
+.form-control:focus {
+  background-color: var(--color-surface-light);
+  border-color: var(--color-primary);
+  color: var(--color-text);
+  box-shadow: 0 0 0 3px rgba(79, 163, 224, 0.2);
+  outline: none;
+}
+
+.form-control[disabled],
+.form-control[readonly] {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+/* Select elements */
+select.form-control > option {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+}
+
+/* ----------------------------------------------------------
+   BUTTONS
+   ---------------------------------------------------------- */
+.btn {
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  font-size: var(--font-size-base);
+  transition:
+    background-color var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition),
+    opacity var(--transition);
+  letter-spacing: 0.2px;
+}
+
+/* Primary */
+.btn-primary {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(79, 163, 224, 0.4);
+}
+
+/* Success */
+.btn-success {
+  background-color: var(--color-success);
+  border-color: var(--color-success);
+  color: #fff;
+}
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active {
+  background-color: #3ab55a;
+  border-color: #3ab55a;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(77, 203, 109, 0.35);
+}
+
+/* Danger */
+.btn-danger {
+  background-color: var(--color-danger);
+  border-color: var(--color-danger);
+  color: #fff;
+}
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger:active {
+  background-color: #c0392b;
+  border-color: #c0392b;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(217, 83, 79, 0.4);
+}
+
+/* Warning */
+.btn-warning {
+  background-color: var(--color-warning);
+  border-color: var(--color-warning);
+  color: #fff;
+}
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-warning:active {
+  background-color: #d68910;
+  border-color: #d68910;
+  color: #fff;
+}
+
+/* Info */
+.btn-info {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+.btn-info:hover,
+.btn-info:focus,
+.btn-info:active {
+  background-color: #147a75;
+  border-color: #147a75;
+  color: #fff;
+}
+
+/* Default — ghost-style dark button */
+.btn-default {
+  background-color: transparent;
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--color-text);
+}
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #fff;
+}
+
+/* Disabled state for all variants */
+.btn[disabled],
+.btn.disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ----------------------------------------------------------
+   ALERTS
+   ---------------------------------------------------------- */
+.alert {
+  border-radius: var(--radius-md);
+  border-width: 1px;
+  border-style: solid;
+  font-size: var(--font-size-base);
+}
+
+.alert-info {
+  background-color: rgba(79, 163, 224, 0.12);
+  border-color: rgba(79, 163, 224, 0.35);
+  color: #a8d4f0;
+}
+
+.alert-warning {
+  background-color: rgba(240, 173, 78, 0.12);
+  border-color: rgba(240, 173, 78, 0.35);
+  color: #f5c97a;
+}
+
+.alert-success {
+  background-color: rgba(77, 203, 109, 0.12);
+  border-color: rgba(77, 203, 109, 0.35);
+  color: #88e3a0;
+}
+
+.alert-danger {
+  background-color: rgba(217, 83, 79, 0.12);
+  border-color: rgba(217, 83, 79, 0.35);
+  color: #e8928f;
+}
+
+/* ----------------------------------------------------------
+   LIST GROUP
+   ---------------------------------------------------------- */
+.list-group-item {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+  color: var(--color-text);
+  transition: background-color var(--transition);
+}
+
+.list-group-item:first-child {
+  border-top-left-radius: var(--radius-md);
+  border-top-right-radius: var(--radius-md);
+}
+
+.list-group-item:last-child {
+  border-bottom-left-radius: var(--radius-md);
+  border-bottom-right-radius: var(--radius-md);
+}
+
+a.list-group-item:hover,
+a.list-group-item:focus,
+button.list-group-item:hover {
+  background-color: var(--color-surface-light);
+  color: #fff;
+}
+
+.list-group-item.active,
+.list-group-item.active:hover {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+/* ----------------------------------------------------------
+   PAGE HEADER
+   ---------------------------------------------------------- */
+.page-header {
+  border-bottom-color: var(--color-border);
+  color: var(--color-text);
+  margin-top: var(--space-md);
+  padding-bottom: var(--space-sm);
+}
+
+/* ----------------------------------------------------------
+   DROPDOWN MENUS
+   ---------------------------------------------------------- */
+.dropdown-menu {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.dropdown-menu > li > a {
+  color: var(--color-text);
+  transition: background-color var(--transition);
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+  background-color: var(--color-surface-light);
+  color: #fff;
+}
+
+.dropdown-menu > .divider {
+  background-color: var(--color-border);
+}
+
+/* ============================================================
    FOCUS RING (accessibility)
    ============================================================ */
 :focus-visible {
