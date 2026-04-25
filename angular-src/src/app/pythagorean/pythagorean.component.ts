@@ -8,9 +8,9 @@ import { Component, AfterViewInit, OnDestroy, ViewEncapsulation } from '@angular
 })
 export class PythagoreanComponent implements AfterViewInit, OnDestroy {
 
-  private readonly A = 180;
-  private readonly B = 120;
-  private readonly S = 300;
+  private A = 180;
+  private B = 120;
+  private S = 300;
   private readonly colors = [
     '#fca5a5', '#93c5fd', '#86efac', '#fde68a',
     '#fca5a5', '#93c5fd', '#86efac', '#fde68a'
