@@ -42,6 +42,7 @@ import { PastPresentReportComponent } from './vanhillequiz/report/class-report/p
 import { CalcReportComponent } from './vanhillequiz/report/class-report/calc-report/calc-report.component';
 import { BarViewComponent } from './vanhillequiz/report/class-report/past-present-report/bar-view/bar-view.component';
 import { RadarViewComponent } from './vanhillequiz/report/class-report/past-present-report/radar-view/radar-view.component';
+import { PythagoreanComponent } from './pythagorean/pythagorean.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -54,7 +55,8 @@ const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
   {path: 'profile', component: ProfileComponent},
-  {path: 'dashboard', component: DashboardComponent}
+  {path: 'dashboard', component: DashboardComponent},
+  {path: 'pythagorean', component: PythagoreanComponent}
   // ,{path:'vanhileregister',component:VanhileformComponent}
 
 ];
@@ -82,6 +84,7 @@ const appRoutes: Routes = [
     CalcReportComponent,
     BarViewComponent,
     RadarViewComponent,
+    PythagoreanComponent,
   ],
   entryComponents: [CustomEditorComponent],
   imports: [

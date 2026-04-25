@@ -1,0 +1,60 @@
+<div class="pyth-wrap" dir="rtl">
+  <h1>משפט פיתגורס בעזרת פירוק והרכבה</h1>
+  <p>
+    ביישומון מופיעים <b>8 משולשים ישרי־זווית חופפים</b>: ארבעה משולשים לכל סידור.
+    בכל סידור מופעים גם ריבועים בהתאם למשולשים נתונים. המטרה היא להוכיח משפט פתגורס ע״י בניה של שני ריבועים חיצוניים חופפים: פעם סביב הריבוע שעל היתר ופעם סביב שני הריבועים שעל הניצבים.
+  </p>
+
+  <section class="pyth-task" aria-label="משימת הפעילות">
+    <h2>משימת הפעילות: הוכחה גיאומטרית ללא נוסחאות</h2>
+    <div class="pyth-task-grid">
+      <div class="pyth-task-section">
+        <strong>סידור 1</strong>
+        <ul>
+          <li>בעזרת הריבוע הבנוי על היתר וארבעת המשולשים ישרי־הזווית, בנו ריבוע.</li>
+          <li>הסבירו מדוע הצורה שהתקבלה היא ריבוע.</li>
+        </ul>
+      </div>
+      <div class="pyth-task-section">
+        <strong>סידור 2</strong>
+        <ul>
+          <li>בעזרת שני הריבועים הבנויים על הניצבים וארבעת המשולשים ישרי־הזווית, בנו ריבוע.</li>
+          <li>הסבירו מדוע הצורה שהתקבלה היא ריבוע.</li>
+        </ul>
+      </div>
+      <div class="pyth-task-section">
+        <strong>דיון והשוואה</strong>
+        <ul>
+          <li>נמקו מדוע שני הריבועים שהתקבלו בסידור 1 ובסידור 2 חופפים.</li>
+          <li>הסבירו כיצד נובע מכך שסכום שטחי הריבועים על הניצבים שווה לשטח הריבוע על היתר.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pyth-test-status" id="pythTestStatus"></div>
+  </section>
+
+  <div class="pyth-toolbar">
+    <button type="button" class="pyth-btn pyth-secondary" (click)="toggleOuterSquares()" id="pythOuterToggle">הסתר ריבועים חיצוניים</button>
+    <button type="button" class="pyth-btn pyth-secondary" (click)="freeLayout()">פיזור חופשי</button>
+    <button type="button" class="pyth-btn pyth-secondary" (click)="rotateSelected90()">סובב נבחר ב־90°</button>
+    <button type="button" class="pyth-btn pyth-success" (click)="toggleRotationMode()" id="pythRotationButton">מצב סיבוב חופשי: כבוי</button>
+  </div>
+
+  <div class="pyth-stage">
+    <svg id="pythSvg" viewBox="0 0 1180 660" aria-label="יישומון גרירת 8 משולשים להמחשת משפט פיתגורס">
+      <rect id="pythLeftOuter" x="80" y="100" width="300" height="300" class="pyth-square" />
+      <text x="230" y="76" text-anchor="middle" class="pyth-label">סידור 1</text>
+      <polygon id="pythCSquare" class="pyth-target" points="260,100 380,280 200,400 80,220" />
+      <text id="pythCLabel" x="230" y="260" text-anchor="middle" class="pyth-label" style="display:none">c²</text>
+
+      <rect id="pythRightOuter" x="700" y="100" width="300" height="300" class="pyth-square" />
+      <text x="850" y="76" text-anchor="middle" class="pyth-label">סידור 2</text>
+      <rect id="pythASquare" x="700" y="100" width="180" height="180" class="pyth-target" />
+      <rect id="pythBSquare" x="880" y="280" width="120" height="120" class="pyth-target" />
+      <text id="pythALabel" x="790" y="198" text-anchor="middle" class="pyth-label" style="display:none">a²</text>
+      <text id="pythBLabel" x="940" y="347" text-anchor="middle" class="pyth-label" style="display:none">b²</text>
+
+      <g id="pythTriangles"></g>
+    </svg>
+  </div>
+</div>
