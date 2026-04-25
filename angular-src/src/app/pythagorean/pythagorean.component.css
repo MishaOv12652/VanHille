@@ -1,0 +1,120 @@
+.pyth-wrap {
+  max-width: 1180px;
+  margin: 24px auto;
+  padding: 16px;
+  font-family: Arial, sans-serif;
+  color: #1f2937;
+  direction: rtl;
+}
+
+.pyth-wrap h1 { margin: 0 0 8px; font-size: 28px; }
+.pyth-wrap p  { margin: 6px 0 14px; font-size: 17px; }
+
+.pyth-task {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin: 14px 0 16px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
+  line-height: 1.55;
+}
+
+.pyth-task h2 { margin: 0 0 10px; font-size: 21px; }
+
+.pyth-task-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+}
+
+.pyth-task-section {
+  border-right: 4px solid #dbeafe;
+  padding-right: 12px;
+}
+
+.pyth-task-section strong { color: #1e40af; }
+
+.pyth-task ul { margin: 6px 0; padding-right: 20px; }
+
+.pyth-toolbar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.pyth-btn {
+  border: 0;
+  border-radius: 12px;
+  padding: 10px 14px;
+  background: #2563eb;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,.12);
+}
+
+.pyth-btn.pyth-secondary { background: #64748b; }
+.pyth-btn.pyth-success   { background: #059669; }
+.pyth-btn:hover          { filter: brightness(1.05); }
+
+.pyth-stage {
+  position: relative;
+  width: 100%;
+  height: 660px;
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 4px 18px rgba(0,0,0,.12);
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+}
+
+.pyth-stage svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+}
+
+.pyth-label      { font-size: 22px; font-weight: bold; fill: #111827; }
+.pyth-small-label { font-size: 16px; fill: #374151; }
+
+.pyth-square {
+  fill: rgba(37,99,235,.03);
+  stroke: #1e40af;
+  stroke-width: 1.5;
+  stroke-dasharray: 6 6;
+}
+
+.pyth-target {
+  fill: rgba(16,185,129,.10);
+  stroke: #059669;
+  stroke-width: 3;
+  stroke-dasharray: 7 6;
+  display: none;
+}
+
+.pyth-tri {
+  stroke: #111827;
+  stroke-width: 2.2;
+  cursor: grab;
+}
+
+.pyth-tri:active { cursor: grabbing; }
+
+.pyth-selected {
+  stroke: #dc2626 !important;
+  stroke-width: 4 !important;
+}
+
+.pyth-test-status {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #166534;
+}
+
+@media (max-width: 900px) {
+  .pyth-task-grid { grid-template-columns: 1fr; }
+  .pyth-stage     { height: 720px; }
+}
