@@ -43,6 +43,7 @@ import { CalcReportComponent } from './vanhillequiz/report/class-report/calc-rep
 import { BarViewComponent } from './vanhillequiz/report/class-report/past-present-report/bar-view/bar-view.component';
 import { RadarViewComponent } from './vanhillequiz/report/class-report/past-present-report/radar-view/radar-view.component';
 import { PythagoreanComponent } from './pythagorean/pythagorean.component';
+import { PythagoreanCuttingComponent } from './pythagorean-cutting/pythagorean-cutting.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -56,7 +57,8 @@ const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'dashboard', component: DashboardComponent},
-  {path: 'pythagorean', component: PythagoreanComponent}
+  {path: 'pythagorean', component: PythagoreanComponent},
+  {path: 'pythagorean-cutting', component: PythagoreanCuttingComponent}
   // ,{path:'vanhileregister',component:VanhileformComponent}
 
 ];
@@ -85,6 +87,7 @@ const appRoutes: Routes = [
     BarViewComponent,
     RadarViewComponent,
     PythagoreanComponent,
+    PythagoreanCuttingComponent,
   ],
   entryComponents: [CustomEditorComponent],
   imports: [
