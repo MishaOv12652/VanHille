@@ -1,0 +1,180 @@
+.pyth-cut-wrap {
+  max-width: 1180px;
+  margin: 22px auto;
+  padding: 14px;
+  font-family: Arial, sans-serif;
+  background: #f7f8fb;
+  color: #111827;
+  direction: rtl;
+}
+
+.pyth-cut-wrap h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+
+.pyth-cut-wrap p {
+  margin: 6px 0 12px;
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+.pyth-cut-task {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 14px 18px;
+  margin: 12px 0 14px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .06);
+  line-height: 1.5;
+}
+
+.pyth-cut-task-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+
+.pyth-cut-task-section {
+  border-right: 4px solid #dbeafe;
+  padding-right: 12px;
+}
+
+.pyth-cut-task-section strong {
+  color: #1e40af;
+}
+
+.pyth-cut-task ul {
+  margin: 5px 0;
+  padding-right: 20px;
+}
+
+.pyth-cut-toolbar {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.pyth-cut-btn {
+  border: 0;
+  border-radius: 12px;
+  padding: 10px 13px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .12);
+}
+
+.pyth-cut-btn:hover {
+  filter: brightness(1.05);
+}
+
+.pyth-cut-secondary {
+  background: #64748b;
+}
+
+.pyth-cut-stage {
+  width: 100%;
+  height: 690px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, .12);
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+}
+
+.pyth-cut-stage svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+}
+
+.pyth-cut-label {
+  font-size: 22px;
+  font-weight: bold;
+  fill: #111827;
+}
+
+.pyth-cut-small-label {
+  font-size: 16px;
+  fill: #374151;
+}
+
+.pyth-cut-tiny-label {
+  font-size: 13px;
+  fill: #374151;
+}
+
+.pyth-cut-square-frame {
+  fill: rgba(37, 99, 235, .025);
+  stroke: #111827;
+  stroke-width: 2;
+}
+
+.pyth-cut-line {
+  stroke: #111827;
+  stroke-width: 1.6;
+}
+
+.pyth-cut-triangle-given {
+  fill: rgba(245, 158, 11, .14);
+  stroke: #111827;
+  stroke-width: 2.2;
+}
+
+.pyth-cut-free-triangle {
+  fill: rgba(59, 130, 246, .18);
+  stroke: #111827;
+  stroke-width: 2.1;
+  cursor: grab;
+}
+
+.pyth-cut-free-triangle:active {
+  cursor: grabbing;
+}
+
+.pyth-cut-selected {
+  stroke: #dc2626;
+  stroke-width: 4;
+}
+
+.pyth-cut-right-angle {
+  fill: none;
+  stroke: #111827;
+  stroke-width: 2;
+}
+
+.pyth-cut-corner-a {
+  fill: rgba(96, 165, 250, .10);
+  stroke: none;
+}
+
+.pyth-cut-corner-b {
+  fill: rgba(52, 211, 153, .10);
+  stroke: none;
+}
+
+.pyth-cut-central-c {
+  fill: rgba(245, 158, 11, .14);
+  stroke: #111827;
+  stroke-width: 2;
+}
+
+.pyth-cut-test-status {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #166534;
+}
+
+@media (max-width: 900px) {
+  .pyth-cut-task-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pyth-cut-stage {
+    height: 760px;
+  }
+}

@@ -1,0 +1,55 @@
+<div class="pyth-cut-wrap" dir="rtl">
+  <h1>הוכחה באמצעות חיתוך: משפט פיתגורס</h1>
+  <p>
+    נקודת ההתחלה: משולש ישר-זווית ושני ריבועים חופפים שצלע כל אחד מהם היא סכום הניצבים, כלומר <b>a+b</b>.
+    כלי החיתוך יוצר בכל ריבוע חיתוך אחר: פעם נשארים שני ריבועים על הניצבים, ופעם נשאר ריבוע על היתר.
+  </p>
+
+  <section class="pyth-cut-task" aria-label="משימת הפעילות">
+    <div class="pyth-cut-task-grid">
+      <div class="pyth-cut-task-section">
+        <strong>צעד 1-2</strong>
+        <ul>
+          <li>התבוננו במשולש ישר-הזווית: הניצבים הם a ו-b, והיתר הוא c.</li>
+          <li>בנו שני ריבועים חופפים שצלע כל אחד מהם היא a+b.</li>
+        </ul>
+      </div>
+      <div class="pyth-cut-task-section">
+        <strong>חיתוך ראשון</strong>
+        <ul>
+          <li>ריבוע שצלעו a בפינה אחת.</li>
+          <li>ריבוע שצלעו b בפינה הנגדית.</li>
+          <li>שני מלבנים הנחתכים באלכסוניהם לארבעה משולשים.</li>
+        </ul>
+      </div>
+      <div class="pyth-cut-task-section">
+        <strong>חיתוך שני והשוואה</strong>
+        <ul>
+          <li>ארבעה משולשים חופפים מסודרים סביב צורה מרכזית.</li>
+          <li>בדקו שהצורה המרכזית היא ריבוע שצלעו c.</li>
+          <li>השוו את השטחים שנותרו.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pyth-cut-test-status" id="pythCutTestStatus"></div>
+  </section>
+
+  <div class="pyth-cut-toolbar">
+    <button type="button" class="pyth-cut-btn" (click)="showStart()">נקודת פתיחה</button>
+    <button type="button" class="pyth-cut-btn" (click)="showABConstruction()">חיתוך ראשון</button>
+    <button type="button" class="pyth-cut-btn" (click)="showCConstruction()">חיתוך שני</button>
+    <button type="button" class="pyth-cut-btn" (click)="showCompare()">השוואת השטחים</button>
+    <button type="button" class="pyth-cut-btn pyth-cut-secondary" (click)="addOneTriangle()">הוסף משולש</button>
+    <button type="button" class="pyth-cut-btn pyth-cut-secondary" (click)="rotateSelectedTriangle()">סובב משולש נבחר</button>
+    <button type="button" class="pyth-cut-btn pyth-cut-secondary" (click)="reflectSelectedTriangle()">שקף משולש נבחר</button>
+    <button type="button" class="pyth-cut-btn pyth-cut-secondary" (click)="clearFreeTriangles()">נקה משולשים חופשיים</button>
+  </div>
+
+  <div class="pyth-cut-stage">
+    <svg id="pythCutSvg" viewBox="0 0 1180 690" aria-label="כלי חיתוך להוכחת משפט פיתגורס">
+      <g id="pythCutDrawingLayer"></g>
+      <g id="pythCutLabelLayer"></g>
+      <g id="pythCutFreeTriangleLayer"></g>
+    </svg>
+  </div>
+</div>
