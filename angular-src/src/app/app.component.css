@@ -2,6 +2,12 @@
   margin-top: 60px;
 }
 
+@media (min-width: 768px) {
+  .margin {
+    padding-right: 220px;
+  }
+}
+
 .backimg {
   background-image: url("../assets/background.jpg");
   /*background-repeat: no-repeat;*/
