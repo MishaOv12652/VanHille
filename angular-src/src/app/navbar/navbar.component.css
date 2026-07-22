@@ -88,7 +88,7 @@ body {
 }
 
 /* =====================================================
-   Mobile: full-width dropdown (< 768px)
+   Mobile: full-screen overlay (< 768px)
    ===================================================== */
 @media (max-width: 767px) {
   .side-nav {
@@ -98,16 +98,25 @@ body {
     box-shadow: none;
   }
 
-  /* When open, show below navbar */
-  .navbar-ex1-collapse.in {
-    display: block !important;
-    overflow-y: auto;
-    max-height: calc(100vh - 60px);
+  /* Overlay covers full screen below the navbar bar */
+  .navbar-ex1-collapse {
+    background-color: #1F2937;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0;
   }
 
-  .navbar-collapse {
-    padding: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  .navbar-ex1-collapse.in,
+  .navbar-ex1-collapse.collapsing {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+    z-index: 1030;
+    background-color: #1F2937;
+    /* Reset Bootstrap's max-height so it fills the screen */
+    max-height: none !important;
   }
 }
 
