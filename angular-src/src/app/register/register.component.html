@@ -1,25 +1,29 @@
 <div class="auth-page">
   <div class="auth-card" dir="rtl">
-    <h2 class="auth-title">הרשמה למערכת</h2>
-    <form (submit)="register()">
-      <div class="form-group">
-        <label for="email">אימייל</label>
-        <input type="email" id="email" name="email" [(ngModel)]="email"
-               class="form-control" placeholder="הכנס אימייל">
-      </div>
-      <div class="form-group">
-        <label for="username">שם משתמש</label>
-        <input type="text" id="username" name="username" [(ngModel)]="username"
-               class="form-control" placeholder="הכנס שם משתמש">
-      </div>
-      <div class="form-group">
-        <label for="password">סיסמא</label>
-        <input type="password" id="password" name="password" [(ngModel)]="password"
-               class="form-control" placeholder="הכנס סיסמא">
-      </div>
-      <div class="form-group auth-submit">
-        <button type="submit" class="btn btn-primary btn-block auth-btn">הרשם</button>
-      </div>
-    </form>
+    <div class="auth-card-header">
+      <h2 class="auth-title">הרשמה למערכת</h2>
+    </div>
+    <div class="auth-card-body">
+      <form (submit)="register()">
+        <div class="form-group">
+          <label for="email">אימייל</label>
+          <input type="email" id="email" name="email" [(ngModel)]="email"
+                 class="form-control" placeholder="הכנס אימייל">
+        </div>
+        <div class="form-group">
+          <label for="username">שם משתמש</label>
+          <input type="text" id="username" name="username" [(ngModel)]="username"
+                 class="form-control" placeholder="הכנס שם משתמש">
+        </div>
+        <div class="form-group">
+          <label for="password">סיסמא</label>
+          <input type="password" id="password" name="password" [(ngModel)]="password"
+                 class="form-control" placeholder="הכנס סיסמא">
+        </div>
+        <div class="form-group auth-submit">
+          <button type="submit" class="btn btn-primary btn-block auth-btn">הרשם</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

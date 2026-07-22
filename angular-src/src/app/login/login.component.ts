@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService  } from "../services/auth.service";
 import { Router } from "@angular/router";
-import { FlashMessagesService } from "angular2-flash-messages";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   password:String;
   constructor(private auth:AuthService,
     private router:Router,
-    private flashMSG:FlashMessagesService) { }
+    private toastr:ToastrService) { }
 
   ngOnInit() {
   }
@@ -27,11 +27,11 @@ export class LoginComponent implements OnInit {
       if(data.success){
         //console.log(data.siteUser)
         this.auth.storeUserData(data.token,data.siteUser.username);
-        this.flashMSG.show('התחברת בהצלחה',{cssClass:'alert-success',timeout:3000});
+        this.toastr.success('התחברת בהצלחה');
         this.router.navigate(['/profile']);
 
       }else{
-        this.flashMSG.show(data.msg,{cssClass:'alert-danger',timeout:3000});
+        this.toastr.error(data.msg);
         this.router.navigate(['/login']);
       }
     })

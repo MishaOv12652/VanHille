@@ -3,12 +3,12 @@ import { ConnectionBackend, Http, Request, RequestOptions, RequestOptionsArgs, R
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-import { FlashMessagesService } from 'angular2-flash-messages';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class HttpErrorInterceptor extends Http {
 
-  constructor(backend: ConnectionBackend, defaultOptions: RequestOptions, private flashMessages: FlashMessagesService) {
+  constructor(backend: ConnectionBackend, defaultOptions: RequestOptions, private toastr: ToastrService) {
     super(backend, defaultOptions);
   }
 
@@ -20,7 +20,7 @@ export class HttpErrorInterceptor extends Http {
     const message = !error.status
       ? 'שגיאת תקשורת: לא ניתן להתחבר לשרת'
       : 'אירעה שגיאה בשרת, נסו שוב מאוחר יותר';
-    this.flashMessages.show(message, { cssClass: 'alert-danger', timeout: 4000 });
+    this.toastr.error(message);
     return Observable.throw(error);
   }
 }

@@ -142,8 +142,8 @@ a:hover {
   border: 1.5px solid var(--color-border) !important;
   color: var(--color-text);
   background-color: var(--color-surface);
-  font-size: 1rem;
-  padding: 10px 14px;
+  font-size: 1.05rem;
+  padding: 11px 14px;
   height: auto !important;
   transition: border-color 0.18s ease, box-shadow 0.18s ease;
 }
@@ -156,7 +156,7 @@ a:hover {
 label {
   font-family: var(--font);
   font-weight: 500;
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   color: var(--color-text-muted);
   margin-bottom: 4px;
 }

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {VanhilereportService} from '../../../../services/vanhilereport.service';
-import {FlashMessagesService} from 'angular2-flash-messages';
+import {ToastrService} from 'ngx-toastr';
 //import {SnotifyService} from 'ng-snotify';
 import {ChartsModule} from 'ng2-charts/ng2-charts';
 
@@ -39,7 +39,7 @@ export class CalcReportComponent implements OnInit {
   tryNumOptions: [any] = [1, 2];
 
   constructor(private reportService: VanhilereportService,
-              private flashMessagesService: FlashMessagesService,) {
+              private toastr: ToastrService,) {
   }
 
   ngOnInit() {
@@ -59,7 +59,7 @@ export class CalcReportComponent implements OnInit {
         //  this.Options = data.resQuiz;
       } else {
         //this.snotifyMessage.error(data.msg, 'שגיאה', {style: 'material'});
-        this.flashMessagesService.show(data.msg, {cssClass: 'alert-danger', timeout: 3000});
+        this.toastr.error(data.msg);
       }
     });
   }
@@ -70,7 +70,7 @@ export class CalcReportComponent implements OnInit {
   getAllUniqueCourseNum() {
     this.reportService.getAllUniqueCourseNum().subscribe(data => {
       if (!data.success) {
-        this.flashMessagesService.show(data.msg, {cssClass: 'alert-danger', timeout: 3000});
+        this.toastr.error(data.msg);
       } else {
         this.courseNumOptions = data.result;
       }
@@ -80,7 +80,7 @@ export class CalcReportComponent implements OnInit {
   getCorepondingGroupNums() {
     this.reportService.getCorepondingGroupNums(this.courseNum).subscribe(data => {
       if (!data.success) {
-        this.flashMessagesService.show(data.msg, {cssClass: 'alert-danger', timeout: 3000});
+        this.toastr.error(data.msg);
       } else {
         this.groupNumOptions = data.result;
       }

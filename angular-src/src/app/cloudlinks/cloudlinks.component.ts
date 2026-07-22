@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 // import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {AuthService} from '../services/auth.service';
 import {CloudlinksService} from '../services/cloudlinks.service';
-import {FlashMessagesService} from 'angular2-flash-messages';
+import {ToastrService} from 'ngx-toastr';
 import {CustomEditorComponent} from './custom-editor/custom-editor.component';
 
 
@@ -19,14 +19,14 @@ export class CloudlinksComponent implements OnInit {
 
   constructor(
     private  cloud_links_service: CloudlinksService,
-    private flashmessage: FlashMessagesService,
+    private toastr: ToastrService,
     private auth_service: AuthService) {
   }
 
   ngOnInit() {
     this.cloud_links_service.getAllCloudLinkTables().subscribe(tables => {
       if (!tables.success) {
-        this.flashmessage.show(tables.msg, {cssClass: 'alert-danger', timeout: 3000});
+        this.toastr.error(tables.msg);
       } else {
         if (this.auth_service.loggedIn()) {
           this.tables_array = tables.cloudLinksTables;
@@ -105,12 +105,9 @@ export class CloudlinksComponent implements OnInit {
       data: []
     }).subscribe(data => {
       if (!data.success) {
-        this.flashmessage.show(JSON.stringify(data.msg), {cssClass: 'alert-danger', timeout: 3000});
+        this.toastr.error(JSON.stringify(data.msg));
       } else {
-        this.flashmessage.show('Table ' + JSON.stringify(data.cloudLinkTable.tableId) + ' Was Created ', {
-          cssClass: 'alert-success',
-          timeout: 3000
-        });
+        this.toastr.success('Table ' + JSON.stringify(data.cloudLinkTable.tableId) + ' Was Created ');
       }
     });
   }
@@ -119,12 +116,9 @@ export class CloudlinksComponent implements OnInit {
     if (window.confirm('Are you sure you want to create?')) {
       this.cloud_links_service.addEntryToCloudLinkTable(tableId.tableId, event.newData).subscribe(data => {
         if (!data.err) {
-          this.flashmessage.show('new Entry was added to the table ' + tableId.tableId, {
-            cssClass: 'alert-success',
-            timeout: 3000
-          });
+          this.toastr.success('new Entry was added to the table ' + tableId.tableId);
         } else {
-          this.flashmessage.show('Something Went Wrong', {cssClass: 'alert-danger', timeout: 3000});
+          this.toastr.error('Something Went Wrong');
         }
       });
       event.confirm.resolve(event.newData);
@@ -138,16 +132,13 @@ export class CloudlinksComponent implements OnInit {
     if (window.confirm('Are you sure you want to save?')) {
       this.cloud_links_service.deleteEntryFromCloudTable(tableId.tableId, event.data).subscribe(data => {
         if (!data.success) {
-          this.flashmessage.show('Something Went Wrong on update delete', {cssClass: 'alert-danger', timeout: 3000});
+          this.toastr.error('Something Went Wrong on update delete');
         } else {
           this.cloud_links_service.addEntryToCloudLinkTable(tableId.tableId, event.newData).subscribe(data => {
             if (!data.success) {
-              this.flashmessage.show('Something Went Wrong on update add', {cssClass: 'alert-danger', timeout: 3000});
+              this.toastr.error('Something Went Wrong on update add');
             } else {
-              this.flashmessage.show('An Entry was updated in the table ' + tableId.tableId, {
-                cssClass: 'alert-success',
-                timeout: 3000
-              });
+              this.toastr.success('An Entry was updated in the table ' + tableId.tableId);
             }
           });
         }
@@ -162,12 +153,9 @@ export class CloudlinksComponent implements OnInit {
     if (window.confirm('Are you sure you want to delete?')) {
       this.cloud_links_service.deleteEntryFromCloudTable(tableId.tableId, event.data).subscribe(data => {
         if (!data.err) {
-          this.flashmessage.show('A row was successfully deleted from the table ' + tableId.tableId, {
-            cssClass: 'alert-success',
-            timeout: 3000
-          });
+          this.toastr.success('A row was successfully deleted from the table ' + tableId.tableId);
         } else {
-          this.flashmessage.show('Something Went Wrong', {cssClass: 'alert-danger', timeout: 3000});
+          this.toastr.error('Something Went Wrong');
         }
       });
       event.confirm.resolve();
@@ -182,12 +170,9 @@ export class CloudlinksComponent implements OnInit {
         this.tables_array.splice(index, 1);
         this.cloud_links_service.deleteCloudLinkTable(this.tableName).subscribe(table => {
           if (!table.success) {
-            this.flashmessage.show(table.msg, {cssClass: 'alert-danger', timeout: 3000});
+            this.toastr.error(table.msg);
           } else {
-            this.flashmessage.show('Table ' + this.tableName + ' was deleted', {
-              cssClass: 'alert-success',
-              timeout: 3000
-            });
+            this.toastr.success('Table ' + this.tableName + ' was deleted');
           }
         });
       }

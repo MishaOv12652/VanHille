@@ -1,4 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {FormsModule} from '@angular/forms';
@@ -17,7 +18,7 @@ import {VanhileformComponent} from './vanhillequiz/vanhileform/vanhileform.compo
 import {ReportComponent} from './vanhillequiz/report/report.component';
 //external modules
 import {ChartsModule} from 'ng2-charts/ng2-charts';
-import {FlashMessagesModule} from "angular2-flash-messages";
+import {ToastrModule} from 'ngx-toastr';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -31,7 +32,7 @@ import {AuthService} from "./services/auth.service";
 import {SiteRegisterServiceService} from "./services/site-register-service.service";
 import {CloudlinksService} from "./services/cloudlinks.service"
 import {HttpErrorInterceptor} from "./services/http-error-interceptor.service";
-import {FlashMessagesService} from "angular2-flash-messages";
+import {ToastrService} from "ngx-toastr";
 import {StudentReportComponent} from './vanhillequiz/report/student-report/student-report.component';
 import {ClassReportComponent} from './vanhillequiz/report/class-report/class-report.component';
 import {TimerComponent} from './vanhillequiz/timer/timer.component';
@@ -94,12 +95,17 @@ const appRoutes: Routes = [
   entryComponents: [CustomEditorComponent],
   imports: [
     BrowserModule,
-    FlashMessagesModule,
-    BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
-    FlashMessagesModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-left',
+      timeOut: 3000,
+      closeButton: true,
+      progressBar: true,
+      preventDuplicates: true
+    }),
     ChartsModule,
     Ng4LoadingSpinnerModule.forRoot(),
     Ng2SmartTableModule,
@@ -117,9 +123,9 @@ const appRoutes: Routes = [
     CloudlinksService,
     {
       provide: Http,
-      useFactory: (backend: XHRBackend, options: RequestOptions, flashMessages: FlashMessagesService) =>
-        new HttpErrorInterceptor(backend, options, flashMessages),
-      deps: [XHRBackend, RequestOptions, FlashMessagesService]
+      useFactory: (backend: XHRBackend, options: RequestOptions, toastr: ToastrService) =>
+        new HttpErrorInterceptor(backend, options, toastr),
+      deps: [XHRBackend, RequestOptions, ToastrService]
     }
   ],
   bootstrap: [AppComponent]

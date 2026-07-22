@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VanhilereportService } from "../../../services/vanhilereport.service";
-import { FlashMessagesService } from "angular2-flash-messages";
+import { ToastrService } from "ngx-toastr";
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 @Component({
@@ -23,7 +23,7 @@ export class StudentReportComponent implements OnInit {
 
   constructor(
     private reportServise: VanhilereportService,
-    private flashmessage: FlashMessagesService
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -31,7 +31,7 @@ export class StudentReportComponent implements OnInit {
       if (data.success) {
         this.Options = data.users;
       } else {
-        this.flashmessage.show('משהו קרה', { cssClass: 'alert-danger', timeout: 3000 });
+        this.toastr.error('משהו קרה');
       }
     });
   }
@@ -111,7 +111,7 @@ export class StudentReportComponent implements OnInit {
             this.barChartData1 = [{ data: data.user[0].correctAperdif1, label: this.selectID }];
           }
         }else{
-          this.flashmessage.show('לא נמצאו תשובות של הסטונדט בעל ת.ז' + this.selectID,{cssClass: 'alert-danger', timeout: 3000 })
+          this.toastr.error('לא נמצאו תשובות של הסטונדט בעל ת.ז' + this.selectID)
           return false;
         }
         //console.log(JSON.stringify(data))
@@ -127,29 +127,29 @@ export class StudentReportComponent implements OnInit {
         // }
 
       } else {
-        this.flashmessage.show('שגיאה', { cssClass: 'alert-danger', timeout: 3000 })
+        this.toastr.error('שגיאה')
       }
     });
   };
 
   findStudentsBetweenDates() {
     if (this.sDate > this.fDate) {
-      this.flashmessage.show("שגיאה! תאריך סיום לפני תאריך התחלה", { cssClass: 'alert-danger', timeout: 3000 })
+      this.toastr.error("שגיאה! תאריך סיום לפני תאריך התחלה")
     } else {
       if (this.sDate == null || this.fDate == null) {
-        this.flashmessage.show("אנא מלא את גם תאריך התחלה וגם תאריך סיום", { cssClass: 'alert-danger', timeout: 3000 })
+        this.toastr.error("אנא מלא את גם תאריך התחלה וגם תאריך סיום")
       } else {
         this.reportServise.getStudentsBetweenDates(this.sDate, this.fDate).subscribe(data => {
           if (data.success) {
             if (data.students.length == 0) {
-              this.flashmessage.show("אין סטודנטים שעשו את השאלון בתאריכים שביקשת", { cssClass: 'alert-danger', timeout: 3000 })
+              this.toastr.error("אין סטודנטים שעשו את השאלון בתאריכים שביקשת")
             } else {
-              this.flashmessage.show("נמצאו סטודנטים מתאים אנא בחר אחד", { cssClass: 'alert-success', timeout: 3000 })
+              this.toastr.success("נמצאו סטודנטים מתאים אנא בחר אחד")
               this.Options = data.students;
               //console.log(this.Options)
             }
           } else {
-            this.flashmessage.show(data.msg, { cssClass: 'alert-danger', timeout: 3000 })
+            this.toastr.error(data.msg)
           }
 
         });
