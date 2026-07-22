@@ -21,9 +21,24 @@ body {
   color: #FFFFFF !important;
   padding: 18px 20px;
   letter-spacing: 0.5px;
+  float: right;
 }
 
-/* Top nav links (login / logout / profile) */
+/* Hamburger toggle button */
+.navbar-inverse .navbar-toggle {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  margin: 13px 15px;
+  float: left;
+}
+.navbar-inverse .navbar-toggle .icon-bar {
+  background-color: #D1D5DB !important;
+}
+.navbar-inverse .navbar-toggle:hover,
+.navbar-inverse .navbar-toggle:focus {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Top nav links */
 .top-nav > li > a {
   font-family: 'Rubik', Arial, sans-serif;
   font-weight: 500;
@@ -33,26 +48,21 @@ body {
   transition: color 0.15s ease, background-color 0.15s ease;
   border-bottom: 3px solid transparent;
 }
-
 .top-nav > li > a:hover,
 .top-nav > li > a:focus {
   color: #FFFFFF !important;
   background-color: rgba(255, 255, 255, 0.06) !important;
   border-bottom-color: #5B7FFF;
 }
-
 .top-nav > li.active > a {
   color: #FFFFFF !important;
   border-bottom-color: #5B7FFF;
 }
 
-/* Sidebar (side-nav) */
+/* =====================================================
+   Desktop: fixed sidebar (>= 768px)
+   ===================================================== */
 @media (min-width: 768px) {
-  #wrapper {
-    padding-right: 220px;
-    padding-left: 0;
-  }
-
   .side-nav {
     position: fixed;
     top: 60px;
@@ -68,9 +78,43 @@ body {
     border-radius: 0;
     box-shadow: -2px 0 8px rgba(0, 0, 0, 0.12);
   }
+
+  /* Hide the collapse wrapper on desktop — always show */
+  .navbar-ex1-collapse {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
 }
 
-/* Side-nav top-level links */
+/* =====================================================
+   Mobile: full-width dropdown (< 768px)
+   ===================================================== */
+@media (max-width: 767px) {
+  .side-nav {
+    position: static;
+    width: 100%;
+    background-color: #1F2937;
+    box-shadow: none;
+  }
+
+  /* When open, show below navbar */
+  .navbar-ex1-collapse.in {
+    display: block !important;
+    overflow-y: auto;
+    max-height: calc(100vh - 60px);
+  }
+
+  .navbar-collapse {
+    padding: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* =====================================================
+   Side-nav link styles (shared)
+   ===================================================== */
+
 .side-nav > li > a {
   font-family: 'Rubik', Arial, sans-serif;
   font-weight: 500;
@@ -81,11 +125,7 @@ body {
   text-decoration: none;
   transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
   border-right: 3px solid transparent;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
-
 .side-nav > li > a:hover,
 .side-nav > li > a:focus {
   color: #FFFFFF !important;
@@ -93,20 +133,18 @@ body {
   border-right-color: #5B7FFF;
   outline: none;
 }
-
 .side-nav > li.active > a {
   color: #FFFFFF !important;
   background-color: rgba(91, 127, 255, 0.18) !important;
   border-right-color: #5B7FFF;
 }
 
-/* Side-nav sub-menu links */
+/* Sub-menus */
 .side-nav > li > ul {
   padding: 0;
   background-color: rgba(0, 0, 0, 0.15);
   list-style: none;
 }
-
 .side-nav > li > ul > li > a {
   font-family: 'Rubik', Arial, sans-serif;
   font-weight: 400;
@@ -118,7 +156,6 @@ body {
   transition: color 0.15s ease, background-color 0.15s ease;
   border-right: 3px solid transparent;
 }
-
 .side-nav > li > ul > li > a:hover {
   color: #FFFFFF !important;
   background-color: rgba(91, 127, 255, 0.10) !important;
@@ -131,7 +168,6 @@ body {
   background-color: rgba(0, 0, 0, 0.1);
   list-style: none;
 }
-
 .side-nav > li > ul > li > ul > li > a {
   font-family: 'Rubik', Arial, sans-serif;
   font-weight: 400;
@@ -142,25 +178,21 @@ body {
   text-decoration: none;
   transition: color 0.15s ease, background-color 0.15s ease;
 }
-
 .side-nav > li > ul > li > ul > li > a:hover {
   color: #FFFFFF !important;
   background-color: rgba(91, 127, 255, 0.10) !important;
 }
 
-/* Divider between nav sections */
 .side-nav > li:not(:last-child) {
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Caret icons */
 .fa-caret-down {
   float: left;
   margin-top: 3px;
   color: #6B7280;
 }
 
-/* Page wrapper */
 #page-wrapper {
   width: 100%;
   padding: 24px;

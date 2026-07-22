@@ -176,3 +176,15 @@ input.radio:checked ~ .answer-label {
   color: #1F2937;
   font-weight: 600;
 }
+
+@media (max-width: 767px) {
+  .quiz-header { padding: 12px 16px; flex-wrap: wrap; gap: 8px; }
+  .quiz-body { padding: 0 12px 32px; }
+  .question-card { padding: 20px 16px; }
+  .question-media { flex-direction: column; }
+  .question-img { max-width: 100%; }
+  .quiz-nav { flex-direction: column-reverse; }
+  .quiz-nav .btn,
+  .quiz-nav .btn-nav-prev { width: 100%; }
+  .finish-card { padding: 32px 24px; }
+}
