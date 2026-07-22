@@ -41,7 +41,9 @@ const cloudLinks = require('./routes/cloudlinks');
   
    //port number
    const port = process.env.PORT || 3050;
-   app.use(forceSSL());
+   if (process.env.NODE_ENV === 'production') {
+     app.use(forceSSL());
+   }
 
 //port number - for develop
 //const port = 3050;

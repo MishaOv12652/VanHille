@@ -1,0 +1,6 @@
+{
+  "/User": { "target": "http://localhost:3050", "secure": false },
+  "/VHS": { "target": "http://localhost:3050", "secure": false },
+  "/VanHilleQuiz": { "target": "http://localhost:3050", "secure": false },
+  "/CloudLinks": { "target": "http://localhost:3050", "secure": false }
+}
