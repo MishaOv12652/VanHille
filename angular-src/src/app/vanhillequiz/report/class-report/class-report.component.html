@@ -1,12 +1,12 @@
 <div class="container-fluid" dir="rtl">
   <h1 class="header">תוצאות כל הכיתה</h1>
-  <div *ngIf="!showpast" class="row col-md-12 col-md-pull-1">
+  <div *ngIf="!showpast">
     <app-calc-report></app-calc-report>
   </div>
   <div *ngIf="showpast">
     <app-past-present-report></app-past-present-report>
   </div>
-  <button type="button" style="margin-top: 10px" class="col-md-12 col-md-pull-1 btn btn-primary" (click)="showPast()">הצג/הסתר
+  <button type="button" style="margin-top: 10px" class="btn btn-primary btn-block" (click)="showPast()">הצג/הסתר
     השוואת נתונים קודמים
   </button>
 
