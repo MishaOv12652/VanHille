@@ -1,6 +1,37 @@
-.margin{
-    margin-right: 75px;
+.auth-page {
+  display: flex;
+  justify-content: center;
+  padding: 32px 16px 48px;
 }
-h2, label{
-    color: white;
+
+.auth-card {
+  background-color: #FFFFFF;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+  padding: 40px;
+  width: 100%;
+  max-width: 480px;
+}
+
+.auth-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #1F2937;
+  margin-bottom: 28px;
+  margin-top: 0;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.auth-submit {
+  margin-top: 8px;
+}
+
+.auth-btn {
+  height: 46px;
+  font-size: 1rem;
+  font-weight: 600;
 }
