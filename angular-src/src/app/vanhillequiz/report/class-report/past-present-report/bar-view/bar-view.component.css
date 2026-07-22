@@ -1,7 +1,9 @@
-.header{
-  text-decoration: underline;
-  text-align: center;
-  /* margin-right: 250px; */
-  margin-right: 150px;
-  color: white;
+.header {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1F2937;
+  text-decoration: none;
+  margin-bottom: 12px;
+  padding-right: 12px;
+  border-right: 4px solid #38C172;
 }

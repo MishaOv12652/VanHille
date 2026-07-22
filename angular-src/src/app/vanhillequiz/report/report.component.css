@@ -1,10 +1,15 @@
-.header{
-    text-decoration: underline;
-    text-align: center;
-    /* margin-right: 250px; */
-    margin-right: 150px;
-    color: white;
+.header {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #1F2937;
+  text-align: right;
+  text-decoration: none;
+  margin-right: 0;
+  margin-bottom: 24px;
+  padding-right: 16px;
+  border-right: 4px solid #5B7FFF;
 }
-h1{
-    color: white;
+
+h1 {
+  color: #1F2937;
 }

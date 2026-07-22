@@ -2,7 +2,7 @@
   max-width: 1180px;
   margin: 24px auto;
   padding: 16px;
-  font-family: Arial, sans-serif;
+  font-family: 'Rubik', Arial, sans-serif;
   color: #1f2937;
   direction: rtl;
 }
@@ -33,7 +33,7 @@
   padding-right: 12px;
 }
 
-.pyth-task-section strong { color: #1e40af; }
+.pyth-task-section strong { color: #3D5FE0; }
 
 .pyth-task ul { margin: 6px 0; padding-right: 20px; }
 
@@ -48,15 +48,15 @@
   border: 0;
   border-radius: 12px;
   padding: 10px 14px;
-  background: #2563eb;
+  background: #5B7FFF;
   color: white;
   font-size: 15px;
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(0,0,0,.12);
 }
 
-.pyth-btn.pyth-secondary { background: #64748b; }
-.pyth-btn.pyth-success   { background: #059669; }
+.pyth-btn.pyth-secondary { background: #6B7280; }
+.pyth-btn.pyth-success   { background: #38C172; }
 .pyth-btn:hover          { filter: brightness(1.05); }
 
 .pyth-stage {
