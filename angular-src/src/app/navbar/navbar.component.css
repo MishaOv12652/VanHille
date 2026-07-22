@@ -24,6 +24,16 @@ body {
   float: right;
 }
 
+/* Keep the brand and the login/profile links on the same row at every width
+   instead of letting the unfloated .navbar-header block push top-nav to a
+   second row (which made the bar taller than the 60px offset content expects) */
+.navbar-inverse .navbar-header {
+  float: right;
+}
+.navbar-inverse .top-nav-wrap {
+  float: left;
+}
+
 /* Hamburger toggle button */
 .navbar-inverse .navbar-toggle {
   border-color: rgba(255, 255, 255, 0.2) !important;
@@ -111,18 +121,36 @@ body {
     top: 60px;
     left: 0;
     right: 0;
-    bottom: 0;
     overflow-y: auto;
     z-index: 1030;
     background-color: #1F2937;
-    /* Reset Bootstrap's max-height so it fills the screen */
-    max-height: none !important;
+    /* Size to content instead of Bootstrap's small default cap, but never exceed the viewport */
+    max-height: calc(100vh - 60px) !important;
   }
 }
 
 /* =====================================================
    Side-nav link styles (shared)
    ===================================================== */
+
+/* Bootstrap's .nav class only zeroes padding-left (a physical property). Under
+   dir="rtl" the browser's default UA list padding is a logical padding-inline-start,
+   which resolves to padding-right — left un-reset, it eats into the right side of
+   the sidebar and squeezes every row, separator and active state to the left. */
+.side-nav {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Bootstrap's default .navbar-nav responsive CSS floats each <li> at desktop
+   widths (built for a horizontal top-nav) and shrinks every row to its text
+   width instead of the full sidebar width. This is a vertical sidebar, not a
+   horizontal nav, so every row must stay a full-width block regardless of viewport. */
+.side-nav > li {
+  float: none;
+  width: 100%;
+}
 
 .side-nav > li > a {
   font-family: 'Rubik', Arial, sans-serif;

@@ -24,7 +24,7 @@
 
 .pyth-task-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
 }
 
@@ -115,6 +115,6 @@
 }
 
 @media (max-width: 900px) {
-  .pyth-task-grid { grid-template-columns: 1fr; }
+  .pyth-task-grid { grid-template-columns: minmax(0, 1fr); }
   .pyth-stage     { height: 720px; }
 }
