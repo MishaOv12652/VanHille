@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {FormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
+import {Http, HttpModule, RequestOptions, XHRBackend} from '@angular/http';
 
 //components
 import {AppComponent} from './app.component';
@@ -30,6 +30,8 @@ import {VanhilereportService} from "./services/vanhilereport.service";
 import {AuthService} from "./services/auth.service";
 import {SiteRegisterServiceService} from "./services/site-register-service.service";
 import {CloudlinksService} from "./services/cloudlinks.service"
+import {HttpErrorInterceptor} from "./services/http-error-interceptor.service";
+import {FlashMessagesService} from "angular2-flash-messages";
 import {StudentReportComponent} from './vanhillequiz/report/student-report/student-report.component';
 import {ClassReportComponent} from './vanhillequiz/report/class-report/class-report.component';
 import {TimerComponent} from './vanhillequiz/timer/timer.component';
@@ -112,7 +114,13 @@ const appRoutes: Routes = [
     VanhilereportService,
     AuthService,
     SiteRegisterServiceService,
-    CloudlinksService
+    CloudlinksService,
+    {
+      provide: Http,
+      useFactory: (backend: XHRBackend, options: RequestOptions, flashMessages: FlashMessagesService) =>
+        new HttpErrorInterceptor(backend, options, flashMessages),
+      deps: [XHRBackend, RequestOptions, FlashMessagesService]
+    }
   ],
   bootstrap: [AppComponent]
 })
