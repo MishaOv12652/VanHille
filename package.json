@@ -7,8 +7,12 @@
   },
   "scripts": {
     "postinstall": "cd angular-src && npm install --legacy-peer-deps && npx ng build && cd ../backend && npm install && npm run build",
-    "start": "node backend/dist/main.js"
+    "start": "node backend/dist/main.js",
+    "dev": "concurrently -n backend,frontend -c blue,green \"npm run start:dev --prefix backend\" \"npm start --prefix angular-src\""
   },
   "author": "Michael Ovodenko",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^10.0.3"
+  }
 }
