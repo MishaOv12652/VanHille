@@ -1,13 +1,33 @@
-<div *ngIf="user" class="col-md-10">
-  <h2 class="page-header" style="text-align: center;color: white">
-    {{user.username}}
-  </h2>
-  <ul class="list-group">
-    <li class="list-group-item">
-       UserName: {{user.username}}
-    </li>
-    <li class="list-group-item">
-        Email: {{user.email}} 
-    </li>
-  </ul>
+<div class="profile-page">
+  <div *ngIf="user" class="profile-card" dir="rtl">
+    <div class="profile-card-header">
+      <div class="profile-avatar">{{user.username.charAt(0)}}</div>
+      <h2 class="profile-name">{{user.username}}</h2>
+    </div>
+    <div class="profile-card-body">
+      <ul class="profile-info-list">
+        <li class="profile-info-item">
+          <span class="profile-info-label">שם משתמש</span>
+          <span class="profile-info-value">{{user.username}}</span>
+        </li>
+        <li class="profile-info-item">
+          <span class="profile-info-label">אימייל</span>
+          <span class="profile-info-value">{{user.email}}</span>
+        </li>
+      </ul>
+      <a [routerLink]="['/dashboard']" class="btn btn-primary btn-block profile-cta">לוח עבודה</a>
+    </div>
+  </div>
+
+  <div *ngIf="!user && !loadError" class="profile-card profile-card--loading" dir="rtl">
+    <div class="profile-card-body">
+      <p class="profile-loading-text">טוען פרופיל...</p>
+    </div>
+  </div>
+
+  <div *ngIf="!user && loadError" class="profile-card profile-card--loading" dir="rtl">
+    <div class="profile-card-body">
+      <p class="profile-loading-text">לא ניתן לטעון את הפרופיל כרגע. נסו לרענן את הדף.</p>
+    </div>
+  </div>
 </div>
