@@ -44,12 +44,16 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 18px;
+}
+
 body {
   margin: 0;
   font-family: var(--font);
   background-color: var(--color-bg);
   color: var(--color-text);
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.6;
   background-image: none !important;
   min-height: 100vh;
