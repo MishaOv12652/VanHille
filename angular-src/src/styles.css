@@ -285,6 +285,40 @@ label {
 }
 
 /* =====================================================
+   ng2-date-picker (RTL support)
+   Its own component uses ViewEncapsulation.None, so its classes are
+   genuinely global — overrides here, not in a component stylesheet.
+   ===================================================== */
+
+.dp-picker-input {
+  width: 100% !important;
+  height: 42px !important;
+  font-family: var(--font);
+  font-size: 1rem !important;
+  text-align: right;
+  direction: rtl;
+  border: 1.5px solid var(--color-border) !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 0 14px;
+  box-sizing: border-box;
+}
+.dp-picker-input:focus {
+  border-color: var(--color-primary) !important;
+  outline: none;
+}
+
+/* The nav buttons' left/right containers and chevron shapes are hardcoded (not
+   RTL-aware). Under an inherited dir="rtl", the containers swap visual sides but
+   keep their original chevron rotation, so "previous" ends up pointing the same
+   way as "next". Swap the chevron rotation so each arrow matches its new side. */
+dp-calendar-nav .dp-calendar-nav-left::before {
+  transform: rotate(45deg) !important;
+}
+dp-calendar-nav .dp-calendar-nav-right::before {
+  transform: rotate(-135deg) !important;
+}
+
+/* =====================================================
    Responsive Utilities
    ===================================================== */
 

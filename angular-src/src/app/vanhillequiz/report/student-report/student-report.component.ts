@@ -2,6 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { VanhilereportService } from "../../../services/vanhilereport.service";
 import { ToastrService } from "ngx-toastr";
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import * as moment from 'moment';
+import 'moment/locale/he';
+
+// ng2-date-picker's DatePickerService.getDayConfigService() whitelists which config
+// keys reach the day-calendar, and it drops weekDayFormatter (monthFormatter survives,
+// which is why the month label below is Hebrew but a custom weekday formatter never
+// would be). weekDayFormat (a moment format token, not a function) does survive, so
+// the weekday header is localized via moment's locale instead.
+moment.locale('he');
 
 @Component({
   selector: 'app-student-report',
@@ -20,6 +29,17 @@ export class StudentReportComponent implements OnInit {
   showSecondChart: Boolean = false;
   sDate: Date;
   fDate: Date;
+
+  private static readonly hebrewMonths = [
+    'ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני',
+    'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'
+  ];
+
+  dateConfig = {
+    firstDayOfWeek: 'su' as any,
+    weekDayFormat: 'ddd',
+    monthFormatter: (month: any) => `${StudentReportComponent.hebrewMonths[month.month()]} ${month.year()}`
+  };
 
   constructor(
     private reportServise: VanhilereportService,
