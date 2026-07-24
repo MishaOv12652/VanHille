@@ -1,10 +1,102 @@
-.header{
-    text-decoration: underline;
-    text-align: center;
-    /* margin-right: 250px; */
-    margin-right: 150px;
-    color: white;
+.allclass {
+  padding: 24px 32px;
 }
-h1{
-    color: white;
+
+.header {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #1F2937;
+  text-align: right;
+  text-decoration: none;
+  margin-right: 0;
+  margin-bottom: 24px;
+  padding-right: 16px;
+  border-right: 4px solid #5B7FFF;
+}
+
+h1 {
+  color: #1F2937;
+}
+
+label {
+  color: #1F2937!important;
+  font-size: 0.9rem !important;
+}
+
+.input-append {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.report-card {
+  background-color: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  padding: 20px 24px;
+  margin-bottom: 20px;
+}
+
+.report-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1F2937;
+  margin: 0 0 16px;
+  text-align: right;
+}
+
+.report-card-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.report-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 200px;
+}
+
+.report-field ::ng-deep dp-date-picker,
+.report-field ::ng-deep .dp-input-container {
+  width: 100%;
+  display: block;
+}
+
+.report-field label {
+  font-size: 0.85rem !important;
+  color: #6B7280 !important;
+  font-weight: 500;
+  margin: 0 !important;
+}
+
+.report-card-btn {
+  height: 42px;
+  padding: 0 24px;
+  font-weight: 600;
+}
+
+.report-select {
+  flex: 1;
+  min-width: 200px;
+  margin-bottom: 0;
+}
+
+.col-md-6 {
+  background-color: #FFFFFF !important;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+  padding: 24px !important;
+}
+
+.col-md-6 h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1F2937;
+  text-align: center;
+  margin-bottom: 16px;
 }

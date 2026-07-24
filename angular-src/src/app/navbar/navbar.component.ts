@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService  } from "../services/auth.service";
 import { Router } from "@angular/router";
-import { FlashMessagesService } from "angular2-flash-messages";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +12,7 @@ export class NavbarComponent implements OnInit {
   SiteUser:any = localStorage.getItem('admin');
   constructor(
     private auth:AuthService,
-    private flashMSG:FlashMessagesService,
+    private toastr:ToastrService,
     private router: Router
   ) { }
 
@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
   }
   onLogout(){
     this.auth.logout();
-    this.flashMSG.show('התנתקת',{cssClass:'alert-danger',timeout:3000});
+    this.toastr.info('התנתקת');
     this.router.navigate(['/login']);
     return false;
   }

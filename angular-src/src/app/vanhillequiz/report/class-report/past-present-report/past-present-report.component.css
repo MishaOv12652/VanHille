@@ -1,7 +1,22 @@
-.header{
-  text-decoration: underline;
-  text-align: center;
-  /* margin-right: 250px; */
-  margin-right: 150px;
-  color: white;
+.header {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #1F2937;
+  text-align: right;
+  text-decoration: none;
+  margin-right: 0;
+  margin-bottom: 20px;
+  padding-right: 12px;
+  border-right: 4px solid #5B7FFF;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  background-color: #FFFFFF;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+  margin-bottom: 16px;
 }

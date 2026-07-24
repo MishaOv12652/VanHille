@@ -1,5 +1,12 @@
 .margin {
-  margin-top: 50px;
+  margin-top: 60px;
+  padding: 0;
+}
+
+@media (min-width: 768px) {
+  .margin {
+    padding-right: 220px;
+  }
 }
 
 .backimg {

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {VanhilereportService} from '../../../services/vanhilereport.service';
-import {FlashMessagesService} from 'angular2-flash-messages';
+import {ToastrService} from 'ngx-toastr';
 import {ChartsModule} from 'ng2-charts/ng2-charts';
 import set = Reflect.set;
 
@@ -14,7 +14,7 @@ export class ClassReportComponent implements OnInit {
   showpast: boolean = false;
 
   constructor(private reportServise: VanhilereportService,
-              private flashmessage: FlashMessagesService) {
+              private toastr: ToastrService) {
   }
 
   ngOnInit() {

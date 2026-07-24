@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ChartsModule} from 'ng2-charts/ng2-charts';
-import {FlashMessagesService} from 'angular2-flash-messages';
+import {ToastrService} from 'ngx-toastr';
 import {VanhilereportService} from '../../../../services/vanhilereport.service';
 
 @Component({
@@ -29,7 +29,7 @@ export class PastPresentReportComponent implements OnInit {
   courseNum: Number;
 
   constructor(private reportServise: VanhilereportService,
-              private flashmessage: FlashMessagesService) {
+              private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -39,7 +39,7 @@ export class PastPresentReportComponent implements OnInit {
   switchGraphs() {
     if (this.courseNumPost === undefined || this.courseNumPre === undefined || this.groupNumPre === undefined
       || this.groupNumPost === undefined) {
-      this.flashmessage.show('אנא בחר את הקבוצות להשוואה לפני מעבר לגרף ברים', {cssClass: 'alert-danger', timeout: 3000});
+      this.toastr.error('אנא בחר את הקבוצות להשוואה לפני מעבר לגרף ברים');
     } else {
       this.showBarGraph = !this.showBarGraph;
     }
@@ -68,7 +68,7 @@ export class PastPresentReportComponent implements OnInit {
     this.reportServise.getAllQuizesDoneInTheLastSemeter().subscribe(data => {
       if (data.success) {
         if (data.quiz.length == 0) {
-          this.flashmessage.show('אין שאלונים שבוצעו בסמסטר האחרון', {cssClass: 'alert-danger', timeout: 3000});
+          this.toastr.error('אין שאלונים שבוצעו בסמסטר האחרון');
         } else if (data.quiz.length == 1) {
           this.courseNumPreOptions = [data.quiz[0].courseNum];
         } else {
@@ -87,7 +87,7 @@ export class PastPresentReportComponent implements OnInit {
           }
         }
       } else {
-        this.flashmessage.show('שגיאה בטעינת שאלונים שבוצעו בסמסטר האחרון', {cssClass: 'alert-danger', timeout: 3000})
+        this.toastr.error('שגיאה בטעינת שאלונים שבוצעו בסמסטר האחרון')
       }
     });
   }
@@ -98,10 +98,7 @@ export class PastPresentReportComponent implements OnInit {
         if (data.success) {
           this.groupNumPreOptions = [data.quiz[0].groupNum];
         } else {
-          this.flashmessage.show('שגיאה במציאת ערכים לתוצאות לפני לשדה של מס קורס', {
-            cssClass: 'alert-danger',
-            timeout: 3000
-          });
+          this.toastr.error('שגיאה במציאת ערכים לתוצאות לפני לשדה של מס קורס');
         }
       });
     }
@@ -112,10 +109,7 @@ export class PastPresentReportComponent implements OnInit {
             this.groupNumPostOptions = [data.quiz[1].groupNum];
           }
         } else {
-          this.flashmessage.show('שגיאה במציאת ערכים לתוצאות אחרי לשדה של מס קורס', {
-            cssClass: 'alert-danger',
-            timeout: 3000
-          });
+          this.toastr.error('שגיאה במציאת ערכים לתוצאות אחרי לשדה של מס קורס');
         }
       });
     }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VanhilereportService } from "../../services/vanhilereport.service";
-import { FlashMessagesService } from "angular2-flash-messages";
+import { ToastrService } from "ngx-toastr";
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 @Component({
   selector: 'app-report',
@@ -15,7 +15,7 @@ export class ReportComponent implements OnInit {
   // radarChartData: any[] = [{
   // }];
   //
-  constructor(private reportServise: VanhilereportService, private flashmessage: FlashMessagesService) { }
+  constructor(private reportServise: VanhilereportService, private toastr: ToastrService) { }
 
   ngOnInit() {
     // this.reportServise.getUsersLast3Hours().subscribe(data => {

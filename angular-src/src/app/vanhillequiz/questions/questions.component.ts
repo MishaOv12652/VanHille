@@ -1,6 +1,6 @@
 import {Component, OnInit, Injectable, AfterViewChecked} from '@angular/core';
 import {QuestionsserviceService} from '../../services/questionsservice.service';
-import {FlashMessagesService} from 'angular2-flash-messages';
+import {ToastrService} from 'ngx-toastr';
 import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
 
 @Component({
@@ -28,7 +28,7 @@ export class QuestionsComponent implements OnInit {
 
 
   constructor(private questionService: QuestionsserviceService,
-              private flashmessage: FlashMessagesService,
+              private toastr: ToastrService,
               private spinner: Ng4LoadingSpinnerService) {
 
   }
@@ -69,7 +69,7 @@ export class QuestionsComponent implements OnInit {
           this.hideButtons();
         }
       } else {
-        this.flashmessage.show('שגיאה לא ניתן לעבור לשאלה הבאה', {cssClass: 'alert-danger', timeout: 3000});
+        this.toastr.error('שגיאה לא ניתן לעבור לשאלה הבאה');
       }
       this.spinner.hide();
     });
@@ -112,7 +112,7 @@ export class QuestionsComponent implements OnInit {
           }
 
         } else {
-          this.flashmessage.show('לא נשמרה התשובה', {cssClass: 'alert-danger', timeout: 3000});
+          this.toastr.error('לא נשמרה התשובה');
           return false;
         }
       });
@@ -129,7 +129,7 @@ export class QuestionsComponent implements OnInit {
             return true;
           }
         } else {
-          this.flashmessage.show('לא נשמרה התשובה', {cssClass: 'alert-danger', timeout: 3000});
+          this.toastr.error('לא נשמרה התשובה');
           return false;
         }
       });
@@ -146,7 +146,7 @@ export class QuestionsComponent implements OnInit {
             return true;
           }
         } else {
-          this.flashmessage.show('לא נשמרה התשובה', {cssClass: 'alert-danger', timeout: 3000});
+          this.toastr.error('לא נשמרה התשובה');
           return false;
         }
       });
@@ -163,7 +163,7 @@ export class QuestionsComponent implements OnInit {
             return true;
           }
         } else {
-          this.flashmessage.show('לא נשמרה התשובה', {cssClass: 'alert-danger', timeout: 3000});
+          this.toastr.error('לא נשמרה התשובה');
           return false;
         }
       });
@@ -180,12 +180,12 @@ export class QuestionsComponent implements OnInit {
             return true;
           }
         } else {
-          this.flashmessage.show('לא נשמרה התשובה', {cssClass: 'alert-danger', timeout: 3000});
+          this.toastr.error('לא נשמרה התשובה');
           return false;
         }
       });
     } else {
-      this.flashmessage.show('לא נבחרה תשובה', {cssClass: 'alert-danger', timeout: 3000});
+      this.toastr.error('לא נבחרה תשובה');
     }
 
   }
@@ -207,7 +207,7 @@ export class QuestionsComponent implements OnInit {
       if (data.success) {
         this.showFinish = true;
       } else {
-        this.flashmessage.show('לא ניתן לשמור תשובות נכונות של סטודנט', {cssClass: 'alert-danger', timeout: 3000});
+        this.toastr.error('לא ניתן לשמור תשובות נכונות של סטודנט');
       }
     });
   }

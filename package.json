@@ -2,26 +2,17 @@
   "name": "vanhilleapp",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "cd angular-src && npm install --legacy-peer-deps && npx ng build",
-    "start": "node server.js"
+  "engines": {
+    "node": ">=20.11"
   },
-  "dependencies": {
-    "bcryptjs": "*",
-    "body-parser": "*",
-    "cors": "*",
-    "express": "*",
-    "express-session": "^1.17.3",
-    "jsonwebtoken": "*",
-    "lodash": "^4.17.5",
-    "moment": "^2.18.1",
-    "momentjs": "^2.0.0",
-    "mongoose": "*",
-    "passport": "*",
-    "passport-jwt": "^2.2.1"
+  "scripts": {
+    "postinstall": "cd angular-src && npm ci --legacy-peer-deps --include=dev && npx ng build && cd ../backend && npm ci --include=dev && npm run build",
+    "start": "node backend/dist/main.js",
+    "dev": "concurrently -n backend,frontend -c blue,green \"npm run start:dev --prefix backend\" \"npm start --prefix angular-src\""
   },
   "author": "Michael Ovodenko",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^10.0.3"
+  }
 }

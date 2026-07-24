@@ -7,7 +7,8 @@ import { Router } from "@angular/router";
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  user:Object;
+  user:any;
+  loadError:boolean = false;
   constructor(private auth:AuthService,private router:Router) { }
 
   ngOnInit() {
@@ -16,8 +17,7 @@ export class ProfileComponent implements OnInit {
     },
     err=>{
       console.log(err);
-      return false;
-      
+      this.loadError = true;
   })
   }
 

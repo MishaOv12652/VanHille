@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SiteRegisterServiceService } from "../services/site-register-service.service";
-import { FlashMessagesService } from "angular2-flash-messages";
+import { ToastrService } from "ngx-toastr";
 import { AuthService } from "../services/auth.service";
 import { Router } from "@angular/router";
 @Component({
@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private siteRegServ:SiteRegisterServiceService,
-    private flashMsg:FlashMessagesService,
+    private toastr:ToastrService,
     private auth:AuthService,
     private router:Router
   ) { }
@@ -31,21 +31,21 @@ export class RegisterComponent implements OnInit {
     
     //requierd fields
     if(!this.siteRegServ.validateRegister(SiteUser)){
-      this.flashMsg.show('אנא מלא את כל השדות!',{ cssClass: 'alert-danger', timeout: 3000 });
+      this.toastr.error('אנא מלא את כל השדות!');
       return false;
     }
     if(!this.siteRegServ.validateEmail(SiteUser.email)){
-      this.flashMsg.show('הכנס מחדש את האימייל!',{ cssClass: 'alert-danger', timeout: 3000 });
+      this.toastr.error('הכנס מחדש את האימייל!');
       return false;
     }
 
     //register Site User
     this.auth.registerSiteUser(SiteUser).subscribe(data=>{
       if(data.success){
-        this.flashMsg.show('נרשמתה בהצלחה',{ cssClass: 'alert-success', timeout: 3000 });
+        this.toastr.success('נרשמתה בהצלחה');
         this.router.navigate(['/login']);
       }else{
-        this.flashMsg.show('לא נרשמתה בהצלחה',{ cssClass: 'alert-danger', timeout: 3000 });
+        this.toastr.error('לא נרשמתה בהצלחה');
         this.router.navigate(['/register']);
       }
     })

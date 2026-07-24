@@ -1,7 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { VanhilereportService } from "../../../services/vanhilereport.service";
-import { FlashMessagesService } from "angular2-flash-messages";
+import { ToastrService } from "ngx-toastr";
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import * as moment from 'moment';
+import 'moment/locale/he';
+
+// ng2-date-picker's DatePickerService.getDayConfigService() whitelists which config
+// keys reach the day-calendar, and it drops weekDayFormatter (monthFormatter survives,
+// which is why the month label below is Hebrew but a custom weekday formatter never
+// would be). weekDayFormat (a moment format token, not a function) does survive, so
+// the weekday header is localized via moment's locale instead.
+moment.locale('he');
 
 @Component({
   selector: 'app-student-report',
@@ -21,9 +30,20 @@ export class StudentReportComponent implements OnInit {
   sDate: Date;
   fDate: Date;
 
+  private static readonly hebrewMonths = [
+    'ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני',
+    'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'
+  ];
+
+  dateConfig = {
+    firstDayOfWeek: 'su' as any,
+    weekDayFormat: 'ddd',
+    monthFormatter: (month: any) => `${StudentReportComponent.hebrewMonths[month.month()]} ${month.year()}`
+  };
+
   constructor(
     private reportServise: VanhilereportService,
-    private flashmessage: FlashMessagesService
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -31,7 +51,7 @@ export class StudentReportComponent implements OnInit {
       if (data.success) {
         this.Options = data.users;
       } else {
-        this.flashmessage.show('משהו קרה', { cssClass: 'alert-danger', timeout: 3000 });
+        this.toastr.error('משהו קרה');
       }
     });
   }
@@ -111,7 +131,7 @@ export class StudentReportComponent implements OnInit {
             this.barChartData1 = [{ data: data.user[0].correctAperdif1, label: this.selectID }];
           }
         }else{
-          this.flashmessage.show('לא נמצאו תשובות של הסטונדט בעל ת.ז' + this.selectID,{cssClass: 'alert-danger', timeout: 3000 })
+          this.toastr.error('לא נמצאו תשובות של הסטונדט בעל ת.ז' + this.selectID)
           return false;
         }
         //console.log(JSON.stringify(data))
@@ -127,29 +147,29 @@ export class StudentReportComponent implements OnInit {
         // }
 
       } else {
-        this.flashmessage.show('שגיאה', { cssClass: 'alert-danger', timeout: 3000 })
+        this.toastr.error('שגיאה')
       }
     });
   };
 
   findStudentsBetweenDates() {
     if (this.sDate > this.fDate) {
-      this.flashmessage.show("שגיאה! תאריך סיום לפני תאריך התחלה", { cssClass: 'alert-danger', timeout: 3000 })
+      this.toastr.error("שגיאה! תאריך סיום לפני תאריך התחלה")
     } else {
       if (this.sDate == null || this.fDate == null) {
-        this.flashmessage.show("אנא מלא את גם תאריך התחלה וגם תאריך סיום", { cssClass: 'alert-danger', timeout: 3000 })
+        this.toastr.error("אנא מלא את גם תאריך התחלה וגם תאריך סיום")
       } else {
         this.reportServise.getStudentsBetweenDates(this.sDate, this.fDate).subscribe(data => {
           if (data.success) {
             if (data.students.length == 0) {
-              this.flashmessage.show("אין סטודנטים שעשו את השאלון בתאריכים שביקשת", { cssClass: 'alert-danger', timeout: 3000 })
+              this.toastr.error("אין סטודנטים שעשו את השאלון בתאריכים שביקשת")
             } else {
-              this.flashmessage.show("נמצאו סטודנטים מתאים אנא בחר אחד", { cssClass: 'alert-success', timeout: 3000 })
+              this.toastr.success("נמצאו סטודנטים מתאים אנא בחר אחד")
               this.Options = data.students;
               //console.log(this.Options)
             }
           } else {
-            this.flashmessage.show(data.msg, { cssClass: 'alert-danger', timeout: 3000 })
+            this.toastr.error(data.msg)
           }
 
         });

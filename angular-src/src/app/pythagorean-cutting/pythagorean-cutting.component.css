@@ -2,7 +2,7 @@
   max-width: 1180px;
   margin: 22px auto;
   padding: 14px;
-  font-family: Arial, sans-serif;
+  font-family: 'Rubik', Arial, sans-serif;
   background: #f7f8fb;
   color: #111827;
   direction: rtl;
@@ -31,7 +31,7 @@
 
 .pyth-cut-task-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
 }
 
@@ -41,7 +41,7 @@
 }
 
 .pyth-cut-task-section strong {
-  color: #1e40af;
+  color: #3D5FE0;
 }
 
 .pyth-cut-task ul {
@@ -60,7 +60,7 @@
   border: 0;
   border-radius: 12px;
   padding: 10px 13px;
-  background: #2563eb;
+  background: #5B7FFF;
   color: #fff;
   font-size: 15px;
   cursor: pointer;
@@ -72,7 +72,7 @@
 }
 
 .pyth-cut-secondary {
-  background: #64748b;
+  background: #6B7280;
 }
 
 .pyth-cut-stage {
@@ -171,7 +171,7 @@
 
 @media (max-width: 900px) {
   .pyth-cut-task-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .pyth-cut-stage {

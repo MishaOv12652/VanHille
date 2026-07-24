@@ -1,7 +1,30 @@
-.header{
-  text-decoration: underline;
-  text-align: center;
-  /* margin-right: 250px; */
-  margin-right: 150px;
-  color: white;
+.header {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1F2937;
+  text-align: right;
+  text-decoration: none;
+  margin-right: 0;
+  margin-bottom: 16px;
+  padding-right: 12px;
+  border-right: 4px solid #5B7FFF;
+}
+
+/* Chart container */
+[style*="background-color: white"] {
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+  padding: 24px;
+  margin-bottom: 16px;
+}
+
+.button-group {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.button-group .form-control {
+  margin-bottom: 0;
 }
